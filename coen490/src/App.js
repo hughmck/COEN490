@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from "./navbar"
+import SignIn from "./pages/sign-in"
+import SignUp from "./pages/sign-up"
+import UserW from "./pages/USER/user"
+import Home from "./pages/home"
+import {Route, Routes} from "react-router-dom"
+import { initializeApp } from 'firebase/app'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return(
+    <>
+      <NavBar />
+      <div className = "container">
+        <Routes>
+          <Route path = "/" element = {<Home />} />
+          <Route path = "/sign-in" element = {<SignIn />} />
+          <Route path = "/sign-up" element = {<SignUp />} />
+          <Route path = "/user-dashboard" element = {<UserW />} />
+        </Routes>
+      </div>
+    </>
+  )
+
 }
 
 export default App;
