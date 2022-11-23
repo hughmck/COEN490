@@ -1,6 +1,6 @@
 .nav{
-  background-color: #333;
-  color: white;
+  background-color: #d3eaf2;
+  color: black;
   display : flex;
   justify-content: space-between;
   align-items: center;
@@ -13,7 +13,7 @@
 }
 
 .site_title:hover{
-  background-color: red;
+  background-color: white;
 }
 .nav ul {
   padding: 0;
@@ -23,6 +23,8 @@
   gap : 1rem;
 }
 
+
+
 .nav a{
   color: inherit;
   text-decoration: none;
@@ -31,11 +33,17 @@
   align-items: center;
   padding :.25rem;
 }
-.nav li.active{
-  background-color: #555;
+.nav a:hover{
+  color: black;
+}
 
+.nav li.active{
+
+}
+.nav li{
+    background-color:inherit;
 }
 
 .nav li:hover {
-  background-color: red;
+  background-color: white;
 }

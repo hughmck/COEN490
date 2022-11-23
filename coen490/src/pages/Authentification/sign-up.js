@@ -1,6 +1,6 @@
 import SignUpForm from "./sign-up-form"
 import { Container } from "react-bootstrap"
-import { AuthProvider } from "../contexts/AuthContext"
+import { AuthProvider } from "../../contexts/AuthContext"
 
 export default function SignUp(){
 

@@ -1,0 +1,20 @@
+.parent {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: repeat(3, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 {
+        grid-area: 1 / 1 / 4 / 2;
+        background-color: red;
+      }
+.div2 {
+        grid-area: 1 / 2 / 4 / 4;
+        background-color: green;
+      }
+.div3 {
+        grid-area: 1 / 4 / 4 / 5;
+        background-color: blue;
+      }

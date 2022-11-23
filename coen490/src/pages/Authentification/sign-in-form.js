@@ -1,8 +1,9 @@
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import React, { useRef, useState } from "react"
-import '../style/sign-in.css'
-import { useAuth } from '../contexts/AuthContext'
+import '../../style/sign-in.css'
+import { useAuth } from '../../contexts/AuthContext'
 import {Link, useNavigate} from "react-router-dom"
+import jQuery from 'jquery'
 
 export default function LogInForm(){
 
@@ -16,15 +17,29 @@ export default function LogInForm(){
   async function handleSubmit(e){
 
     e.preventDefault()
-
+    var status = 'status', storage = window.localStorage;
     try{
+
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      navigate("/user-dashboard")
+
+      if(emailRef.current.value.slice(emailRef.current.value.indexOf('@'),emailRef.current.value.length) === "@easysante.com")
+      {
+          storage.setItem(status,'HCP')
+          navigate("/HCP-dashboard")
+          window.location.reload();
+      }
+      else {
+          storage.setItem(status,'user')
+          navigate("/user-dashboard")
+          window.location.reload();
+      }
+
+
 
     }catch{
-      setError('Could Not Log In')
+      setError("Email or Password Incorrect")
     }
     setLoading(false)
   }
@@ -47,6 +62,9 @@ export default function LogInForm(){
             Log In
           </Button>
         </Form>
+        <div className = "w-100 text-center mt-2">
+          <Link to ="/forgot-password"> Forgot Password ? </Link>
+        </div>
       </Card.Body>
     </Card>
 

@@ -1,8 +1,9 @@
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import React, { useRef, useState } from "react"
-import '../style/sign-up.css'
-import { useAuth } from '../contexts/AuthContext'
+import '../../style/sign-up.css'
+import { useAuth } from '../../contexts/AuthContext'
 import {Link, useNavigate} from "react-router-dom"
+import jQuery from 'jquery'
 
 export default function SignUpForm(){
 
@@ -17,6 +18,7 @@ export default function SignUpForm(){
   async function handleSubmit(e){
 
     e.preventDefault()
+    var status = 'status', storage = window.localStorage;
 
     if(passwordRef.current.value !== passwordConfirmRef.current.value){
       return setError('Passwords Do Not Match')
@@ -27,8 +29,21 @@ export default function SignUpForm(){
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/")
+      if(emailRef.current.value.slice(emailRef.current.value.indexOf('@'),emailRef.current.value.length) === "@easysante.com")
+      {
+          storage.setItem(status,'HCP')
+          navigate("/HCP-dashboard")
+          window.location.reload();
+      }
+      else {
+          storage.setItem(status,'user')
+          navigate("/user-dashboard")
+          window.location.reload();
+      }
 
+      jQuery(window).load(function() {
+        sessionStorage.setItem('status','loggedIn')
+      });
     }catch{
       setError('Failed To Create Account')
     }

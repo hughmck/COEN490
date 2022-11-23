@@ -1,12 +1,12 @@
 import {Link} from "react-router-dom"
-
-
-export default function NavBar(){
+import '../../style/home-navbar.css'
+import logo from '../../Digital-Identity/logo-2.png'
+export default function HomeNavBar(){
 
   return(
     <nav className = "nav">
-      <Link to = "/" className = "site_title">
-        EasySante
+      <Link to = "/">
+         <img src={logo} width="100" height="fill" />
       </Link>
 
       <ul>
