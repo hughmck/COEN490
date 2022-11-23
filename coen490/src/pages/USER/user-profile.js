@@ -1,17 +1,15 @@
-import UserW from "./USER/user.js"
-import HCPW from "./HCP/hcp.js"
-import LogInForm from "./sign-in-form"
 import { Container } from "react-bootstrap"
-import { AuthProvider } from "../contexts/AuthContext"
+import { AuthProvider } from "../../contexts/AuthContext"
+import LogOut from '../Authentification/logout'
 
-export default function SignIn(){
+export default function UserProfile(){
 
 
   return (
     <AuthProvider>
       <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "100vh" }}>
         <div className = "w-100" style ={{ maxWidth: "400px"}}>
-          <LogInForm />
+          <LogOut />
         </div>
       </Container>
     </AuthProvider>
