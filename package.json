@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@clerk/clerk-react": "^4.5.3",
     "firebase": "^9.13.0",
     "mdb-react-ui-kit": "^5.0.0"
   }
