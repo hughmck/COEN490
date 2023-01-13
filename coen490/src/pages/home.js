@@ -1,14 +1,13 @@
-import '../style/home.css'
+import { useContext } from "react";
+import { UserContext } from "../contexts/user.context";
 
-export default function Home(){
-  return (
-<>
-<div class="parent">
-<div class="div1">test </div>
-<div class="div2"> test</div>
-<div class="div3"> test</div>
-</div>
-<h1>test</h1>
-</>
+export default function Home() {
+
+ const { user } = useContext(UserContext);
+  if (!user) {
+    console.log('Not Logged In');
+  }
+  return(
+ <h1>Home Page (No User Logged In)</h1>
 )
 }
