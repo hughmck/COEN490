@@ -1,35 +1,33 @@
-import {Form, Button, Card, Alert} from 'react-bootstrap'
-import React, { useRef, useState } from "react"
-import { useAuth } from '../../contexts/AuthContext'
-import {Link, useNavigate} from "react-router-dom"
-import jQuery from 'jquery'
-
+import { Container } from "react-bootstrap"
+import { Button } from '@mui/material'
+import { useContext } from 'react';
+import { UserProvider, UserContext } from '../../contexts/user.context';
+import { useNavigate} from "react-router-dom"
 
 export default function LogOut(){
 
-  const { logout } = useAuth()
   const navigate = useNavigate()
+  const { logOutUser } = useContext(UserContext);
   var status = 'status', storage = window.localStorage;
 
-  async function handleClick(e){
 
-  e.preventDefault()
+  // This function is called when the user clicks the "Logout" button.
+  const logOut = async () => {
+    try {
+      const loggedOut = await logOutUser();
+      storage.setItem(status, '')
+      navigate("/")
+      window.location.reload();
+      if (loggedOut) {
+        window.location.reload(true);
+      }
+    } catch (error) {
+      alert(error)
 
-  try {
-    await logout()
-    storage.setItem(status, '')
-    navigate("/")
-    window.location.reload();
-
-  }catch{
-      //message failed to logout
   }
+}
 
-  }
-
-
-  return (
-     <button onClick = {handleClick} > LogOut </button>
-
+return(
+  <Button variant="contained" onClick={logOut}>Logout</Button>
 )
 }
