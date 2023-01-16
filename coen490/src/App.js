@@ -1,5 +1,6 @@
 import './style/App.css';
 
+import { UserProvider } from "./contexts/user.context"
 import Home from "./pages/home"
 
 import HomeNavBar from "./pages/NavBar/home-navbar"
@@ -8,7 +9,6 @@ import WhichNav from "./pages/NavBar/whichNavBar"
 
 import SignIn from "./pages/Authentification/sign-in"
 import SignUp from "./pages/Authentification/sign-up"
-import ForgotP from "./pages/Authentification/forgot-password"
 import Error404 from "./pages/Authentification/error404"
 
 import UserDashboard from './pages/USER/user-dashboard'
@@ -24,8 +24,6 @@ import HCPPatientList from './pages/HCP/HCP-patient-list'
 import HCPProfile from './pages/HCP/HCP-profile'
 
 import {Route, Routes, Navigate, useNavigate} from "react-router-dom"
-import { initializeApp } from 'firebase/app'
-
 function App() {
 
   var status = 'status', storage = window.localStorage;
@@ -93,7 +91,6 @@ function App() {
 
           <Route path = "/sign-in" element = {<AlreadyAuthHome> <SignIn /> </AlreadyAuthHome>} />
           <Route path = "/sign-up" element = {<AlreadyAuthHome> <SignUp /> </AlreadyAuthHome>} />
-          <Route path ="/forgot-password" element = {<AlreadyAuthHome> <ForgotP /> </AlreadyAuthHome>} />
 
           <Route path = "/user-DashBoard" element = {<PrivateRouteUser> <UserDashboard /> </PrivateRouteUser>} />
           <Route path ="/user-connect" element = {<PrivateRouteUser> <UserConnect /> </PrivateRouteUser>} />

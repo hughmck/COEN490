@@ -1,17 +1,20 @@
 import { Container } from "react-bootstrap"
-import { AuthProvider } from "../../contexts/AuthContext"
-import LogOut from '../Authentification/logout'
+import { Button } from '@mui/material'
+import  LogOut  from '../Authentification/logout';
+import { UserProvider } from '../../contexts/user.context';
 
 export default function UserProfile(){
 
 
   return (
-    <AuthProvider>
+    <>
+    <UserProvider>
       <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "100vh" }}>
-        <div className = "w-100" style ={{ maxWidth: "400px"}}>
-          <LogOut />
-        </div>
+        <LogOut />
       </Container>
-    </AuthProvider>
-)
+    </UserProvider>
+
+    </>
+  )
+
 }
