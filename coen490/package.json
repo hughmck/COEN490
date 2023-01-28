@@ -9,12 +9,15 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.4",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.2",
     "express": "^4.18.2",
-    "firebase": "^9.13.0",
+    "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.6.1",
     "mdb-react-ui-kit": "^5.1.0",
+    "mongoose": "^6.8.4",
+    "node-localstorage": "^2.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
@@ -23,7 +26,9 @@
     "react-scripts": "^5.0.1",
     "react-scrollama": "^2.3.2",
     "realm-web": "^1.5.1",
-    "web-vitals": "^2.1.4"
+    "stream": "^0.0.2",
+    "web-vitals": "^2.1.4",
+    "xhr2": "^0.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,6 +42,7 @@
       "react-app/jest"
     ]
   },
+
   "browserslist": {
     "production": [
       ">0.2%",
@@ -50,6 +56,7 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "react-error-overlay": "6.0.9"
   }
 }

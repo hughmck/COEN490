@@ -1,0 +1,42 @@
+
+.form-check-label{
+  padding-bottom: 0.80em;
+  padding-top: 0.80em;
+}
+
+.livedata{
+  padding-bottom: 0.4em;
+}
+
+hr.divider {
+  margin: 0em;
+  border-width: 1px;
+}
+
+.card-data {
+  padding-bottom: 0 !important;
+}
+.form-switch .form-check-input:checked {
+  margin-top: 17px;
+}
+
+.form-check.form-switch {
+    display: block;
+    min-height: 1.0rem;
+    padding-left: 1em;
+}
+.col-md-12.text-center{
+  padding-top:0.5em;
+  padding-bottom:0.75em;
+}
+
+.btn.btn-danger{
+
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+@media (min-width: 1400px) {
+    max-width: 100%;
+    max-height: 100%;
+}

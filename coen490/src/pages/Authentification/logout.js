@@ -25,6 +25,21 @@ export default function LogOut(){
       alert(error)
 
   }
+  //set backend variables to 0
+  let logout = {
+   "status": 'logout'
+  }
+  fetch('http://localhost:4444/logout', {
+       method: 'POST',
+       body: JSON.stringify(logout),
+       headers: {
+           'Content-Type': 'application/json'
+       },
+   })
+   .then(res => res.json())
+   .then(data => console.log("data sent to BackEnd"));
+
+
 }
 
 return(
