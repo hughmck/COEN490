@@ -1,86 +1,74 @@
-import React from 'react';
-
-import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+import React, { useState, useEffect, useRef } from 'react';
+import Talk from 'talkjs'
+import axios from 'axios';
 
 export default function UserConnect() {
+  const [url, setUrl] = useState('');
 
-  const client = ZoomMtgEmbedded.createClient();
+  const chatboxEl = useRef();
 
-  var signatureEndpoint = 'http://localhost:3000'
-  var leaveUrl = 'http://localhost:3000/user-connect'
-  var sdkKey = 'zEv00ZtV04coPSoLTyDv26LG5qKNV65Rx15y'
-  var meetingNumber = '123456789'
-  var role = 0
-  var userName = 'React-test'
-  var userEmail = ''
-  var passWord = ''
-  var registrantToken = ''
+ // wait for TalkJS to load
+ const [talkLoaded, markTalkLoaded] = useState(false);
 
-  function getSignature(e) {
-    e.preventDefault();
+ useEffect(() => {
+   Talk.ready.then(() => markTalkLoaded(true));
 
-    fetch(signatureEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        meetingNumber: meetingNumber,
-        role: role
+   if (talkLoaded) {
+     const currentUser = new Talk.User({
+       id: '1',
+       name: 'Henry Mill',
+       email: 'henrymill@example.com',
+       photoUrl: 'henry.jpeg',
+       welcomeMessage: 'Hello!',
+       role: 'default',
+     });
+
+     const otherUser = new Talk.User({
+       id: '2',
+       name: 'Jessica Wells',
+       email: 'jessicawells@example.com',
+       photoUrl: 'jessica.jpeg',
+       welcomeMessage: 'Hello!',
+       role: 'default',
+     });
+
+     const session = new Talk.Session({
+       appId: 'tW54Iuga',
+       me: currentUser,
+     });
+
+     const conversationId = Talk.oneOnOneId(currentUser, otherUser);
+     const conversation = session.getOrCreateConversation(conversationId);
+     conversation.setParticipant(currentUser);
+     conversation.setParticipant(otherUser);
+
+     const chatbox = session.createChatbox();
+     chatbox.select(conversation);
+     chatbox.mount(chatboxEl.current);
+
+     return () => session.destroy();
+   }
+ }, [talkLoaded]);
+
+ return <div ref={chatboxEl} />;
+
+  const handleClick = async () => {
+    axios.post("http://localhost:4444/zoomid")
+      .then(res => {
+        setUrl(res.data)
       })
-    }).then(res => res.json())
-    .then(response => {
-      startMeeting(response.signature)
-    }).catch(error => {
-      console.error(error)
-    })
-  }
+      .catch(err => {
+        console.log(err)
 
-  function startMeeting(signature) {
+      })
+      console.log(url)
+    window.open(url, '_blank');
+  };
 
-    let meetingSDKElement = document.getElementById('meetingSDKElement');
-
-    client.init({
-      debug: true,
-      zoomAppRoot: meetingSDKElement,
-      language: 'en-US',
-      customize: {
-        meetingInfo: ['topic', 'host', 'mn', 'pwd', 'telPwd', 'invite', 'participant', 'dc', 'enctype'],
-        toolbar: {
-          buttons: [
-            {
-              text: 'Custom Button',
-              className: 'CustomButton',
-              onClick: () => {
-                console.log('custom button');
-              }
-            }
-          ]
-        }
-      }
-    });
-
-    client.join({
-    	sdkKey: sdkKey,
-    	signature: signature,
-    	meetingNumber: meetingNumber,
-    	password: passWord,
-    	userName: userName,
-      userEmail: userEmail,
-      tk: registrantToken
-    })
-  }
 
   return (
-    <div className="App">
-      <main>
-        <h1>Zoom Meeting SDK Sample React</h1>
-
-        {/* For Component View */}
-        <div id="meetingSDKElement">
-          {/* Zoom Meeting SDK Component View Rendered Here */}
-        </div>
-
-        <button onClick={getSignature}>Join Meeting</button>
-      </main>
+    <div>
+      <button onClick={handleClick}>Join Meeting</button>
     </div>
   );
-}
+};

@@ -5,7 +5,27 @@ import { UserProvider } from '../../contexts/user.context';
 import React from 'react';
 import {MDBCol, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
 import '../../style/user/user-profile.css'
+import axios from 'axios';
+import { useContext, useState, useEffect } from "react";
+
 export default function HCPProfile() {
+
+
+var [data, setData] = useState({});
+  useEffect(() => {
+    axios.get("http://localhost:4444/user/profile")
+      .then(res => {
+        setData(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+
+      })
+
+
+  })
+
+
   return (
     <>
     <section className = "w-100 h-100" style={{ backgroundColor: '#fff' }}>
@@ -28,7 +48,7 @@ export default function HCPProfile() {
                       <MDBCardText>Full Name</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">Johnatan Smith</MDBCardText>
+                    <MDBCardText className="text-muted">{data ? data.name : 'Loading...'}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -37,7 +57,7 @@ export default function HCPProfile() {
                       <MDBCardText>Email</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -166,7 +186,7 @@ export default function HCPProfile() {
                         <input className="card-data-button form-check-input float-end align-middle" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <div className="col-md-12 text-center">
-                        <button type="button" class="btn btn-danger">Terminate</button>
+                        <button type="button" className="btn btn-danger">Terminate</button>
                       </div>
                     </MDBRow>
                   </MDBCardBody>

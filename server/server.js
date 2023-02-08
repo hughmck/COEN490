@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 
 const User = require("./db_data/user")
 const HCP = require("./db_data/hcp")
+const zoomSdk = require('zoomus')
 var cors = require('cors')
 
 app.use(cors())
@@ -115,7 +116,7 @@ mongoose
 	};
 
 
-	app.get('/api', (req, res) => {
+	app.get('/user/profile', (req, res) => {
 	    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 	        if (err) throw err;
 	        var dbo = db.db("DATA_FROM_EMAIL");
@@ -130,6 +131,67 @@ mongoose
 	        });
 	    });
 	});
+
+
+const jwt = require('jsonwebtoken');
+
+const zoompayload = {
+  iss: 'h47ymZHRSWOpgdQCE79L9Q',
+  exp: Math.floor(Date.now() / 1000) + 30 * 60, // 30 minutes
+};
+
+const secret = 'Z3qOFqQbVLlWfL1zunMlS34AYUy00bYHayjC';
+
+const token = jwt.sign(zoompayload, secret);
+
+const axios = require('axios');
+
+const createMeeting = async (token, zoompayload2) => {
+  try {
+    const response = await axios.post(
+      'https://api.zoom.us/v2/users/me/meetings',
+      zoompayload2,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+var meeting
+
+const callCreateMeeting = async () => {
+  const zoompayload2 = {
+    topic: 'My Zoom Meeting',
+    type: 2,
+    start_time: '2022-12-31T12:00:00Z',
+    duration: 60,
+		host_email: 'test',
+  };
+
+  meeting = await createMeeting(token, zoompayload2);
+};
+
+
+
+
+app.post('/zoomid', async (req, res) => {
+	 await callCreateMeeting();
+	console.log("USER :", meeting)
+  res.json(meeting.join_url);
+});
+
+app.post('/zoomidHCP', async (req, res) => {
+  await callCreateMeeting();
+	console.log("HCP:", meeting)
+  res.json(meeting.start_url);
+});
 
 
 

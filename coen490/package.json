@@ -20,6 +20,7 @@
     "node-localstorage": "^2.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
+    "react-chat-engine": "^1.11.28",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
@@ -27,6 +28,7 @@
     "react-scrollama": "^2.3.2",
     "realm-web": "^1.5.1",
     "stream": "^0.0.2",
+    "talkjs": "^0.15.6",
     "web-vitals": "^2.1.4",
     "xhr2": "^0.2.1"
   },
@@ -42,7 +44,6 @@
       "react-app/jest"
     ]
   },
-
   "browserslist": {
     "production": [
       ">0.2%",
