@@ -1,5 +1,18 @@
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
+import React from 'react';
+import {
+  MDBCard,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBBtn,
+  MDBListGroup, 
+  MDBListGroupItem,
+  MDBRow, 
+  MDBContainer,
+  MDBCol
+} from 'mdb-react-ui-kit';
 
 export default function UserBookApt(){
   const [reason, setReason] = useState('');
@@ -75,21 +88,25 @@ export default function UserBookApt(){
       <button type="submit" onClick={handleSearch}>Search</button>
       <button type="reset" onClick={handleReset}>Reset</button>
     </form>
-
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
-     {searchResults && searchResults.length > 0 ? (
-       searchResults.map(user => (
-         <div key={user.email} style={{ padding: "5px" }}>
-         <div>Name: {user.name}</div>
-         <div>Lastname: {user.lastname}</div>
-         <div>Type: {user.type}</div>
-         <div>Certificate: {user.Certificate}</div>
-         </div>
-       ))
-     ) : (
-       <p>No search results</p>
-     )}
-   </div>
+  <MDBContainer>
+      <MDBRow>
+        {searchResults.map((user, index) => (
+          <MDBCol size='3' key={index} style={{ margin: "40px" }}>
+            <MDBCard>
+              <MDBCardImage src='./Digital-Identity/logo-1.png' position='top' alt='user image' />
+              <MDBCardBody>
+                <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
+                <MDBListGroup flush>
+                  <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
+                  <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
+                </MDBListGroup>
+                <MDBBtn href='#'>View Profile</MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        ))}
+      </MDBRow>
+    </MDBContainer>
     </>
   );
 };
