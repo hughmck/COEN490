@@ -182,7 +182,6 @@ const callCreateMeeting = async () => {
 
 
 app.post('/zoomid', async (req, res) => {
-	 await callCreateMeeting();
 	console.log("USER :", meeting)
   res.json(meeting.join_url);
 });

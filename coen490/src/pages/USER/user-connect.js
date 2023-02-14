@@ -4,18 +4,17 @@ import axios from 'axios';
 
 export default function UserConnect() {
   const [url, setUrl] = useState('');
-
   const chatboxEl = useRef();
 
- // wait for TalkJS to load
- const [talkLoaded, markTalkLoaded] = useState(false);
+  // wait for TalkJS to load
+  const [talkLoaded, markTalkLoaded] = useState(false);
 
- useEffect(() => {
+  useEffect(() => {
    Talk.ready.then(() => markTalkLoaded(true));
 
    if (talkLoaded) {
      const currentUser = new Talk.User({
-       id: '1',
+       id: '10',
        name: 'Henry Mill',
        email: 'henrymill@example.com',
        photoUrl: 'henry.jpeg',
@@ -24,8 +23,8 @@ export default function UserConnect() {
      });
 
      const otherUser = new Talk.User({
-       id: '2',
-       name: 'Jessica Wells',
+       id: '20',
+       name: 'Jessica Well',
        email: 'jessicawells@example.com',
        photoUrl: 'jessica.jpeg',
        welcomeMessage: 'Hello!',
@@ -41,19 +40,24 @@ export default function UserConnect() {
      const conversation = session.getOrCreateConversation(conversationId);
      conversation.setParticipant(currentUser);
      conversation.setParticipant(otherUser);
-
      const chatbox = session.createChatbox();
      chatbox.select(conversation);
      chatbox.mount(chatboxEl.current);
 
+
+     const iframe = chatboxEl.current.querySelector('iframe');
+      if (iframe) {
+        iframe.style.width = '100%';
+        iframe.style.height = '730px';
+      }
+
      return () => session.destroy();
    }
- }, [talkLoaded]);
+  }, [talkLoaded]);
 
- return <div ref={chatboxEl} />;
 
   const handleClick = async () => {
-    axios.post("http://localhost:4444/zoomid")
+    axios.post("http://localhost:4444/zoomidHCP")
       .then(res => {
         setUrl(res.data)
       })
@@ -67,8 +71,9 @@ export default function UserConnect() {
 
 
   return (
-    <div>
-      <button onClick={handleClick}>Join Meeting</button>
-    </div>
+    <>
+    <div ref={chatboxEl} />
+      <button className="button" onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
+    </>
   );
 };

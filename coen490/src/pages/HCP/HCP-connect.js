@@ -15,7 +15,7 @@ useEffect(() => {
 
  if (talkLoaded) {
    const otherUser = new Talk.User({
-     id: '1',
+     id: '10',
      name: 'Henry Mill',
      email: 'henrymill@example.com',
      photoUrl: 'henry.jpeg',
@@ -24,7 +24,7 @@ useEffect(() => {
    });
 
    const currentUser = new Talk.User({
-     id: '2',
+     id: '20',
      name: 'Jessica Well',
      email: 'jessicawells@example.com',
      photoUrl: 'jessica.jpeg',
@@ -49,7 +49,7 @@ useEffect(() => {
    const iframe = chatboxEl.current.querySelector('iframe');
     if (iframe) {
       iframe.style.width = '100%';
-      iframe.style.height = '920px';
+      iframe.style.height = '730px';
     }
 
    return () => session.destroy();
@@ -73,9 +73,8 @@ const handleClick = async () => {
 
 return (
   <>
-  <div ref={chatboxEl}>
-    <button className="button" onClick={handleClick} style={{ position: 'absolute', bottom: '10px', right: '10px' }}>Join Meeting</button>
-  </div>
+  <div ref={chatboxEl} />
+    <button onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
   </>
 );
 };
