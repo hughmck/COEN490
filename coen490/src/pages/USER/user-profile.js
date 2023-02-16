@@ -3,27 +3,60 @@ import { Button } from '@mui/material'
 import  LogOut  from '../Authentification/logout';
 import { UserProvider } from '../../contexts/user.context';
 import React from 'react';
-import {MDBCol, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
+import {MDBCol, MDBInput, MDBButton, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
 import '../../style/user/user-profile.css'
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
 
 export default function HCPProfile() {
 
-
+const [isEditing, setIsEditing] = useState(false);
 var [data, setData] = useState({});
-  useEffect(() => {
+var image;
+const [filename, setFilename] = useState(null);
+
+useEffect(() => {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
         setData(res.data)
       })
       .catch(err => {
         console.log(err)
-
       })
+      
+      const formData = new FormData();
+      axios.post('http://localhost:4444/user/profile/image', formData, {
+        headers: {
+      'Content-Type': 'multipart/form-data'
+      }
+      }).then((res) => {
+        setFilename(res.data.filename);
+        console.log(res.data)
+      }).catch((err) => {
+        console.error(err);
+      });
 
 
-  })
+
+
+
+  }, [])
+
+
+
+
+const handleEdit = () => {
+  setIsEditing(!isEditing);
+}
+
+const handleSave = () => {
+  // Get the new values from the input fields
+  const newName = document.getElementById('full-name').value;
+  const newEmail = document.getElementById('email').value;
+  const newPhone = document.getElementById('phone').value;
+}
+
+
 
 
   return (
@@ -35,59 +68,67 @@ var [data, setData] = useState({});
             <MDBCard className="border h-100  w-100" >
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                  src={`/uploads/${filename}`}
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
                   fluid />
 
               </MDBCardBody>
-                <MDBCardBody>
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{data ? data.name : 'Loading...'}</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Email</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Phone</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">Bay Area, San Francisco, CA</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCardBody>
+              <MDBCardBody>
+{isEditing ? (
+  <>
+    <MDBInput label="Full Name" value={data ? data.name : ''} />
+    <MDBInput label="Email" value={data ? data.email : ''} />
+    <MDBInput label="Phone" value="(097) 234-5678" />
+    <MDBInput label="Mobile" value="(098) 765-4321" />
+    <MDBInput label="Address" value="Bay Area, San Francisco, CA" />
+    <button type="button" class="btn btn-dark" onClick={handleSave}>Save</button>
+
+  </>
+) : (
+  <>
+    <MDBRow>
+      <MDBCol sm="3">
+        <MDBCardText>Full Name</MDBCardText>
+      </MDBCol>
+      <MDBCol sm="9">
+        <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
+      </MDBCol>
+    </MDBRow>
+    <hr />
+    <MDBRow>
+      <MDBCol sm="3">
+        <MDBCardText>Email</MDBCardText>
+      </MDBCol>
+      <MDBCol sm="9">
+        <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
+      </MDBCol>
+    </MDBRow>
+    <hr />
+    <MDBRow>
+      <MDBCol sm="3">
+        <MDBCardText>Phone</MDBCardText>
+      </MDBCol>
+      <MDBCol sm="9">
+        <MDBCardText className="text-muted">{data ? data.phone : 'Loading...'}</MDBCardText>
+      </MDBCol>
+    </MDBRow>
+    <hr />
+    <MDBRow>
+      <MDBCol sm="3">
+        <MDBCardText>City</MDBCardText>
+      </MDBCol>
+      <MDBCol sm="9">
+        <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
+        <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+
+      </MDBCol>
+    </MDBRow>
+  </>
+)}
+</MDBCardBody>
+
 
 
             </MDBCard>

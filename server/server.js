@@ -2,11 +2,13 @@ require("dotenv").config({ path: 'config.env' })
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
-
+const multer = require('multer');
+const path = require('path');
 const User = require("./db_data/user")
 const HCP = require("./db_data/hcp")
 const zoomSdk = require('zoomus')
 var cors = require('cors')
+const { ObjectId } = require('mongodb')
 
 app.use(cors())
 let MongoClient = require('mongodb').MongoClient;
@@ -17,8 +19,10 @@ mongoose
 	  useUnifiedTopology: true,
 	  useCreateIndex: true
 	})
-	.then(() => console.log("Database connected!"))
+	.then(() => console.log("dataDB connected!"))
 	.catch((err) => console.log(err))
+
+
 
 	global.bodyParser = require('body-parser');
 
@@ -71,7 +75,6 @@ mongoose
 			const query = { type: req.body.type, reason: req.body.reason };
   		dbo.collection('HCP').find(query).toArray(function(err, result) {
     	if (err) throw err;
-    	console.log(result);
 			res.json(result)
 			db.close()
   	});
@@ -83,7 +86,6 @@ mongoose
 			var dbo = db.db("DATA_FROM_EMAIL");
   		dbo.collection('HCP').find({}).toArray(function(err, result) {
     	if (err) throw err;
-    	console.log(result);
 			res.json(result)
 			db.close()
   	});
@@ -120,7 +122,6 @@ mongoose
 	    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 	        if (err) throw err;
 	        var dbo = db.db("DATA_FROM_EMAIL");
-					console.log('api : ', current(currentU,currentH))
 	        dbo.collection(collection(currentU,currentH)).findOne({
 	            email: current(currentU,currentH)
 	        },
@@ -182,16 +183,75 @@ const callCreateMeeting = async () => {
 
 
 app.post('/zoomid', async (req, res) => {
-	console.log("USER :", meeting)
   res.json(meeting.join_url);
 });
 
+var zoomStart
+var zoomJoin
+
 app.post('/zoomidHCP', async (req, res) => {
   await callCreateMeeting();
-	console.log("HCP:", meeting)
   res.json(meeting.start_url);
+	zoomStart = meeting.start_url;
+	zoomJoin = meeting.join_url;
 });
 
+app.post('/user/booked', (req, res) => {
+	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+		const HCPbooked = {
+			Username : 'null',
+	    user: current(currentU,currentH),
+			HCP : req.body.HCPemail,
+			HCPfirstname : req.body.HCPfirstname,
+			HCPlastname: req.body.HCPlastname,
+			zoomid : 'null'
+	  };
+		var dbo = db.db("CONNECT");
+		dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
+				if(err) return console.log("ERROR");
+				res.send(('saved to db: ' + data));
+		})
+
+	});
+});
+
+app.post('/user/viewapts', (req, res) => {
+	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+		var dbo = db.db("CONNECT");
+		dbo.collection('zoom').find({user: currentU}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result)
+		db.close()
+	});
+	});
+});
+
+app.post('/user/cancel', (req, res) => {
+	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+		var dbo = db.db("CONNECT");
+		dbo.collection('zoom').deleteOne({ _id: ObjectId(req.body.id) }, function(err, result) {
+    if (err) throw err;
+		db.close();
+  	});
+	});
+});
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname);
+    cb(null, Date.now() + ext);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/user/profile/image', upload.single('file'), (req, res) => {
+  res.send(req.file.filename);
+});
 
 
 /*

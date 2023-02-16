@@ -66,7 +66,25 @@ export default function UserBookApt(){
       const handleReset = async (event) => {
               event.preventDefault();
               setSearchResults(localReset);
+
         };
+
+        const handleBook = async (user) => {
+          let HCPbooked = {
+           "HCPemail": user.email,
+           "HCPfirstname": user.name,
+           "HCPlastname": user.lastname
+          }
+          fetch('http://localhost:4444/user/booked', {
+               method: 'POST',
+               body: JSON.stringify(HCPbooked),
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+           })
+           .then(res => res.json())
+           .then(data => console.log("data sent to BackEnd"));
+  }
 
   return (
     <>
@@ -100,7 +118,7 @@ export default function UserBookApt(){
                   <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
                   <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn href='#'>View Profile</MDBBtn>
+                <MDBBtn onClick={() => handleBook(user)} href='#'>View Profile</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
