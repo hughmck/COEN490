@@ -1,23 +1,30 @@
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
 
-
-export default function HCPDashboard(){
- const [posts, setPosts] = useState([])
- var [email, setEmail] = useState()
-
+export default function HCPDashboard() {
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:4444/api")
-      .then(res => {
-        setEmail(res.data.email)
-      })
-      .catch(err => {
-        console.log(err)
+    async function fetchData() {
+      let databody = {
+        "name": "Suor",
+      };
+      const response = await fetch('http://localhost:4444/HCP/calendar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(databody),
+      });
 
-      })
-  })
+      try {
+        const data = await response.json();
+        console.log(data[0].date);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
 
-  console.log(email)
-  return <h1>HCP : {email}</h1>
+  console.log(email);
+  return <h1>HCP : {email}</h1>;
 }
