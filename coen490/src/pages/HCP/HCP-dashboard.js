@@ -57,7 +57,9 @@ export default function HCPDashboard({ user }) {
   return (
     <div>
       <h1>{welcomeMessage}</h1>
-      <Calendar value={selectedDate} onChange={setSelectedDate} />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Calendar value={selectedDate} onChange={setSelectedDate} />
+      </div>
       <ul>
         {filteredAppointments.map((appointment, index) => (
           <li key={index}>
@@ -69,3 +71,4 @@ export default function HCPDashboard({ user }) {
     </div>
   );
 }
+

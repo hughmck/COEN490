@@ -118,7 +118,7 @@ export default function UserBookApt(){
                   <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
                   <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn onClick={() => handleBook(user)} href='#'>View Profile</MDBBtn>
+                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>View Profile</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
