@@ -253,7 +253,18 @@ app.post('/user/profile/image', upload.single('file'), (req, res) => {
   res.send(req.file.filename);
 });
 
-
+app.post('/HCP/calendar', (req, res) => {
+    MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+        var dbo = db.db("CONNECT");
+        const query = {HCPlastname: req.body.name};
+        dbo.collection('zoom').find(query).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result)
+        console.log(result)
+        db.close()
+    });
+    });
+});
 /*
 
 const newHCP = new HCP({
