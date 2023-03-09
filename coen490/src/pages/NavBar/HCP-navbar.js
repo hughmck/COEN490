@@ -12,7 +12,6 @@ export default function HomeNavBar(){
       <ul>
       <CustomLink to="/HCP-dashboard"> DashBoard </CustomLink>
       <CustomLink to="/HCP-connect"> Connect </CustomLink>
-      <CustomLink to="/HCP-view-apt"> Appointments </CustomLink>
       <CustomLink to="/HCP-patient-list"> Patient Info </CustomLink>
       <CustomLink to="/HCP-profile"> View Profile </CustomLink>
       </ul>

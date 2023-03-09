@@ -91,19 +91,18 @@ export default function HCPPatientList(){
   return (
     <>
   <MDBContainer>
-  <MDBCardHeader style={{fontSize: "24px", fontWeight: "bold"}}>
+  <MDBCardHeader style={{fontSize: "36px"}}>
     Here are your current patients:
   </MDBCardHeader>
       <MDBRow>
         {searchResults.map((user, index) => (
           <MDBCol size='3' key={index} style={{ margin: "40px" }}>
             <MDBCard>
-              <MDBCardImage src='./Digital-Identity/logo-1.png' position='top' alt='user image' />
               <MDBCardBody>
                 <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
                 <MDBListGroup flush>
-                  <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
-                  <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
+                  <MDBListGroupItem>Patient's Issue: {user.type}</MDBListGroupItem>
+                  <MDBListGroupItem>Preffered communication method: {user.type}</MDBListGroupItem>
                 </MDBListGroup>
                 <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>View Profile</MDBBtn>
               </MDBCardBody>
