@@ -2,6 +2,7 @@ import {Link, useNavigate} from "react-router-dom"
 import React from 'react'
 import { useAuth } from "../../contexts/user.context"
 
+
 export default function UserNavBar(){
 
   return(

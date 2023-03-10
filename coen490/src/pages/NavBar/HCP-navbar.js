@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function HomeNavBar() {
+export default function HCPNavBar() { //change back to HomeNavBar if this does not work 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
