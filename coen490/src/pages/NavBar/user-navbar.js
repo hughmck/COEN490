@@ -5,7 +5,7 @@ export default function UserNavBar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          <img src={process.env.PUBLIC_URL + '/logo-noback.png'} alt="logo" className="d-inline-block align-text-top me-2" style={{height: "2rem"}} />
+          <img src={process.env.PUBLIC_URL + '/logo-back.jpg'} alt="logo" className="d-inline-block align-text-top me-2" style={{height: "2rem"}} />
           EasySante
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
