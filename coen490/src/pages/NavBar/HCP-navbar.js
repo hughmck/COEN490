@@ -17,7 +17,6 @@ export default function HCPNavBar() {
             <CustomLink to="/HCP-connect" className="nav-link"> Connect </CustomLink>
             <CustomLink to="/HCP-patient-list" className="nav-link"> Patient Info </CustomLink>
             <CustomLink to="/HCP-profile" className="nav-link"> View Profile </CustomLink>
-            <CustomLink to="/logout" className="nav-link"> Log Out </CustomLink>
           </ul>
         </div>
       </div>
