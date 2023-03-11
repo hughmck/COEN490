@@ -3,10 +3,10 @@ import { App, Credentials } from "realm-web";
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
 import '../../style/user/user-dashboard.css';
-import HeartRateChart from '../../components/HeartRateChart';
-import SleepQualityChart from "../../components/SleepQualityChart";
 
 export default function UserDashboard() {
+
+  
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -56,14 +56,6 @@ export default function UserDashboard() {
           </div>
         </div>
       )}
-      <div className="container">
-        <div className="chart-container">
-          <HeartRateChart />
-        </div>
-        <div className="chart-container">
-          <SleepQualityChart />
-        </div>
-      </div>
     </>
   );
 }
