@@ -112,7 +112,6 @@ export default function UserBookApt(){
         {searchResults.map((user, index) => (
           <MDBCol size='3' key={index} style={{ margin: "40px" }}>
             <MDBCard>
-              <MDBCardImage src='./Digital-Identity/logo-1.png' position='top' alt='user image' />
               <MDBCardBody>
                 <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
                 <MDBListGroup flush>
