@@ -76,6 +76,7 @@ export default function UserBookApt(){
            "HCPfirstname": user.name,
            "HCPlastname": user.lastname
           }
+          console.log(HCPbooked)
           fetch('http://localhost:4444/user/booked', {
                method: 'POST',
                body: JSON.stringify(HCPbooked),

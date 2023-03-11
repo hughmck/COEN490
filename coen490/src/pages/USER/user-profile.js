@@ -23,24 +23,33 @@ useEffect(() => {
       .catch(err => {
         console.log(err)
       })
-      
+
       const formData = new FormData();
+      formData.append('file', file);
       axios.post('http://localhost:4444/user/profile/image', formData, {
         headers: {
-      'Content-Type': 'multipart/form-data'
-      }
-      }).then((res) => {
+          'Content-Type': 'multipart/form-data'
+        }
+        }).then((res) => {
         setFilename(res.data.filename);
-        console.log(res.data)
-      }).catch((err) => {
+        console.log(res.data);
+        }).catch((err) => {
         console.error(err);
-      });
-
-
+        });
 
 
 
   }, [])
+  const [file, setFile] = useState(null);
+
+    const handleFileChange = (e) => {
+      setFile(e.target.files[0]);
+    };
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+  };
 
 
 
@@ -67,6 +76,11 @@ const handleSave = () => {
           <MDBCol lg="4">
             <MDBCard className="border h-100  w-100" >
               <MDBCardBody className="text-center">
+              <form onSubmit={handleSubmit}>
+                <input type="file" onChange={handleFileChange} />
+                <button type="submit">Upload</button>
+              </form>
+
                 <MDBCardImage
                   src={`/uploads/${filename}`}
                   alt="avatar"
