@@ -15,6 +15,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 export default function UserBookApt(){
+  
   const [reason, setReason] = useState('');
   const [type, setType] = useState('');
   const [data, setData] = useState({});
@@ -112,14 +113,13 @@ export default function UserBookApt(){
         {searchResults.map((user, index) => (
           <MDBCol size='3' key={index} style={{ margin: "40px" }}>
             <MDBCard>
-              <MDBCardImage src='./Digital-Identity/logo-1.png' position='top' alt='user image' />
               <MDBCardBody>
                 <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
                 <MDBListGroup flush>
                   <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
                   <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn onClick={() => handleBook(user)} href='#'>View Profile</MDBBtn>
+                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>View Profile</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

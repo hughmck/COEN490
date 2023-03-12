@@ -204,8 +204,7 @@ app.post('/user/booked', (req, res) => {
 			HCP : req.body.HCPemail,
 			HCPfirstname : req.body.HCPfirstname,
 			HCPlastname: req.body.HCPlastname,
-			zoomid : 'null',
-			date:'2023, 2,22,0'
+			zoomid : 'null'
 	  };
 		var dbo = db.db("CONNECT");
 		dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
@@ -252,22 +251,20 @@ const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
   res.send(req.file.filename);
-	console.log(req.file.filename)
 });
 
 app.post('/HCP/calendar', (req, res) => {
-	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
-		var dbo = db.db("CONNECT");
-		const query = {HCPlastname: req.body.name};
-		dbo.collection('zoom').find(query).toArray(function(err, result) {
-		if (err) throw err;
-		res.json(result)
-		console.log(result)
-		db.close()
-	});
-	});
+    MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+        var dbo = db.db("CONNECT");
+        const query = {HCPlastname: req.body.name};
+        dbo.collection('zoom').find(query).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result)
+        console.log(result)
+        db.close()
+    });
+    });
 });
-
 /*
 
 const newHCP = new HCP({
