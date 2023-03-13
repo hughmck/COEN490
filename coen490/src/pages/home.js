@@ -33,6 +33,11 @@ const reviews = [
     name: "Emily",
     quote: "The therapists I have worked with through EasySante have been incredibly knowledgeable and supportive. I have felt heard and understood throughout the entire process.",
     image: customer5Image,
+  },
+  {
+    name: "Kevin",
+    quote: "Fuck",
+    image: customer5Image,
   }
 ];
 
