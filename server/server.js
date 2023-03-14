@@ -92,6 +92,33 @@ mongoose
 		});
 	});
 
+	app.post('/HCP/booked/all', async (req, res) => {
+	  try {
+	    const zoomDb = await MongoClient.connect(process.env.ATLAS_URI2);
+	    const connectDb = await MongoClient.connect(process.env.ATLAS_URI);
+	    const dboZoom = zoomDb.db("CONNECT");
+	    const dboConnect = connectDb.db("DATA_FROM_EMAIL");
+
+	    const HCP_client = await dboZoom.collection('zoom').find({ HCP: currentH }).toArray();
+			var usersmap = HCP_client.map(function(client) {
+  			return client.user;
+			});
+			const users = await Promise.all(
+  			usersmap.map((email) =>
+    		dboConnect.collection('USER').find({ email }).toArray()
+  		)
+			);
+			console.log(users);
+	    res.json(users);
+
+	    zoomDb.close();
+	    connectDb.close();
+	  } catch (error) {
+	    console.error(error);
+	    res.status(500).send("Internal Server Error");
+	  }
+	});
+
 
 
 	app.post('/logout', (req, res) => {
@@ -243,15 +270,25 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
-    cb(null, Date.now() + ext);
+    const avatar = Date.now() + ext;
+    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+			var dba = db.db("DATA_FROM_EMAIL");
+			console.log("user", currentU, " with avatar : ", avatar);
+			dba.collection('USER').updateOne({ email:currentU }, { $set: { avatar: avatar } }, (err, result) => {
+        if (err) throw err;
+        db.close()
+        cb(null, avatar);
+      });
+    });
   }
 });
 
 const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
-  res.send(req.file.filename);
+  res.send(req.body.file);
 });
+
 
 app.post('/HCP/calendar', (req, res) => {
     MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
@@ -265,16 +302,7 @@ app.post('/HCP/calendar', (req, res) => {
     });
     });
 });
-/*
 
-const newHCP = new HCP({
-  name: "HCP",
-  age: 23,
-  isAdult: true,
-})
-
-newHCP.save().then(() => console.log("Saved new HCP"))
-*/
 const PORT = process.env.PORT || 4444
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))

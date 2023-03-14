@@ -10,12 +10,12 @@ import { useContext, useState, useEffect } from "react";
 
 export default function HCPProfile() {
 
-const [isEditing, setIsEditing] = useState(false);
-var [data, setData] = useState({});
-var image;
-const [filename, setFilename] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [data, setData] = useState({});
+  const [file, setFile] = useState(null);
+  const [filename, setFilename] = useState(null);
 
-useEffect(() => {
+  useEffect(() => {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
         setData(res.data)
@@ -23,122 +23,136 @@ useEffect(() => {
       .catch(err => {
         console.log(err)
       })
-
-      const formData = new FormData();
-      formData.append('file', file);
-      axios.post('http://localhost:4444/user/profile/image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-        }).then((res) => {
-        setFilename(res.data.filename);
-        console.log(res.data);
-        }).catch((err) => {
-        console.error(err);
-        });
-
-
-
   }, [])
-  const [file, setFile] = useState(null);
 
-    const handleFileChange = (e) => {
-      setFile(e.target.files[0]);
-    };
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-    const handleSubmit = (e) => {
+  const handleFileUpload = (e) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  axios.post('http://localhost:4444/user/profile/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then((res) => {
+    setFilename(res.data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+};
+
+
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+    // Get the new values from the input fields
+    const fullNameInput = document.getElementById('full-name');
+    const newName = fullNameInput ? fullNameInput.value : '';
+
+    const emailInput = document.getElementById('email');
+    const newEmail = emailInput ? emailInput.value : '';
+
+    const phoneInput = document.getElementById('phone');
+    const newPhone = phoneInput ? phoneInput.value : '';
+    // Call the file upload function only if a file has been selected
+    if (file) {
+        handleFileUpload();
+        console.log("file detected")
+    }
 
   };
 
 
 
 
-const handleEdit = () => {
-  setIsEditing(!isEditing);
-}
-
-const handleSave = () => {
-  // Get the new values from the input fields
-  const newName = document.getElementById('full-name').value;
-  const newEmail = document.getElementById('email').value;
-  const newPhone = document.getElementById('phone').value;
-}
-
-
-
 
   return (
     <>
-    <section className = "w-100 h-100" style={{ backgroundColor: '#fff' }}>
+    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
-            <MDBCard className="border h-100  w-100" >
-              <MDBCardBody className="text-center">
-              <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Upload</button>
-              </form>
-
-                <MDBCardImage
-                  src={`/uploads/${filename}`}
-                  alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: '150px' }}
-                  fluid />
-
-              </MDBCardBody>
-              <MDBCardBody>
+            <MDBCard className="border h-100  w-100">
+              <MDBCardBody style={{ backgroundColor: '#fff' }}>
 {isEditing ? (
   <>
-    <MDBInput label="Full Name" value={data ? data.name : ''} />
-    <MDBInput label="Email" value={data ? data.email : ''} />
-    <MDBInput label="Phone" value="(097) 234-5678" />
-    <MDBInput label="Mobile" value="(098) 765-4321" />
-    <MDBInput label="Address" value="Bay Area, San Francisco, CA" />
-    <button type="button" class="btn btn-dark" onClick={handleSave}>Save</button>
+  <form onSubmit={handleSubmit}>
+    <input type="file" onChange={handleFileChange} />
+  </form>
 
-  </>
+  <MDBRow>
+  <MDBCardBody className="text-center">
+    <div>
+      <MDBInput label="Full Name" labelPosition="top" value={data ? data.firstname + " " + data.lastname : ''} />
+      <MDBInput label="Email" labelPosition="top" value={data ? data.email : ''} />
+      <MDBInput label="Phone" labelPosition="top" value={data ? data.phone : ''}/>
+      <MDBInput label="City" labelPosition="top" value={data ? data.city : ''} />
+    </div>
+    <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
+  </MDBCardBody>
+</MDBRow>
+
+</>
+
 ) : (
   <>
-    <MDBRow>
-      <MDBCol sm="3">
-        <MDBCardText>Full Name</MDBCardText>
-      </MDBCol>
-      <MDBCol sm="9">
-        <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
-      </MDBCol>
-    </MDBRow>
-    <hr />
-    <MDBRow>
-      <MDBCol sm="3">
-        <MDBCardText>Email</MDBCardText>
-      </MDBCol>
-      <MDBCol sm="9">
-        <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
-      </MDBCol>
-    </MDBRow>
-    <hr />
-    <MDBRow>
-      <MDBCol sm="3">
-        <MDBCardText>Phone</MDBCardText>
-      </MDBCol>
-      <MDBCol sm="9">
-        <MDBCardText className="text-muted">{data ? data.phone : 'Loading...'}</MDBCardText>
-      </MDBCol>
-    </MDBRow>
-    <hr />
-    <MDBRow>
-      <MDBCol sm="3">
-        <MDBCardText>City</MDBCardText>
-      </MDBCol>
-      <MDBCol sm="9">
-        <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
-        <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+  <MDBCardImage
+    src={`../../Digital-Identity/logo-1.png`}
+    alt="avatar"
+    className="rounded-circle"
+    style={{ width: '150px' }}
+    fluid />
+    <MDBCardBody className="pt-1">
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Name</MDBCardText>
+    </MDBCol>
+    <MDBCol>
+      <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Email</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Phone</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.phone : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>City</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
+      <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+    </MDBCol>
+  </MDBRow>
+</MDBCardBody>
 
-      </MDBCol>
-    </MDBRow>
   </>
 )}
 </MDBCardBody>

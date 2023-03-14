@@ -12,105 +12,83 @@ import {
   MDBRow,
   MDBContainer,
   MDBCol,
-  MDBCardHeader
+  MDBCardHeader,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter
 } from 'mdb-react-ui-kit';
 
 export default function HCPPatientList(){
   const [reason, setReason] = useState('');
   const [type, setType] = useState('');
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [localReset, setLocalReset] = useState([]);
+  const [modalContent, setModalContent] = useState(false);
 
-
-  
-   useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-    const response = await fetch('http://localhost:4444/user/bookapt/all', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: null,
-    });
-    try {
-      const data = await response.json();
-      setSearchResults(data);
-      setLocalReset(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchData();
-}, []);
-
-    const handleSearch = async (event) => {
-      event.preventDefault();
-      let databody = {
-       "reason": reason,
-       "type": type
+      const response = await fetch('http://localhost:4444/HCP/booked/all', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: null,
+      });
+      try {
+        const data = await response.json();
+        console.log(data);
+        setData(data);
+        setSearchResults(data);
+      } catch (error) {
+        console.log(error);
       }
+    };
 
-           const response = await fetch('http://localhost:4444/user/bookapt', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(databody),
-          });
-          try {
-              const data = await response.json();
-              setSearchResults(data);
-            } catch (error) {
-              console.log(error);
-            }
+    fetchData();
+  }, []);
 
-      };
 
-      const handleReset = async (event) => {
-              event.preventDefault();
-              setSearchResults(localReset);
+  const handleView = (user) => {
+  setModalContent(true);
+}
 
-        };
-
-        const handleBook = async (user) => {
-          let HCPbooked = {
-           "HCPemail": user.email,
-           "HCPfirstname": user.name,
-           "HCPlastname": user.lastname
-          }
-          fetch('http://localhost:4444/user/booked', {
-               method: 'POST',
-               body: JSON.stringify(HCPbooked),
-               headers: {
-                   'Content-Type': 'application/json'
-               },
-           })
-           .then(res => res.json())
-           .then(data => console.log("data sent to BackEnd"));
-  }
 
   return (
     <>
-  <MDBContainer>
-  <MDBCardHeader style={{fontSize: "36px"}}>
-    Here are your current patients:
-  </MDBCardHeader>
-      <MDBRow>
-        {searchResults.map((user, index) => (
-          <MDBCol size='3' key={index} style={{ margin: "40px" }}>
-            <MDBCard>
-              <MDBCardBody>
-                <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
-                <MDBListGroup flush>
-                  <MDBListGroupItem>Patient's Issue: {user.type}</MDBListGroupItem>
-                  <MDBListGroupItem>Preffered communication method: {user.type}</MDBListGroupItem>
-                </MDBListGroup>
-                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>View Profile</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        ))}
-      </MDBRow>
-    </MDBContainer>
+      <MDBContainer>
+        <MDBRow>
+          {data.map((subArray, index) => (
+            <MDBCol size="3" key={index}>
+              {subArray.map((user) => (
+                <MDBCard key={user._id}>
+                  <MDBCardBody>
+                    <MDBCardTitle>
+                      {user.firstname} {user.lastname}
+                    </MDBCardTitle>
+                    <MDBListGroup flush></MDBListGroup>
+                    <MDBBtn onClick={() => handleView(user)} href="#" style={{ marginTop: "10px" }} > View Profile </MDBBtn>
+                  </MDBCardBody>
+                </MDBCard>
+              ))}
+            </MDBCol>
+          ))}
+        </MDBRow>
+      </MDBContainer>
+
+      {modalContent && (
+        <div className="modal-overlay" onClick={() => setModalContent(false)}>
+          <div className="modal-body" onClick={(e) => e.stopPropagation()}>
+            <h2>
+              {modalContent.firstname} {modalContent.lastname}
+            </h2>
+            <p>Email: {modalContent.email}</p>
+            <p>Phone: {modalContent.phone}</p>
+            <button onClick={() => setModalContent(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
     </>
   );
 };

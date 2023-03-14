@@ -19,7 +19,6 @@ import UserProfile from './pages/USER/user-profile'
 
 import HCPDashboard from './pages/HCP/HCP-dashboard'
 import HCPConnect from './pages/HCP/HCP-connect'
-import HCPViewApt from './pages/HCP/HCP-view-apt'
 import HCPPatientList from './pages/HCP/HCP-patient-list'
 import HCPProfile from './pages/HCP/HCP-profile'
 
@@ -101,7 +100,6 @@ function App() {
 
           <Route path = "/HCP-DashBoard" element = {<PrivateRouteHCP> <HCPDashboard /> </PrivateRouteHCP>} />
           <Route path = "/HCP-connect" element = {<PrivateRouteHCP> <HCPConnect /> </PrivateRouteHCP>} />
-          <Route path = "/HCP-view-apt" element = {<PrivateRouteHCP> <HCPViewApt /> </PrivateRouteHCP>} />
           <Route path = "/HCP-patient-list" element = {<PrivateRouteHCP> <HCPPatientList /> </PrivateRouteHCP>} />
           <Route path = "/HCP-profile" element = {<PrivateRouteHCP> <HCPProfile /> </PrivateRouteHCP>} />
 

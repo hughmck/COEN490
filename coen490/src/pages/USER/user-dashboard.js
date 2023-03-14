@@ -3,28 +3,41 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { App, Credentials } from "realm-web";
 import axios from 'axios';
 import '../../style/user/user-dashboard.css';
-import Chart from "chart.js";
+import  Chart from 'chart.js/auto';
 import { Grid } from '@mui/material';
+import { Tweet } from 'react-twitter-widgets';
 
 
 export default function UserDashboard() {
 
   const [showPopup, setShowPopup] = useState(false);
   const [file, setFile] = useState(null);
+  const [lineChart, setLineChart] = useState(null);
+  const [barChart, setBarChart] = useState(null);
   const lineChartRef = useRef(null);
   const barChartRef = useRef(null);
+  const [tweetId, setTweetId] = useState('1513487024556290051');
+
+
+
 
   useEffect(() => {
-    const popupSeen = localStorage.getItem("popsupSeen");
+    const popupSeen = localStorage.getItem("popupSeen");
 
     if (!popupSeen) {
       setShowPopup(true);
       localStorage.setItem("popupSeen", true);
     }
+    else{
+      setShowPopup(false);
+      localStorage.setItem("popupSeen", false);
+    }
+
+
 
     // Line chart
     const lineCtx = lineChartRef.current.getContext("2d");
-    new Chart(lineCtx, {
+    let lineChart = new Chart(lineCtx, {
       type: "line",
       data: {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -37,12 +50,17 @@ export default function UserDashboard() {
           },
         ],
       },
-      options: {},
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        width: 700,
+        height: 500
+      },
     });
 
     // Bar chart
     const barCtx = barChartRef.current.getContext("2d");
-    new Chart(barCtx, {
+    let barChart = new Chart(barCtx, {
       type: "bar",
       data: {
         labels: ["N1", "N2", "N3", "REM"],
@@ -56,9 +74,50 @@ export default function UserDashboard() {
           },
         ],
       },
-      options: {},
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        width: 300,
+        height: 200
+      },
     });
+    const getMsUntilNextHour = () => {
+      const now = new Date();
+      const nextHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, 0, 0);
+      return nextHour.getTime() - now.getTime();
+    };
+
+    const fetchLatestTweetId = async () => {
+      /*const response = await fetch('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=<screen_name>&count=1', {
+        headers: {
+          'Authorization': 'Bearer <bearer_token>'
+        }
+      });
+      const data = await response.json();
+      */
+      return "1513487024556290051";
+    };
+
+    const getLatestTweetId = async () => {
+      const latestTweetId = await fetchLatestTweetId();
+      setTweetId(latestTweetId);
+    };
+
+    const interval = setInterval(() => {
+      getLatestTweetId();
+    }, getMsUntilNextHour());
+
+    return () => {
+      lineChart.destroy();
+      barChart.destroy();
+      clearInterval(interval);
+    };
+
+
+
+
   }, []);
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -78,6 +137,9 @@ export default function UserDashboard() {
       console.error(err);
     });
   };
+
+
+
 
 
   return (
@@ -100,6 +162,7 @@ export default function UserDashboard() {
           </div>
         </div>
       )}
+       {tweetId && <Tweet tweetId={tweetId} />}
     </>
   );
 }
