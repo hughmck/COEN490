@@ -69,17 +69,36 @@ mongoose
 	});
 
 
-	app.post('/user/bookapt', (req, res) => {
-		MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
-			var dbo = db.db("DATA_FROM_EMAIL");
-			const query = { type: req.body.type, reason: req.body.reason };
-  		dbo.collection('HCP').find(query).toArray(function(err, result) {
-    	if (err) throw err;
-			res.json(result)
-			db.close()
-  	});
-		});
+	app.post('/user/bookapt', async (req, res) => {
+  const zoomDb = await MongoClient.connect(process.env.ATLAS_URI2);
+  const connectDb = await MongoClient.connect(process.env.ATLAS_URI);
+  const query = { type: req.body.type, reason: req.body.reason };
+  const dboZoom = zoomDb.db("CONNECT");
+  const dboConnect = connectDb.db("DATA_FROM_EMAIL");
+
+  // Find HCPs in DATA_FROM_EMAIL.HCP database with matching type and reason
+  const hcpQuery = { type: req.body.type, reason: req.body.reason };
+  const hcpResult = await dboConnect.collection('HCP').find(hcpQuery).toArray();
+  console.log(hcpResult)
+
+  const hcpEmails = hcpResult.map(hcp => hcp.email);
+  const zoomQuery = { MeetingDate: req.body.date, MeetingTime: req.body.time};
+  const bookedHCPs = await dboZoom.collection('zoom').find(zoomQuery).toArray();
+
+	console.log("zoomQuery", bookedHCPs);
+
+	const resultWithoutConnect = hcpResult.filter((item) => {
+  return !bookedHCPs.some((connectItem) => connectItem.HCP === item.email);
 	});
+
+	console.log('result : ', resultWithoutConnect);
+  res.json(resultWithoutConnect);
+
+  zoomDb.close();
+  connectDb.close();
+});
+
+
 
 	app.post('/user/bookapt/all', (req, res) => {
 		MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
@@ -231,6 +250,8 @@ app.post('/user/booked', (req, res) => {
 			HCP : req.body.HCPemail,
 			HCPfirstname : req.body.HCPfirstname,
 			HCPlastname: req.body.HCPlastname,
+			MeetingDate: req.body.MeetingDate,
+			MeetingTime: req.body.MeetingTime,
 			zoomid : 'null'
 	  };
 		var dbo = db.db("CONNECT");
