@@ -4,6 +4,8 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdb-react-ui-kit';
+import '../../style/user/user-dashboard.css';
+
 
 export default function UserViewApt(){
 
@@ -76,6 +78,19 @@ export default function UserViewApt(){
 
   return (
     <>
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
     <MDBCard>
       <MDBCardBody>
         <MDBCardTitle>
@@ -118,7 +133,9 @@ export default function UserViewApt(){
       <hr className="divider" />
     </div>
     ))}
-
+    </div>
+    </section>
+    </main>
     </>
   );
 }

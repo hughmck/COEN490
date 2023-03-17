@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs'
 import axios from 'axios';
+import '../../style/user/user-dashboard.css';
+
 
 export default function UserConnect() {
   const [url, setUrl] = useState('');
@@ -72,8 +74,24 @@ export default function UserConnect() {
 
   return (
     <>
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
     <div ref={chatboxEl} />
       <button className="button" onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
+    </div>
+    </section>
+    </main>
     </>
   );
 };

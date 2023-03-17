@@ -1,7 +1,11 @@
 import { Button, TextField } from "@mui/material";
+import { MDBContainer } from "mdb-react-ui-kit";
 import { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
+//import './sign-up.css';
+
+
 
 const Signup = () => {
 
@@ -143,6 +147,7 @@ function saveHCP(email){
 
  return (
   <>
+  <MDBContainer class="signup-form">
     {showSecondForm ? (
       <form
         style={{
@@ -294,10 +299,9 @@ function saveHCP(email){
         </p>
       </form>
     )}
+    </MDBContainer>
   </>
 );
-
-
 }
 
 export default Signup;
