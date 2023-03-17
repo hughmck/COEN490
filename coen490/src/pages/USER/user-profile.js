@@ -74,10 +74,6 @@ export default function HCPProfile() {
 
   };
 
-
-
-
-
   return (
     <>
     <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
