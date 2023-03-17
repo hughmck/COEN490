@@ -4,6 +4,7 @@ import { Typography, Paper, Grid, Box, Accordion, AccordionSummary, AccordionDet
 import {
   MDBCarousel,
   MDBCarouselItem,
+  MDBBtn
 } from 'mdb-react-ui-kit';
 
 import customer1Image from "./download-7.jpg";
@@ -44,31 +45,37 @@ export default function Home() {
   const { user } = useContext(UserContext);
   
   return (
-    <Box sx={{ p: 2 }}>
-      <Typography variant="h1" align="center" gutterBottom>
-        Welcome to EasySante!
-      </Typography>
-      <Typography variant="body1" align="center" gutterBottom>
-        We at EasySante believe that support, exercise, and a good night's sleep are the three pillars to improving your mental health. Luckily for you, we provide all three. EasySante provides simple and effective access to healthcare professionals which are tailored to your needs, while also providing you with useful insights on your sleep quality and stress levels.
-      </Typography>
-      <Typography variant="h2" align="center" gutterBottom>
-        What our customers are saying
-      </Typography>
-      <MDBCarousel showControls showIndicators style={{ width: '75%', height: '200px', margin: '0 auto' }}>
-        {reviews.map((review, index) => (
-          <MDBCarouselItem
-            key={index}
-            className='w-100 dock'
-            src={review.image}
-            alt={review.name}
-          >
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
-              <Typography variant="h5" sx={{ color: 'black', fontSize: '2rem' }} fontWeight="bold">{review.name}</Typography>
-              <Typography variant="body1" align="center" sx={{ color: 'black', fontSize: '2rem' }}>{review.quote}</Typography>
-            </Box>
-          </MDBCarouselItem>
-        ))}
-      </MDBCarousel>
-    </Box>
+    <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+  <Typography variant="h1" align="center" gutterBottom sx={{ fontSize: '3rem', fontWeight: 'bold', color: '#0D47A1', my: 1 }}>
+    Join over 1500 registered users who trust EasySante
+  </Typography>
+  <Typography variant="body1" align="center" gutterBottom sx={{ fontSize: '1rem', color: '#333', my: 4 }}>
+    We at EasySante believe that support, exercise, and a good night's sleep are the three pillars to improving your mental health. Luckily for you, we provide all three. EasySante provides simple and effective access to healthcare professionals which are tailored to your needs, while also providing you with useful insights on your sleep quality and stress levels.
+  </Typography>
+  <a href="/sign-up">
+    <MDBBtn className='me-1' align="center" color='success'>
+      Get Started!
+    </MDBBtn>
+  </a>
+  <Typography variant="h2" align="center" gutterBottom sx={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#0D47A1', my: 4 }}>
+    What our customers are saying
+  </Typography>
+  <MDBCarousel showControls showIndicators style={{ width: '75%', height: '200px', margin: '0 auto' }}>
+    {reviews.map((review, index) => (
+      <MDBCarouselItem
+        key={index}
+        className='w-100 dock'
+        src={review.image}
+        alt={review.name}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', mb: 4 }}>
+          <Typography variant="h5" sx={{ color: 'white', fontSize: '2rem' }} fontWeight="bold">{review.name}</Typography>
+          <Typography variant="body1" align="center" sx={{ color: 'white', fontSize: '1rem' }}>{review.quote}</Typography>
+        </Box>
+      </MDBCarouselItem>
+    ))}
+  </MDBCarousel>
+</Box>
+
   )
 }
