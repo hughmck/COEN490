@@ -4,7 +4,6 @@ import HCPNavBar from './HCP-navbar'
 
 export default function WhichNav(){
 
-
   switch(localStorage.getItem('status')) {
     case 'user':
       return <UserNavBar />
@@ -15,6 +14,6 @@ export default function WhichNav(){
     case 'none':
       break;
     default:
-      return <HomeNavBar />
+      break;
 }
 }
