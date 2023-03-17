@@ -3,7 +3,7 @@ import { MDBContainer } from "mdb-react-ui-kit";
 import { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
-import './sign-up.css';
+//import './sign-up.css';
 
 
 
