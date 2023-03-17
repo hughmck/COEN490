@@ -138,16 +138,27 @@ export default function UserDashboard() {
     });
   };
 
-
-
-
-
   return (
     <>
-    <div className="chart-container">
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
+      <div className="chart-container">
         <canvas id="line-chart" ref={lineChartRef}></canvas>
         <canvas id="bar-chart" ref={barChartRef}></canvas>
       </div>
+    </div>
+  </section>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
@@ -163,6 +174,8 @@ export default function UserDashboard() {
         </div>
       )}
        {tweetId && <Tweet tweetId={tweetId} />}
+</main>
+    
     </>
   );
 }

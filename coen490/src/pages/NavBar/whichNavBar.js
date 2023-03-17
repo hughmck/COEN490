@@ -6,7 +6,6 @@ export default function WhichNav(){
 
   switch(localStorage.getItem('status')) {
     case 'user':
-      return <UserNavBar />
       break;
     case 'HCP':
       return <HCPNavBar />
