@@ -4,7 +4,8 @@ import { Typography, Paper, Grid, Box, Accordion, AccordionSummary, AccordionDet
 import {
   MDBCarousel,
   MDBCarouselItem,
-  MDBBtn
+  MDBBtn,
+  MDBFooter, MDBContainer, MDBRow, MDBCol, MDBInput
 } from 'mdb-react-ui-kit';
 
 import customer1Image from "./download-7.jpg";
@@ -45,8 +46,10 @@ export default function Home() {
   const { user } = useContext(UserContext);
   
   return (
-    <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-  <Typography variant="h1" align="center" gutterBottom sx={{ fontSize: '3rem', fontWeight: 'bold', color: '#0D47A1', my: 1 }}>
+    <>
+      <MDBContainer style={{ marginBottom: '500px' }}>
+    <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
+  <Typography variant="h1" align="center" gutterBottom sx={{ fontSize: '3rem', fontWeight: 'bold', color: '#0D47A1', my: 0 }}>
     Join over 1500 registered users who trust EasySante
   </Typography>
   <Typography variant="body1" align="center" gutterBottom sx={{ fontSize: '1rem', color: '#333', my: 4 }}>
@@ -60,7 +63,7 @@ export default function Home() {
   <Typography variant="h2" align="center" gutterBottom sx={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#0D47A1', my: 4 }}>
     What our customers are saying
   </Typography>
-  <MDBCarousel showControls showIndicators style={{ width: '75%', height: '200px', margin: '0 auto' }}>
+  <MDBCarousel showControls showIndicators style={{ width: '75%', height: '200px', margin: '0 auto', zIndex: 1 }}>
     {reviews.map((review, index) => (
       <MDBCarouselItem
         key={index}
@@ -76,6 +79,36 @@ export default function Home() {
     ))}
   </MDBCarousel>
 </Box>
+</MDBContainer>
 
+<MDBFooter style={{ backgroundColor: 'blue' }} className='text-center text-lg-left'>
+  <MDBContainer className='p-4 pb-0'>
+    <form action=''>
+      <MDBRow className='d-flex justify-content-center'>
+        <MDBCol size='auto' className='mb-4 mb-md-0'>
+          <p className='pt-2' style={{ color: 'white' }}>
+            <strong>Sign up for our newsletter</strong>
+          </p>
+        </MDBCol>
+
+        <MDBCol md='5' size='12' className='mb-4 mb-md-0'>
+          <MDBInput type='text' id='form5Example2' style={{ color: 'white' }} label='Email address' />
+        </MDBCol>
+
+        <MDBCol size='auto' className='mb-4 mb-md-0'>
+          <MDBBtn style={{ color: 'white' }}>Subscribe</MDBBtn>
+        </MDBCol>
+      </MDBRow>
+    </form>
+  </MDBContainer>
+
+  <div className='text-center p-3' style={{ color: 'white' }}>
+    &copy; {new Date().getFullYear()} Copyright:{' '}
+    <a className='text-dark' href='https://mdbootstrap.com/'style={{ color: 'white' }}>
+      EasySante.com
+    </a>
+  </div>
+</MDBFooter>
+    </>
   )
 }
