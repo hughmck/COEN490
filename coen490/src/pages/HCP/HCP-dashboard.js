@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdb-react-ui-kit';
+import '../../style/user/user-profile.css'
 
 const formatDate = (date) => {
   const options = { hour: 'numeric', minute: '2-digit' };
@@ -41,6 +42,20 @@ export default function HCPDashboard({ user }) {
   };
 
   return (
+
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
     <MDBCard>
       <MDBCardBody>
         <MDBCardTitle>
@@ -71,5 +86,9 @@ export default function HCPDashboard({ user }) {
         </div>
       </MDBCardBody>
     </MDBCard>
+    </div>
+    </section>
+    </main>
+
   );
 }
