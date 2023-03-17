@@ -29,6 +29,7 @@ export default function UserBookApt(){
   const [date, setDate] = useState(new Date());
   const [realDate, setRealDate] = useState("");
   const [isDateOpen, SetIsDateOpen] = useState(false);
+  const [canBook, setCanBook] = useState(false);
 
 
    useEffect(() => {
@@ -56,6 +57,16 @@ export default function UserBookApt(){
 
     const handleSearch = async (event) => {
       event.preventDefault();
+      if(!type || !reason || !date || !time){
+        document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+        setTimeout(() => {
+          document.getElementById('popup-container').style.display = 'none';
+        }, 5000);
+      }
+      else{
+      setCanBook(true);
       let databody = {
        "reason": reason,
        "type": type,
@@ -74,11 +85,16 @@ export default function UserBookApt(){
             } catch (error) {
               console.log(error);
             }
-
+          }
       };
 
       const handleReset = async (event) => {
               event.preventDefault();
+              setCanBook(false);
+              setReason('Reason');
+              setType('Type');
+              setTime('Time');
+              setDate('Date');
               setSearchResults(localReset);
 
         };
@@ -104,27 +120,77 @@ export default function UserBookApt(){
 
 
         const handleBook = async (user) => {
-          let HCPbooked = {
-           "HCPemail": user.email,
-           "HCPfirstname": user.name,
-           "HCPlastname": user.lastname,
-           "MeetingDate" : realDate,
-           "MeetingTime" : time
-          }
-          console.log(HCPbooked)
-          fetch('http://localhost:4444/user/booked', {
-               method: 'POST',
-               body: JSON.stringify(HCPbooked),
-               headers: {
-                   'Content-Type': 'application/json'
-               },
-           })
-           .then(res => res.json())
-           .then(data => console.log("data sent to BackEnd"));
-  }
 
-  return (
+        if(!canBook){
+          console.log("IN", canBook);
+          document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
+          document.getElementById('popup-container').style.display = 'block';
+          document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+          setTimeout(() => {
+            document.getElementById('popup-container').style.display = 'none';
+          }, 5000);
+        }
+        else{
+            console.log("OUT", canBook);
+        let HCPbooked = {
+          "HCPemail": user.email,
+          "HCPfirstname": user.name,
+          "HCPlastname": user.lastname,
+          "MeetingDate" : realDate,
+          "MeetingTime" : time
+        };
+        try {
+    const response = await fetch('http://localhost:4444/user/booked', {
+      method: 'POST',
+      body: JSON.stringify(HCPbooked),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+      const data = await response.json();
+      if (data == '1') {
+        document.getElementById('popup-container').innerText = 'Your Interview Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#38f57d';
+
+      } else if (data == '0') {
+        document.getElementById('popup-container').innerText = 'You Already Have An Appointment Booked With An HCP. Please View Appointments Page.';
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+      }
+      } catch (error) {
+        console.error(error);
+    }
+    setTimeout(() => {
+      document.getElementById('popup-container').style.display = 'none';
+    }, 5000);
+  }
+};
+
+
+  return(
     <>
+    <div id="popup-container" style={{
+    display: "none",
+    width: "900px",
+    height: "65px",
+    position: "fixed",
+    top: "15%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#d5eef7",
+    zIndex: 9999,
+    textAlign: "center",
+    borderRadius: "10px",
+    opacity: 0.9,
+    fontSize: "15px",
+    fontFamily: "Montserrat",
+    lineHeight: "70px"
+  }}>
+  </div>
+
+
+
     <form className="flex justify-center items-center">
         <div className="flex flex-wrap justify-center items-center m-2">
             <select
@@ -149,7 +215,7 @@ export default function UserBookApt(){
                 <option value="audiocall">Audio Call</option>
                 <option value="videocall">Video Call</option>
             </select>
-            
+
                 <MDBBtn onClick={handleDate} color="primary">{date.toDateString()}</MDBBtn>
                 {isDateOpen && (
                     <div>

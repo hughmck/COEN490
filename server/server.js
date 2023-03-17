@@ -243,25 +243,35 @@ app.post('/zoomidHCP', async (req, res) => {
 });
 
 app.post('/user/booked', (req, res) => {
-	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
-		const HCPbooked = {
-			Username : 'null',
-	    user: current(currentU,currentH),
-			HCP : req.body.HCPemail,
-			HCPfirstname : req.body.HCPfirstname,
-			HCPlastname: req.body.HCPlastname,
-			MeetingDate: req.body.MeetingDate,
-			MeetingTime: req.body.MeetingTime,
-			zoomid : 'null'
-	  };
-		var dbo = db.db("CONNECT");
-		dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
-				if(err) return console.log("ERROR");
-				res.send(('saved to db: ' + data));
-		})
-
-	});
+  MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+    const HCPbooked = {
+      Username : 'null',
+      user: current(currentU,currentH),
+      HCP : req.body.HCPemail,
+      HCPfirstname : req.body.HCPfirstname,
+      HCPlastname: req.body.HCPlastname,
+      MeetingDate: req.body.MeetingDate,
+      MeetingTime: req.body.MeetingTime,
+      zoomid : 'null'
+    };
+    var dbo = db.db("CONNECT");
+    dbo.collection('zoom').findOne({ user: current(currentU,currentH) }, function(err, result) {
+      if (err) throw err;
+      if (result) {
+        res.send('0');
+      } else {
+        dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
+          if(err) {
+            res.send('0');
+          } else {
+            res.send('1');
+          }
+        });
+      }
+    });
+  });
 });
+
 
 app.post('/user/viewapts', (req, res) => {
 	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
