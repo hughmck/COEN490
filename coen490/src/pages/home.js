@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/user.context";
 import { Typography, Paper, Grid, Box, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import {
+  MDBCarousel,
+  MDBCarouselItem,
+} from 'mdb-react-ui-kit';
 
-import customer1Image from "./download-1.jpg";
-import customer2Image from "./download-2.jpg";
-import customer3Image from "./download-3.jpg";
-import customer4Image from "./minionbrah.jpg";
-import customer5Image from "./Sad-Minion.jpg";
+import customer1Image from "./download-7.jpg";
+import customer2Image from "./download-8.jpg";
+import customer3Image from "./download-9.jpg";
+import customer4Image from "./download-10.jpg";
+import customer5Image from "./download-12.avif";
 
 const reviews = [
   {
@@ -33,11 +37,6 @@ const reviews = [
     name: "Emily",
     quote: "The therapists I have worked with through EasySante have been incredibly knowledgeable and supportive. I have felt heard and understood throughout the entire process.",
     image: customer5Image,
-  },
-  {
-    name: "Kevin",
-    quote: "Fuck",
-    image: customer5Image,
   }
 ];
 
@@ -55,27 +54,21 @@ export default function Home() {
       <Typography variant="h2" align="center" gutterBottom>
         What our customers are saying
       </Typography>
-      <Grid container spacing={3} justifyContent="center">
+      <MDBCarousel showControls showIndicators style={{ width: '75%', height: '200px', margin: '0 auto' }}>
         {reviews.map((review, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Paper sx={{ p: 2 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Box sx={{ width: '100%', height: '200px', marginBottom: '16px' }}>
-                  <img src={review.image} alt={review.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </Box>
-                <Accordion>
-                  <AccordionSummary>
-                    <Typography variant="h5">{review.name}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant="body1" align="center">{review.quote}</Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </Box>
-            </Paper>
-          </Grid>
+          <MDBCarouselItem
+            key={index}
+            className='w-100 dock'
+            src={review.image}
+            alt={review.name}
+          >
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+              <Typography variant="h5" sx={{ color: 'black', fontSize: '2rem' }} fontWeight="bold">{review.name}</Typography>
+              <Typography variant="body1" align="center" sx={{ color: 'black', fontSize: '2rem' }}>{review.quote}</Typography>
+            </Box>
+          </MDBCarouselItem>
         ))}
-      </Grid>
+      </MDBCarousel>
     </Box>
   )
 }
