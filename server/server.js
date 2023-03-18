@@ -179,6 +179,21 @@ mongoose
 	    });
 	});
 
+	app.get('/hcp/profile', (req, res) => {
+	    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+	        if (err) throw err;
+	        var dbo = db.db("DATA_FROM_EMAIL");
+	        dbo.collection(collection(currentU,currentH)).findOne({
+	            email: current(currentU,currentH)
+	        },
+	        function(err, result) {
+	            if (err) throw err;
+	            res.json(result);
+	            db.close();
+	        });
+	    });
+	});
+
 
 const jwt = require('jsonwebtoken');
 
@@ -257,9 +272,11 @@ app.post('/user/booked', (req, res) => {
     var dbo = db.db("CONNECT");
     dbo.collection('zoom').findOne({ user: current(currentU,currentH) }, function(err, result) {
       if (err) throw err;
-      if (result) {
+			if (!req.body.canBook) {
+				res.send('2');
+		 	}else if (result) {
         res.send('0');
-      } else {
+      } else if (!result) {
         dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
           if(err) {
             res.send('0');

@@ -3,71 +3,171 @@ import { Button } from '@mui/material'
 import  LogOut  from '../Authentification/logout';
 import { UserProvider } from '../../contexts/user.context';
 import React from 'react';
-import {MDBCol, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
+import {MDBCol, MDBInput, MDBButton, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
 import '../../style/HCP/hcp-profile.css'
+import axios from 'axios';
+import { useContext, useState, useEffect } from "react";
+
 export default function HCPProfile() {
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [data, setData] = useState({});
+  const [file, setFile] = useState(null);
+  const [filename, setFilename] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:4444/HCP/profile")
+      .then(res => {
+        setData(res.data)
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleFileUpload = (e) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  axios.post('http://localhost:4444/hcp/profile/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then((res) => {
+    setFilename(res.data);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+};
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+    // Get the new values from the input fields
+    const fullNameInput = document.getElementById('full-name');
+    const newName = fullNameInput ? fullNameInput.value : '';
+
+    const emailInput = document.getElementById('email');
+    const newEmail = emailInput ? emailInput.value : '';
+
+    const phoneInput = document.getElementById('phone');
+    const newPhone = phoneInput ? phoneInput.value : '';
+    // Call the file upload function only if a file has been selected
+    if (file) {
+        handleFileUpload();
+        console.log("file detected")
+    }
+
+  };
+
+
+
+
+
   return (
     <>
-    <section className = "w-100 h-100" style={{ backgroundColor: '#fff' }}>
+    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
-            <MDBCard className="border h-100  w-100" >
-              <MDBCardBody className="text-center">
-                <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                  alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: '150px' }}
-                  fluid />
+            <MDBCard className="border h-100  w-100">
+              <MDBCardBody style={{ backgroundColor: '#fff' }}>
+{isEditing ? (
+  <>
+  <form onSubmit={handleSubmit}>
+    <input type="file" onChange={handleFileChange} />
+  </form>
 
-              </MDBCardBody>
-                <MDBCardBody>
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">Johnatan Smith</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Email</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">example@example.com</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Phone</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">Bay Area, San Francisco, CA</MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCardBody>
+  <MDBRow>
+  <MDBCardBody className="text-center">
+    <div>
+      <MDBInput label="Full Name" labelPosition="top" value={data ? data.firstname + " " + data.lastname : ''} />
+      <MDBInput label="Email" labelPosition="top" value={data ? data.email : ''} />
+      <MDBInput label="Profession" labelPosition="top" value={data ? data.profession : ''}/>
+      <MDBInput label="Specialty" labelPosition="top" value={data ? data.specialty : ''}/>
+      <MDBInput label="City" labelPosition="top" value={data ? data.city : ''} />
+    </div>
+    <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
+  </MDBCardBody>
+</MDBRow>
+
+</>
+
+) : (
+  <>
+  <MDBCardImage
+    src={`../../Digital-Identity/logo-1.png`}
+    alt="avatar"
+    className="rounded-circle"
+    style={{ width: '150px' }}
+    fluid />
+    <MDBCardBody className="pt-1">
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Name</MDBCardText>
+    </MDBCol>
+    <MDBCol>
+      <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Email</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Profession</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.profession : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>Specialty</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.specialty : 'Loading...'}</MDBCardText>
+    </MDBCol>
+  </MDBRow>
+  <hr />
+  <MDBRow>
+    <MDBCol sm="3">
+      <MDBCardText>City</MDBCardText>
+    </MDBCol>
+    <MDBCol sm="9">
+      <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
+      <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+    </MDBCol>
+  </MDBRow>
+</MDBCardBody>
+
+  </>
+)}
+</MDBCardBody>
+
 
 
             </MDBCard>
@@ -77,7 +177,7 @@ export default function HCPProfile() {
           <MDBCol lg="8">
             <MDBCard className="mb-4 w-100">
               <MDBCardBody>
-                  <h5 className="mx-auto w-100 text-center">Describe Your Issues </h5>
+                  <h5 className="mx-auto w-100 text-center">Describe Your Experience </h5>
                   <MDBCardText className="text-muted ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
@@ -166,7 +266,7 @@ export default function HCPProfile() {
                         <input className="card-data-button form-check-input float-end align-middle" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <div className="col-md-12 text-center">
-                        <button type="button" class="btn btn-danger">Terminate</button>
+                        <button type="button" className="btn btn-danger">Terminate</button>
                       </div>
                     </MDBRow>
                   </MDBCardBody>
