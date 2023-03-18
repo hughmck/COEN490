@@ -3,6 +3,8 @@ import { useContext, useState, useEffect } from "react";
 import React from 'react';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import '../../style/user/user-dashboard.css';
+
 import {
   MDBCard,
   MDBCardImage,
@@ -186,6 +188,19 @@ export default function UserBookApt(){
 
   return(
     <>
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
     <div id="popup-container" style={{
     display: "none",
     width: "900px",
@@ -388,9 +403,10 @@ export default function UserBookApt(){
     </MDBModalDialog>
   </MDBModal>
 
+    </div>
+    </section>
+    </main>
 
-
-
-</>
+    </>
   );
 };
