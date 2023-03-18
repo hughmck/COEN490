@@ -15,7 +15,16 @@ import {
   MDBListGroupItem,
   MDBRow,
   MDBContainer,
-  MDBCol
+  MDBCardText,
+  MDBCol,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter
+
 } from 'mdb-react-ui-kit';
 
 export default function UserBookApt(){
@@ -27,11 +36,15 @@ export default function UserBookApt(){
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [cardData, setCardData] = useState([]);
   const [localReset, setLocalReset] = useState([]);
   const [date, setDate] = useState(new Date());
   const [realDate, setRealDate] = useState("");
   const [isDateOpen, SetIsDateOpen] = useState(false);
   const [canBook, setCanBook] = useState(false);
+  const [basicModal, setBasicModal] = useState(false);
+
+
 
 
    useEffect(() => {
@@ -59,6 +72,7 @@ export default function UserBookApt(){
 
     const handleSearch = async (event) => {
       event.preventDefault();
+      console.log(type + reason + date + time);
       if(!type || !reason || !date || !time){
         document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
         document.getElementById('popup-container').style.display = 'block';
@@ -93,10 +107,10 @@ export default function UserBookApt(){
       const handleReset = async (event) => {
               event.preventDefault();
               setCanBook(false);
-              setReason('Reason');
-              setType('Type');
-              setTime('Time');
-              setDate('Date');
+              setReason('');
+              setType('');
+              setTime('');
+              setDate(new Date());
               setSearchResults(localReset);
 
         };
@@ -106,6 +120,15 @@ export default function UserBookApt(){
                 SetIsDateOpen(true);
 
           };
+
+      const toggleShow = (user) => {
+
+        setCardData(user);
+        console.log(cardData);
+        setBasicModal(!basicModal)
+
+      };
+
 
 
           const handleDateClick = (date) => {
@@ -122,27 +145,16 @@ export default function UserBookApt(){
 
 
         const handleBook = async (user) => {
-
-        if(!canBook){
-          console.log("IN", canBook);
-          document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
-          document.getElementById('popup-container').style.display = 'block';
-          document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
-          setTimeout(() => {
-            document.getElementById('popup-container').style.display = 'none';
-          }, 5000);
-        }
-        else{
-            console.log("OUT", canBook);
         let HCPbooked = {
           "HCPemail": user.email,
           "HCPfirstname": user.name,
           "HCPlastname": user.lastname,
           "MeetingDate" : realDate,
-          "MeetingTime" : time
+          "MeetingTime" : time,
+          "canBook" : canBook
         };
         try {
-    const response = await fetch('http://localhost:4444/user/booked', {
+      const response = await fetch('http://localhost:4444/user/booked', {
       method: 'POST',
       body: JSON.stringify(HCPbooked),
       headers: {
@@ -160,13 +172,17 @@ export default function UserBookApt(){
         document.getElementById('popup-container').style.display = 'block';
         document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
       }
+      else if (data == '2') {
+        document.getElementById('popup-container').innerText = 'You Need To Enter Your Preferences Before Booking!';
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+      }
       } catch (error) {
         console.error(error);
     }
     setTimeout(() => {
       document.getElementById('popup-container').style.display = 'none';
     }, 5000);
-  }
 };
 
 
@@ -202,7 +218,9 @@ export default function UserBookApt(){
     fontFamily: "Montserrat",
     lineHeight: "70px"
   }}>
+  An error
   </div>
+
 
 
 
@@ -283,17 +301,112 @@ export default function UserBookApt(){
                   <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
                   <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>View Profile</MDBBtn>
+                <MDBBtn onClick={() => toggleShow(user)}>VIEW PROFILE</MDBBtn>
+                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>Book Meeting</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         ))}
       </MDBRow>
     </MDBContainer>
+
+    <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+  <MDBModalDialog>
+    {cardData && (
+      <MDBModalContent
+        style={{
+          width: '800px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '500px',
+          borderRadius: '20px',
+          top: '50%',
+          left: '50%',
+          marginTop: '500px',
+          transform: 'translate(-50%, -50%)',
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)'
+        }}
+      >
+        <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+        <MDBModalBody>
+          <MDBRow>
+            <MDBCol lg='6'>
+              <h2 className='fw-bold mb-3'>HCP Information</h2>
+              <MDBCardImage
+                src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
+                alt='avatar'
+                className='rounded-circle'
+                style={{ width: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                fluid
+              />
+              <MDBCardBody className='pt-1'>
+                <MDBRow>
+                  <MDBCol sm='3'>
+                    <MDBCardText>Name</MDBCardText>
+                  </MDBCol>
+                  <MDBCol>
+                    <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm='3'>
+                    <MDBCardText>Email</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm='9'>
+                    <MDBCardText className='text-muted'>{cardData.email}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm='3'>
+                    <MDBCardText>Profession</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm='9'>
+                    <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm='3'>
+                    <MDBCardText>Specialty</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm='9'>
+                    <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm='3'>
+                    <MDBCardText>City</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm='9'>
+                    <MDBCardText className='text-muted'>{cardData.city}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCol>
+            <MDBCol lg='6'>
+              <h2 className='fw-bold mb-3'>A Little Bit About Myself</h2>
+              <MDBCardText className='text-muted text-center'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                  in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </MDBCardText>
+              </MDBCol>
+            </MDBRow>
+          </MDBModalBody>
+        </MDBModalContent>
+      )}
+    </MDBModalDialog>
+  </MDBModal>
+
     </div>
     </section>
     </main>
-    
+
     </>
   );
 };
