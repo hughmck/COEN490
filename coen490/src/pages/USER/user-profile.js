@@ -82,10 +82,11 @@ export default function HCPProfile() {
       <nav className="navbar">
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
-          <a href="/HCP-dashboard">Dashboard</a>
-          <a href="/HCP-connect">Connect</a>
-          <a href="/HCP-patient-list">View Appointments</a>
-          <a href="/HCP-profile">Profile</a>
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apts">View Appointments</a>
+          <a href="/user-book-apts">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
         </ul>
       </nav>
     <section className = "w-200 h-100" style={{ backgroundColor: "transparent" }}>

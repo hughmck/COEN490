@@ -36,6 +36,10 @@ hr.divider {
   font-size: 12px;
 }
 
+.transparent-bg {
+  background-color: transparent;
+}
+
 @media (min-width: 1400px) {
     max-width: 100%;
     max-height: 100%;
