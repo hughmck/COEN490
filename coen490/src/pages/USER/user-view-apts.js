@@ -117,9 +117,8 @@ export default function UserViewApt(){
   return (
     <>
     <main className="hero-section">
-    <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
@@ -129,37 +128,34 @@ export default function UserViewApt(){
           <a href="/user-profile">Profile</a>
         </ul>
       </nav>
-      <MDBCard>
-        <MDBCardBody>
-          <MDBCardTitle style ={{color: 'black'}}>
-            Welcome back, Hugh! You have {number} upcoming appointments:{' '}
-          </MDBCardTitle>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'left',
-              height: '700px',
-              width: '100%',
-            }}
-          >
-            <Calendar value={selectedDate} onChange={handleCalendarChange} />
-            <div style={{ marginLeft: '20px', width: '600px', color: 'black' }}>
-              {selectedAppointments.length > 0 ? (
-                <div>
-                  <h4>Appointments for {selectedDate.toDateString()}:</h4>
-                  {selectedAppointments.map((appointment, index) => (
-                    <div key={index}>
-                      <h5>
-                        {appointment.title} at {formatDate(appointment.date)}
-                      </h5>
-                      <p>{appointment.description}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : selectedDate.toDateString() === new Date().toDateString() ? (
-                <p>No appointments today, book an appointment with a patient!</p>
+      </div>
+    <MDBCard style={{ backgroundColor: "transparent", border: "0" }}>
+      <MDBCardBody>
+        <MDBCardTitle>
+          Welcome back, Hugh! You have {number} upcoming appointments:{' '}
+        </MDBCardTitle>
+        <div style={{ display: 'flex', justifyContent: 'left', height: '700px', width: '100%' }}>
+          <Calendar value={selectedDate} onChange={handleCalendarChange} />
+          <div style={{ marginLeft: '20px', width: '600px' }}>
+            {selectedAppointments.length > 0 ? (
+              <div>
+                <h4>Appointments for {selectedDate.toDateString()}:</h4>
+                {selectedAppointments.map((appointment, index) => (
+                  <div key={index}>
+                    <h5>
+                      {appointment.title} at {formatDate(appointment.date)}
+                    </h5>
+                    <p>{appointment.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              selectedDate.toDateString() === new Date().toDateString() ? (
+                <p>No appointments today, please book an appointment with an HCP if you are feeling down.</p>
+
               ) : (
                 <p>No appointments on {selectedDate.toDateString()}</p>
+              )
               )}
 
               {selectedAppointments.length > 0 && (
@@ -235,10 +231,8 @@ export default function UserViewApt(){
               )}
             </div>
           </div>
-        </MDBCardBody>
-      </MDBCard>
-    </div>
-    </section>
+      </MDBCardBody>
+    </MDBCard>
     </main>
     </>
   );

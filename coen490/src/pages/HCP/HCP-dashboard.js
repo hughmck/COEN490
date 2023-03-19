@@ -20,8 +20,9 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter
-
 } from 'mdb-react-ui-kit';
+
+import '../../style/user/user-dashboard.css';
 
 const formatDate = (date) => {
   const options = { hour: 'numeric', minute: '2-digit' };
@@ -111,37 +112,42 @@ export default function HCPDashboard() {
   };
 
   return (
-      <MDBCard>
-        <MDBCardBody>
-          <MDBCardTitle>
-              Welcome back, Dr {name}! You have {number} upcoming appointments:{' '}
-          </MDBCardTitle>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'left',
-              height: '700px',
-              width: '100%',
-            }}
-          >
-            <Calendar value={selectedDate} onChange={handleCalendarChange} />
-            <div style={{ marginLeft: '20px', width: '600px' }}>
-              {selectedAppointments.length > 0 ? (
-                <div>
-                  <h4>Appointments for {selectedDate.toDateString()}:</h4>
-                  {selectedAppointments.map((appointment, index) => (
-                    <div key={index}>
-                      <h5>
-                        {appointment.title} at {formatDate(appointment.date)}
-                      </h5>
-                      <p>{appointment.description}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : selectedDate.toDateString() === new Date().toDateString() ? (
+     <main className="hero-section">
+     <div className="hero-content">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/HCP-dashboard">Dashboard</a>
+          <a href="/HCP-connect">Connect</a>
+          <a href="/HCP-patient-list">View Appointments</a>
+          <a href="/HCP-profile">Profile</a>
+        </ul>
+      </nav>
+      <MDBCardBody style={{marginLeft: '40px', alignContent: 'center'}}>
+        <MDBCardTitle>
+            Welcome back, Dr {name}! You have {number} upcoming appointments:{' '}
+        </MDBCardTitle>
+        <div style={{ display: 'flex', justifyContent: 'left', height: '700px', width: '100%' }}>
+          <Calendar value={selectedDate} onChange={handleCalendarChange} />
+          <div style={{ marginLeft: '20px', width: '600px' }}>
+            {selectedAppointments.length > 0 ? (
+              <div>
+                <h4>Appointments for {selectedDate.toDateString()}:</h4>
+                {selectedAppointments.map((appointment, index) => (
+                  <div key={index}>
+                    <h5>
+                      {appointment.title} at {formatDate(appointment.date)}
+                    </h5>
+                    <p>{appointment.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              selectedDate.toDateString() === new Date().toDateString() ? (
                 <p>No appointments today, book an appointment with a patient!</p>
               ) : (
                 <p>No appointments on {selectedDate.toDateString()}</p>
+              )
               )}
 
               {selectedAppointments.length > 0 && (
@@ -205,10 +211,10 @@ export default function HCPDashboard() {
                 </>
               )}
             </div>
-          </div>
-        </MDBCardBody>
-      </MDBCard>
-    );
+        </div>
+      </MDBCardBody>
+    </div>
+    </main>
 
-
+  );
 }

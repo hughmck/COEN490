@@ -7,6 +7,8 @@ import {MDBCol, MDBInput, MDBButton, MDBContainer,MDBRow,MDBCard,MDBCardText,MDB
 import '../../style/HCP/hcp-profile.css'
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
+import '../../style/user/user-dashboard.css';
+
 
 export default function HCPProfile() {
 
@@ -81,8 +83,18 @@ export default function HCPProfile() {
 
   return (
     <>
-    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
-      <MDBContainer className="py-5">
+    <main className="hero-section">
+    <div className="hero-content">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/HCP-dashboard">Dashboard</a>
+          <a href="/HCP-connect">Connect</a>
+          <a href="/HCP-patient-list">View Appointments</a>
+          <a href="/HCP-profile">Profile</a>
+        </ul>
+      </nav>
+    <section className = "w-200 h-100" style={{ backgroundColor: "transparent", paddingTop: '50px', marginLeft: '20px', marginRight: '20px' }}>
         <MDBRow>
           <MDBCol lg="4">
             <MDBCard className="border h-100  w-100">
@@ -171,8 +183,6 @@ export default function HCPProfile() {
 
 
             </MDBCard>
-
-
           </MDBCol>
           <MDBCol lg="8">
             <MDBCard className="mb-4 w-100">
@@ -275,13 +285,14 @@ export default function HCPProfile() {
             </MDBRow>
           </MDBCol>
         </MDBRow>
-      </MDBContainer>
       <UserProvider>
         <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "1vh" }}>
-          <LogOut />
+          <LogOut style = {{paddingTop: '10px'}} />
         </Container>
       </UserProvider>
     </section>
+    </div>
+    </main>
     </>
   );
 }

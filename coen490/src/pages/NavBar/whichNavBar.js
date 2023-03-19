@@ -8,7 +8,7 @@ export default function WhichNav(){
     case 'user':
       break;
     case 'HCP':
-      return <HCPNavBar />
+      //return <HCPNavBar />
       break;
     case 'none':
       break;

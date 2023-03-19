@@ -76,11 +76,23 @@ export default function HCPProfile() {
 
   return (
     <>
-    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
-      <MDBContainer className="py-5">
-        <MDBRow>
-          <MDBCol lg="4">
-            <MDBCard className="border h-100  w-100">
+    <main className="hero-section">
+    <div className="hero-content">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/user-dashboard">Dashboard</a>
+          <a href="/user-connect">Connect</a>
+          <a href="/user-view-apts">View Appointments</a>
+          <a href="/user-book-apts">Book Appointments</a>
+          <a href="/user-profile">Profile</a>
+        </ul>
+      </nav>
+    <section className = "w-200 h-100" style={{ backgroundColor: "transparent" }}>
+      <MDBContainer className="py-5" style={{ backgroundColor: "transparent" }}>
+        <MDBRow style={{ backgroundColor: "transparent" }}>
+          <MDBCol lg="4" style={{ backgroundColor: "transparent" }}>
+            <MDBCard className="border h-100  w-100" style={{ backgroundColor: "transparent" }}>
               <MDBCardBody style={{ backgroundColor: '#fff' }}>
 {isEditing ? (
   <>
@@ -267,6 +279,8 @@ export default function HCPProfile() {
         </Container>
       </UserProvider>
     </section>
+    </div>
+    </main>
     </>
   );
 }

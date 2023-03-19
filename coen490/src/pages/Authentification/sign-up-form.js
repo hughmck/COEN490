@@ -267,7 +267,7 @@ function saveHCP(email){
           </>
         )}
         <Button variant="contained" color="primary" type="submit">
-          Signup
+          Sign Up
         </Button>
       </form>
     ) : (
@@ -289,7 +289,7 @@ function saveHCP(email){
           name="email"
           value={form.email}
           onInput={onFormInputChange}
-          style={{ marginBottom: "1rem" }}
+          style={{ marginBottom: "1rem", backgroundColor: "white" }}
         />
         <Button variant="contained" color="primary" type="submit">
           Continue

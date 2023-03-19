@@ -64,6 +64,17 @@ export default function HCPPatientList(){
 
     return (
     <>
+    <main className="hero-section">
+    <div className="hero-content">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/HCP-dashboard">Dashboard</a>
+          <a href="/HCP-connect">Connect</a>
+          <a href="/HCP-patient-list">View Appointments</a>
+          <a href="/HCP-profile">Profile</a>
+        </ul>
+      </nav>
     {isLoading ? (
           <MDBSpinner grow color="primary" className="mt-5" />
         ) : (
@@ -72,7 +83,7 @@ export default function HCPPatientList(){
           <MDBRow key={subArray[0]._id}>
             {subArray.map((user) => (
               <MDBCol key={user._id}>
-                <MDBCard>
+                <MDBCard class="mb-3">
                   <MDBCardBody className="d-flex">
                     <MDBCardImage
                       src="https://i.pravatar.cc/100"
@@ -93,6 +104,7 @@ export default function HCPPatientList(){
                         onClick={() => handleView(user)}
                         href="#"
                         style={{ marginTop: "auto", marginBottom: "auto" }}
+                        noCollapse
                       >
                         View Profile
                       </MDBBtn>
@@ -130,6 +142,8 @@ export default function HCPPatientList(){
           )}
         </MDBModalBody>
       </MDBModal>
+      </div>
+      </main>
     </>
   );
 
