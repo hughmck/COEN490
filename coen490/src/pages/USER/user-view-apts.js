@@ -90,7 +90,8 @@ export default function UserViewApt(){
           <a href="/user-profile">Profile</a>
         </ul>
       </nav>
-    <MDBCard>
+      </div>
+    <MDBCard style={{ backgroundColor: "transparent", border: "0" }}>
       <MDBCardBody>
         <MDBCardTitle>
           Welcome back, Hugh! Here are your upcoming appointments:{' '}
@@ -111,7 +112,7 @@ export default function UserViewApt(){
               </div>
             ) : (
               selectedDate.toDateString() === new Date().toDateString() ? (
-                <p>No appointments today, book an appointment with a patient!</p>
+                <p>No appointments today, please book an appointment with an HCP if you are feeling down.</p>
               ) : (
                 <p>No appointments on {selectedDate.toDateString()}</p>
               )
@@ -120,7 +121,6 @@ export default function UserViewApt(){
         </div>
       </MDBCardBody>
     </MDBCard>
-    </div>
     </main>
     </>
   );
