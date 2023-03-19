@@ -189,9 +189,8 @@ export default function UserBookApt(){
   return(
     <>
     <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
@@ -220,10 +219,6 @@ export default function UserBookApt(){
   }}>
   An error
   </div>
-
-
-
-
     <form className="flex justify-center items-center">
         <div className="flex flex-wrap justify-center items-center m-2">
             <select
@@ -404,7 +399,6 @@ export default function UserBookApt(){
   </MDBModal>
 
     </div>
-    </section>
     </main>
 
     </>

@@ -51,9 +51,8 @@ export default function HCPDashboard() {
 
   return (
      <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
@@ -62,7 +61,7 @@ export default function HCPDashboard() {
           <a href="/HCP-profile">Profile</a>
         </ul>
       </nav>
-      <MDBCardBody>
+      <MDBCardBody style={{marginLeft: '40px', alignContent: 'center'}}>
         <MDBCardTitle>
           Welcome back, Hugh! Here are your upcoming appointments:{' '}
         </MDBCardTitle>
@@ -91,7 +90,6 @@ export default function HCPDashboard() {
         </div>
       </MDBCardBody>
     </div>
-    </section>
     </main>
 
   );
