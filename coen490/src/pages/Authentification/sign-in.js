@@ -9,9 +9,8 @@ export default function SignIn(){
 
   return (
     <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/sign-up">Sign Up</a>
@@ -26,7 +25,6 @@ export default function SignIn(){
       </Container>
     </UserProvider>
     </div>
-    </section>
     </main>
 )
 }

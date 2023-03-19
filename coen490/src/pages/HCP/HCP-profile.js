@@ -84,9 +84,8 @@ export default function HCPProfile() {
   return (
     <>
     <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
@@ -95,7 +94,7 @@ export default function HCPProfile() {
           <a href="/HCP-profile">Profile</a>
         </ul>
       </nav>
-    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }} style={{paddingTop: '50px'}}>
+    <section className = "w-200 h-100" style={{ backgroundColor: "transparent", paddingTop: '50px', marginLeft: '20px', marginRight: '20px' }}>
         <MDBRow>
           <MDBCol lg="4">
             <MDBCard className="border h-100  w-100">
@@ -288,12 +287,11 @@ export default function HCPProfile() {
         </MDBRow>
       <UserProvider>
         <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "1vh" }}>
-          <LogOut />
+          <LogOut style = {{paddingTop: '10px'}} />
         </Container>
       </UserProvider>
     </section>
     </div>
-    </section>
     </main>
     </>
   );

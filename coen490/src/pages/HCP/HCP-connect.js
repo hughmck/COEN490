@@ -74,9 +74,8 @@ const handleClick = async () => {
 return (
   <>
   <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
@@ -88,7 +87,6 @@ return (
   <div ref={chatboxEl} />
     <button onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
     </div>
-    </section>
     </main>
   </>
 );
