@@ -6,6 +6,8 @@ import '../../style/user/user-dashboard.css';
 import  Chart from 'chart.js/auto';
 import { Grid } from '@mui/material';
 import { Tweet } from 'react-twitter-widgets';
+import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
+
 
 
 export default function UserDashboard() {
@@ -40,21 +42,34 @@ export default function UserDashboard() {
     let lineChart = new Chart(lineCtx, {
       type: "line",
       data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am","12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"],
         datasets: [
           {
-            label: "Hours of sleep",
-            data: [6, 7, 8, 7, 6, 5, 6, 7, 8, 7, 6, 5],
+            label: "Heart Rate Today",
+            data: [50, 50, 60, 50, 50, 60, 50, 50, 60, 50, 80, 160, 160, 80, 60, 50, 60, 60, 50, 60, 50, 50, 60],
             borderColor: "rgba(255, 99, 132, 1)",
             backgroundColor: "rgba(255, 99, 132, 0.2)",
           },
         ],
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         width: 700,
-        height: 500
+        height: 500,
+        borderColor: "black",
+        scales: {
+        yAxes: [{
+        ticks: {
+          fontColor: "black"
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          fontColor: "black"
+        }
+      }]
+    }
       },
     });
 
@@ -66,7 +81,7 @@ export default function UserDashboard() {
         labels: ["N1", "N2", "N3", "REM"],
         datasets: [
           {
-            label: "Hours of sleep",
+            label: "Quality of sleep",
             data: [1, 3, 2, 3],
             backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)"],
             borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)"],
@@ -152,11 +167,15 @@ export default function UserDashboard() {
           <a href="/user-profile">Profile</a>
         </ul>
       </nav>
-      <div className="chart-container">
-        <canvas id="line-chart" ref={lineChartRef}></canvas>
-        <canvas id="bar-chart" ref={barChartRef}></canvas>
       </div>
-    </div>
+      <MDBRow style={{marginLeft: '15px'}}>
+        <MDBCol md='6'>
+        <canvas id="line-chart" ref={lineChartRef} style={{width: "800px", height: "500px"}}></canvas>
+        </MDBCol>
+        <MDBCol md='5'>
+        <canvas id="bar-chart" ref={barChartRef} style={{width: "800px", height: "500px"}}></canvas>
+        </MDBCol>
+      </MDBRow>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
