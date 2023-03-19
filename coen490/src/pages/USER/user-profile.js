@@ -76,7 +76,19 @@ export default function HCPProfile() {
 
   return (
     <>
-    <section className = "w-200 h-100" style={{ backgroundColor: '#fff' }}>
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/HCP-dashboard">Dashboard</a>
+          <a href="/HCP-connect">Connect</a>
+          <a href="/HCP-patient-list">View Appointments</a>
+          <a href="/HCP-profile">Profile</a>
+        </ul>
+      </nav>
+    <section className = "w-200 h-100" style={{ backgroundColor: "transparent" }}>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
@@ -267,6 +279,9 @@ export default function HCPProfile() {
         </Container>
       </UserProvider>
     </section>
+    </div>
+    </section>
+    </main>
     </>
   );
 }
