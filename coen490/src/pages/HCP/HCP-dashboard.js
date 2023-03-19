@@ -61,7 +61,7 @@ export default function HCPDashboard() {
           <a href="/HCP-profile">Profile</a>
         </ul>
       </nav>
-      <MDBCardBody>
+      <MDBCardBody style={{marginLeft: '40px', alignContent: 'center'}}>
         <MDBCardTitle>
           Welcome back, Hugh! Here are your upcoming appointments:{' '}
         </MDBCardTitle>

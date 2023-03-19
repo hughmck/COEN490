@@ -83,7 +83,7 @@ export default function HCPPatientList(){
           <MDBRow key={subArray[0]._id}>
             {subArray.map((user) => (
               <MDBCol key={user._id}>
-                <MDBCard>
+                <MDBCard class="mb-3">
                   <MDBCardBody className="d-flex">
                     <MDBCardImage
                       src="https://i.pravatar.cc/100"
@@ -104,6 +104,7 @@ export default function HCPPatientList(){
                         onClick={() => handleView(user)}
                         href="#"
                         style={{ marginTop: "auto", marginBottom: "auto" }}
+                        noCollapse
                       >
                         View Profile
                       </MDBBtn>
