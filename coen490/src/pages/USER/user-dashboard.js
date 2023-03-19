@@ -141,7 +141,6 @@ export default function UserDashboard() {
   return (
     <>
     <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
       <nav className="navbar">
         <h1 className="nav-logo">EasySante</h1>
@@ -158,7 +157,6 @@ export default function UserDashboard() {
         <canvas id="bar-chart" ref={barChartRef}></canvas>
       </div>
     </div>
-  </section>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
@@ -175,7 +173,7 @@ export default function UserDashboard() {
       )}
        {tweetId && <Tweet tweetId={tweetId} />}
 </main>
-    
+
     </>
   );
 }

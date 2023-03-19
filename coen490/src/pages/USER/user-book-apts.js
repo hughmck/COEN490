@@ -4,7 +4,6 @@ import React from 'react';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import '../../style/user/user-dashboard.css';
-
 import {
   MDBCard,
   MDBCardImage,
@@ -72,6 +71,13 @@ export default function UserBookApt(){
 
     const handleSearch = async (event) => {
       event.preventDefault();
+
+      const month = date.getMonth() + 1; // add 1 since getMonth() returns 0-11
+      const day = date.getDate();
+      const year = date.getFullYear();
+      const formattedDate = `${month}.${day}.${year}`;
+      setRealDate(formattedDate);
+
       console.log(type + reason + date + time);
       if(!type || !reason || !date || !time){
         document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
@@ -138,7 +144,6 @@ export default function UserBookApt(){
           const year = date.getFullYear();
           const formattedDate = `${month}.${day}.${year}`;
           setRealDate(formattedDate);
-          console.log(realDate);
           SetIsDateOpen(false);
           };
 
@@ -153,6 +158,8 @@ export default function UserBookApt(){
           "MeetingTime" : time,
           "canBook" : canBook
         };
+
+        console.log(HCPbooked)
         try {
           const response = await fetch('http://localhost:4444/user/booked', {
           method: 'POST',
@@ -163,14 +170,10 @@ export default function UserBookApt(){
           });
             const data = await response.json();
             if (data == '1') {
-              document.getElementById('popup-container').innerText = 'Your Interview Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
+              document.getElementById('popup-container').innerText = 'Your Meeting Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
               document.getElementById('popup-container').style.display = 'block';
               document.getElementById('popup-container').style.backgroundColor = '#38f57d';
 
-            } else if (data == '0') {
-              document.getElementById('popup-container').innerText = 'You Already Have An Appointment Booked With An HCP. Please View Appointments Page.';
-              document.getElementById('popup-container').style.display = 'block';
-              document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
             }
             else if (data == '2') {
               document.getElementById('popup-container').innerText = 'You Need To Enter Your Preferences Before Booking!';
@@ -261,17 +264,17 @@ export default function UserBookApt(){
                     onChange={(e) => setTime(e.target.value)}
                 >
                     <option value="">Time</option>
-                    <option value="9am">9am</option>
-                    <option value="10am">10am</option>
-                    <option value="11am">11am</option>
-                    <option value="12am">12am</option>
-                    <option value="1pm">1pm</option>
-                    <option value="2pm">2pm</option>
-                    <option value="3pm">3pm</option>
-                    <option value="4pm">4pm</option>
-                    <option value="5pm">5pm</option>
-                    <option value="6pm">6pm</option>
-                    <option value="7pm">7pm</option>
+                    <option value="9">9:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
                 </select>
             <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mr-2"
