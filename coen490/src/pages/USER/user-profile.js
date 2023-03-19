@@ -77,9 +77,8 @@ export default function HCPProfile() {
   return (
     <>
     <main className="hero-section">
-  <section className="container">
     <div className="hero-content">
-      <nav className="navbar">
+      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
@@ -281,7 +280,6 @@ export default function HCPProfile() {
       </UserProvider>
     </section>
     </div>
-    </section>
     </main>
     </>
   );
