@@ -121,18 +121,6 @@ export default function UserViewApt(){
         </div>
       </MDBCardBody>
     </MDBCard>
-    {data.map(appointment => (
-    <div key={appointment._id}>
-      <div className="appointment">
-        <h2 className="hcp-name">{appointment.HCPfirstname} {appointment.HCPlastname}</h2>
-        <div className="appointment-actions">
-          <button className="btn btn-cancel" onClick={() => handleCancel(appointment._id)}>Cancel Appointment</button>
-          <button className="btn btn-details">More Details</button>
-        </div>
-      </div>
-      <hr className="divider" />
-    </div>
-    ))}
     </div>
     </section>
     </main>

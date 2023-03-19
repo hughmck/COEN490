@@ -154,35 +154,35 @@ export default function UserBookApt(){
           "canBook" : canBook
         };
         try {
-      const response = await fetch('http://localhost:4444/user/booked', {
-      method: 'POST',
-      body: JSON.stringify(HCPbooked),
-      headers: {
-        'Content-Type': 'application/json'
+          const response = await fetch('http://localhost:4444/user/booked', {
+          method: 'POST',
+          body: JSON.stringify(HCPbooked),
+          headers: {
+            'Content-Type': 'application/json'
       }
-    });
-      const data = await response.json();
-      if (data == '1') {
-        document.getElementById('popup-container').innerText = 'Your Interview Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
-        document.getElementById('popup-container').style.display = 'block';
-        document.getElementById('popup-container').style.backgroundColor = '#38f57d';
+          });
+            const data = await response.json();
+            if (data == '1') {
+              document.getElementById('popup-container').innerText = 'Your Interview Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
+              document.getElementById('popup-container').style.display = 'block';
+              document.getElementById('popup-container').style.backgroundColor = '#38f57d';
 
-      } else if (data == '0') {
-        document.getElementById('popup-container').innerText = 'You Already Have An Appointment Booked With An HCP. Please View Appointments Page.';
-        document.getElementById('popup-container').style.display = 'block';
-        document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
-      }
-      else if (data == '2') {
-        document.getElementById('popup-container').innerText = 'You Need To Enter Your Preferences Before Booking!';
-        document.getElementById('popup-container').style.display = 'block';
-        document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
-      }
-      } catch (error) {
-        console.error(error);
-    }
-    setTimeout(() => {
-      document.getElementById('popup-container').style.display = 'none';
-    }, 5000);
+            } else if (data == '0') {
+              document.getElementById('popup-container').innerText = 'You Already Have An Appointment Booked With An HCP. Please View Appointments Page.';
+              document.getElementById('popup-container').style.display = 'block';
+              document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+            }
+            else if (data == '2') {
+              document.getElementById('popup-container').innerText = 'You Need To Enter Your Preferences Before Booking!';
+              document.getElementById('popup-container').style.display = 'block';
+              document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
+            }
+            } catch (error) {
+              console.error(error);
+          }
+          setTimeout(() => {
+            document.getElementById('popup-container').style.display = 'none';
+          }, 5000);
 };
 
 

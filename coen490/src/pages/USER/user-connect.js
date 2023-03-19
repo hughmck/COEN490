@@ -74,8 +74,7 @@ export default function UserConnect() {
 
   return (
     <>
-    <main className="hero-section">
-  <section className="container">
+  <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar">
         <h1 className="nav-logo">EasySante</h1>
@@ -90,8 +89,8 @@ export default function UserConnect() {
     <div ref={chatboxEl} />
       <button className="button" onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
     </div>
-    </section>
     </main>
+
     </>
   );
 };

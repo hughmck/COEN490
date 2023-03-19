@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdb-react-ui-kit';
@@ -8,26 +8,33 @@ const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', options).format(date);
 };
 
-export default function HCPDashboard({ user }) {
-  const [appointments, setAppointments] = useState([
-    {
-      title: 'Appointment 1',
-      date: new Date(2023, 3, 18, 10, 0),
-      description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      title: 'Appointment 2',
-      date: new Date(2023, 3, 18, 14, 0),
-      description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      title: 'Appointment 3',
-      date: new Date(2023, 3, 19, 14, 0),
-      description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-  ]);
+export default function HCPDashboard() {
+  const [dbDate, setDbDate] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedAppointments, setSelectedAppointments] = useState([]);
+
+  useEffect(() => {
+    setDbDate([2023, 3, 18, 10, 30]);
+    console.log("HERE", dbDate);
+    setAppointments([
+      {
+        title: 'Appointment 1',
+        date: new Date(dbDate[0], dbDate[1]-1, dbDate[2], dbDate[3], dbDate[4]),
+        description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+      {
+        title: 'Appointment 2',
+        date: new Date(2023, 3, 18, 14, 0),
+        description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+      {
+        title: 'Appointment 3',
+        date: new Date(2023, 3, 19, 14, 0),
+        description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+    ]);
+  }, []);
 
   const handleCalendarChange = (date) => {
     setSelectedDate(date);

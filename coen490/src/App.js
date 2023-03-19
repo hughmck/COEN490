@@ -84,7 +84,8 @@ function App() {
     return(
     <>
       <WhichNav />
-      <div className = "container">
+      <div className="container" style={{ width: '100%', maxWidth: '100%', paddingLeft: '0px', paddingRight: '0px' }}>
+
         <Routes>
           <Route path = "/" element = {<AlreadyAuthHome> <Home /> </AlreadyAuthHome>} />
 
