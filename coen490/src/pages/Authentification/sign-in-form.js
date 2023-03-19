@@ -128,7 +128,7 @@ const Login = () => {
      name="email"
      value={form.email}
      onChange={onFormInputChange}
-     style={{ marginBottom: "1rem" }}
+     style={{ marginBottom: "1rem", backgroundColor: "white" }}
    />
    <TextField
      label="Password"
@@ -137,7 +137,7 @@ const Login = () => {
      name="password"
      value={form.password}
      onChange={onFormInputChange}
-     style={{ marginBottom: "1rem" }}
+     style={{ marginBottom: "1rem", backgroundColor: "white"}}
    />
    <Button variant="contained" color="primary" onClick={onSubmit}>
      Login
