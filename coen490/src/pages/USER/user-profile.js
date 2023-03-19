@@ -89,10 +89,10 @@ export default function HCPProfile() {
         </ul>
       </nav>
     <section className = "w-200 h-100" style={{ backgroundColor: "transparent" }}>
-      <MDBContainer className="py-5">
-        <MDBRow>
-          <MDBCol lg="4">
-            <MDBCard className="border h-100  w-100">
+      <MDBContainer className="py-5" style={{ backgroundColor: "transparent" }}>
+        <MDBRow style={{ backgroundColor: "transparent" }}>
+          <MDBCol lg="4" style={{ backgroundColor: "transparent" }}>
+            <MDBCard className="border h-100  w-100" style={{ backgroundColor: "transparent" }}>
               <MDBCardBody style={{ backgroundColor: '#fff' }}>
 {isEditing ? (
   <>

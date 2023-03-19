@@ -79,13 +79,11 @@ mongoose
   // Find HCPs in DATA_FROM_EMAIL.HCP database with matching type and reason
   const hcpQuery = { type: req.body.type, reason: req.body.reason };
   const hcpResult = await dboConnect.collection('HCP').find(hcpQuery).toArray();
-  console.log(hcpResult)
 
   const hcpEmails = hcpResult.map(hcp => hcp.email);
   const zoomQuery = { MeetingDate: req.body.date, MeetingTime: req.body.time};
   const bookedHCPs = await dboZoom.collection('zoom').find(zoomQuery).toArray();
 
-	console.log("zoomQuery", bookedHCPs);
 
 	const resultWithoutConnect = hcpResult.filter((item) => {
   return !bookedHCPs.some((connectItem) => connectItem.HCP === item.email);
@@ -110,6 +108,50 @@ mongoose
   	});
 		});
 	});
+
+
+	app.post('/user/profile/hcp', (req, res) => {
+  MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+    var dbo = db.db("DATA_FROM_EMAIL");
+    const emails = req.body;
+    const results = [];
+
+    for (let i = 0; i < emails.length; i++) {
+      dbo.collection('USER').find({ email: emails[i] }).toArray(function(err, result) {
+        if (err) throw err;
+        results.push(result[0]);
+        if (results.length === emails.length) {
+
+          res.json(results);
+          db.close();
+        }
+      });
+    }
+  });
+});
+
+app.post('/user/viewapts/HCPinfo', (req, res) => {
+MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+	var dbo = db.db("DATA_FROM_EMAIL");
+	const emails = req.body;
+	console.log("emails", emails)
+	const results = [];
+
+	for (let i = 0; i < emails.length; i++) {
+		dbo.collection('HCP').find({ email: emails[i] }).toArray(function(err, result) {
+			if (err) throw err;
+			results.push(result[0]);
+			if (results.length === emails.length) {
+				console.log("results", results)
+				res.json(results);
+				db.close();
+			}
+		});
+	}
+});
+});
+
+
 
 	app.post('/HCP/booked/all', async (req, res) => {
 	  try {
@@ -274,9 +316,7 @@ app.post('/user/booked', (req, res) => {
       if (err) throw err;
 			if (!req.body.canBook) {
 				res.send('2');
-		 	}else if (result) {
-        res.send('0');
-      } else if (!result) {
+      } else if (result) {
         dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
           if(err) {
             res.send('0');
@@ -294,6 +334,17 @@ app.post('/user/viewapts', (req, res) => {
 	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
 		var dbo = db.db("CONNECT");
 		dbo.collection('zoom').find({user: currentU}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result)
+		db.close()
+	});
+	});
+});
+
+app.post('/HCP/dashboard', (req, res) => {
+	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+		var dbo = db.db("CONNECT");
+		dbo.collection('zoom').find({HCP: currentH}).toArray(function(err, result) {
 		if (err) throw err;
 		res.json(result)
 		db.close()
@@ -321,7 +372,6 @@ const storage = multer.diskStorage({
     const avatar = Date.now() + ext;
     MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 			var dba = db.db("DATA_FROM_EMAIL");
-			console.log("user", currentU, " with avatar : ", avatar);
 			dba.collection('USER').updateOne({ email:currentU }, { $set: { avatar: avatar } }, (err, result) => {
         if (err) throw err;
         db.close()
@@ -345,7 +395,6 @@ app.post('/HCP/calendar', (req, res) => {
         dbo.collection('zoom').find(query).toArray(function(err, result) {
         if (err) throw err;
         res.json(result)
-        console.log(result)
         db.close()
     });
     });

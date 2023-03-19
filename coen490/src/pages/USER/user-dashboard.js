@@ -192,7 +192,7 @@ export default function UserDashboard() {
       )}
        {tweetId && <Tweet tweetId={tweetId} />}
 </main>
-    
+
     </>
   );
 }
