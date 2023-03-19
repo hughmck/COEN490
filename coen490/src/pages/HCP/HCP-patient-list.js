@@ -64,6 +64,18 @@ export default function HCPPatientList(){
 
     return (
     <>
+    <main className="hero-section">
+  <section className="container">
+    <div className="hero-content">
+      <nav className="navbar">
+        <h1 className="nav-logo">EasySante</h1>
+        <ul className="nav-links">
+          <a href="/HCP-dashboard">Dashboard</a>
+          <a href="/HCP-connect">Connect</a>
+          <a href="/HCP-patient-list">View Appointments</a>
+          <a href="/HCP-profile">Profile</a>
+        </ul>
+      </nav>
     {isLoading ? (
           <MDBSpinner grow color="primary" className="mt-5" />
         ) : (
@@ -130,6 +142,9 @@ export default function HCPPatientList(){
           )}
         </MDBModalBody>
       </MDBModal>
+      </div>
+      </section>
+      </main>
     </>
   );
 
