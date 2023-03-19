@@ -269,14 +269,14 @@ export default function UserBookApt(){
                     <option value="7pm">7pm</option>
                 </select>
             <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mr-2"
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mr-2 px-[10px]"
                 type="submit"
                 onClick={handleSearch}
             >
                 Search
             </button>
             <button
-                className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+                className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 px-[10px]"
                 type="reset"
                 onClick={handleReset}
             >
