@@ -5,6 +5,7 @@ import React from 'react';
 import {MDBCol, MDBInput, MDBButton, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
 import '../../style/user/user-profile.css'
 import axios from 'axios';
+import './calendar.css'
 import { useContext, useState, useEffect } from "react";
 
 export default function HCPProfile() {
