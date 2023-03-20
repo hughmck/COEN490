@@ -22,8 +22,8 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter
-
 } from 'mdb-react-ui-kit';
+
 import '../../style/user/user-dashboard.css';
 
 const formatDate = (date) => {
@@ -38,6 +38,8 @@ export default function UserViewApt(){
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedAppointments, setSelectedAppointments] = useState([]);
   const [number, setNumber] = useState('...');
+  const [basicModal, setBasicModal] = useState(false);
+  const toggleShow = () => setBasicModal(!basicModal);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,7 +136,7 @@ export default function UserViewApt(){
         <MDBCardTitle>
           Welcome back, Hugh! You have {number} upcoming appointments:{' '}
         </MDBCardTitle>
-        <div style={{ display: 'flex', justifyContent: 'left', height: '700px', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'left'}}>
           <Calendar value={selectedDate} onChange={handleCalendarChange} />
           <div style={{ marginLeft: '20px', width: '600px' }}>
             {selectedAppointments.length > 0 ? (
