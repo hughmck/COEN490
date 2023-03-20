@@ -37,6 +37,17 @@ export default function HCPDashboard() {
   const [selectedAppointments, setSelectedAppointments] = useState([]);
   const [number, setNumber] = useState('...');
   const [name, setName] = useState('...');
+  const [basicModal, setBasicModal] = useState(false);
+  const [cardData, setCardData] = useState([]);
+
+
+  const toggleShow = (user) => {
+
+        setCardData(user);
+        console.log(cardData);
+        setBasicModal(!basicModal)
+
+      };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -128,7 +139,18 @@ export default function HCPDashboard() {
             Welcome back, Dr {name}! You have {number} upcoming appointments:{' '}
         </MDBCardTitle>
         <div style={{ display: 'flex', justifyContent: 'left', height: '700px', width: '100%' }}>
-          <Calendar value={selectedDate} onChange={handleCalendarChange} />
+          <Calendar value={selectedDate} onChange={handleCalendarChange} onClickDay={() => toggleShow()} />
+          <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+              <MDBModalDialog>
+                 <MDBCard>
+                  <MDBContainer>
+                <MDBCardTitle style={{color: "black"}}>
+                    Dear Dr {name}, on {selectedDate.toDateString()}, you have {number} appointments. Here they are listed: {' '}
+                  </MDBCardTitle>
+                  </MDBContainer>
+                  </MDBCard>
+                </MDBModalDialog>
+              </MDBModal>
           <div style={{ marginLeft: '20px', width: '600px' }}>
             {selectedAppointments.length > 0 ? (
               <div>
