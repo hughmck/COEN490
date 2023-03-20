@@ -94,11 +94,12 @@ export default function HCPProfile() {
           <a href="/HCP-profile">Profile</a>
         </ul>
       </nav>
-    <section className = "w-200 h-100" style={{ backgroundColor: "transparent", paddingTop: '50px', marginLeft: '20px', marginRight: '20px' }}>
+    <section className = "w-200 h-100">
+      <MDBContainer className="bg1">
         <MDBRow>
           <MDBCol lg="4">
-            <MDBCard className="border h-100  w-100">
-              <MDBCardBody style={{ backgroundColor: '#fff' }}>
+            <MDBCard style={{background: "transparent", border: '0px'}}>
+              <MDBCardBody style={{background: "transparent"}}>
 {isEditing ? (
   <>
   <form onSubmit={handleSubmit}>
@@ -106,14 +107,12 @@ export default function HCPProfile() {
   </form>
 
   <MDBRow>
-  <MDBCardBody className="text-center">
-    <div>
+  <MDBCardBody style={{background: "transparent"}}>
       <MDBInput label="Full Name" labelPosition="top" value={data ? data.firstname + " " + data.lastname : ''} />
       <MDBInput label="Email" labelPosition="top" value={data ? data.email : ''} />
       <MDBInput label="Profession" labelPosition="top" value={data ? data.profession : ''}/>
       <MDBInput label="Specialty" labelPosition="top" value={data ? data.specialty : ''}/>
       <MDBInput label="City" labelPosition="top" value={data ? data.city : ''} />
-    </div>
     <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
   </MDBCardBody>
 </MDBRow>
@@ -123,18 +122,18 @@ export default function HCPProfile() {
 ) : (
   <>
   <MDBCardImage
-    src={`../../Digital-Identity/logo-1.png`}
+    src="https://i.pravatar.cc/100"
     alt="avatar"
     className="rounded-circle"
     style={{ width: '150px' }}
     fluid />
-    <MDBCardBody className="pt-1">
+    <MDBCardBody style={{background: "transparent", border: '0px'}}>
   <MDBRow>
     <MDBCol sm="3">
       <MDBCardText>Name</MDBCardText>
     </MDBCol>
     <MDBCol>
-      <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -143,7 +142,7 @@ export default function HCPProfile() {
       <MDBCardText>Email</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.email : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -152,7 +151,7 @@ export default function HCPProfile() {
       <MDBCardText>Profession</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.profession : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.profession : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -161,7 +160,7 @@ export default function HCPProfile() {
       <MDBCardText>Specialty</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.specialty : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.specialty : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -170,8 +169,8 @@ export default function HCPProfile() {
       <MDBCardText>City</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
-      <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.city : 'Loading...'}</MDBCardText>
+      <button type="button" className="button-81" onClick={handleEdit}>Edit</button>
     </MDBCol>
   </MDBRow>
 </MDBCardBody>
@@ -179,22 +178,19 @@ export default function HCPProfile() {
   </>
 )}
 </MDBCardBody>
-
-
-
             </MDBCard>
           </MDBCol>
           <MDBCol lg="8">
-            <MDBCard className="mb-4 w-100">
+            <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
                   <h5 className="mx-auto w-100 text-center">Describe Your Experience </h5>
-                  <MDBCardText className="text-muted ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
+                  <MDBCardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
 
             <MDBRow>
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard style={{background: "transparent", border: '0px'}}>
                   <MDBCardBody>
                       <h5 className="mx-auto w-100 text-center">Your Past Meetings</h5>
                       <MDBRow>
@@ -254,7 +250,7 @@ export default function HCPProfile() {
               </MDBCol>
 
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard style={{background: "transparent", border: '0px'}}>
                   <MDBCardBody className = "card-data">
                     <MDBRow>
                       <MDBCol>
@@ -290,6 +286,7 @@ export default function HCPProfile() {
           <LogOut style = {{paddingTop: '10px'}} />
         </Container>
       </UserProvider>
+      </MDBContainer>
     </section>
     </div>
     </main>

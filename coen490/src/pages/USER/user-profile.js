@@ -268,7 +268,7 @@ export default function HCPProfile() {
       </MDBContainer>
       <UserProvider>
         <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "1vh" }}>
-          <LogOut />
+          <LogOut  style = {{paddingTop: '10px'}} />
         </Container>
       </UserProvider>
     </section>

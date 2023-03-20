@@ -96,9 +96,9 @@ export default function HCPPatientList(){
         ) : (
       <MDBContainer className = "w-100">
         {data.map((subArray) => (
-          <MDBRow key={subArray[0]._id}>
+          <MDBRow key={subArray[0]._id} style={{height: '100px', paddingTop: '20px'}}>
             {subArray.map((user) => (
-              <MDBCol key={user._id}>
+              <MDBCol key={user._id} style={{ border: '1px'}}>
                 <MDBCard class="mb-3">
                   <MDBCardBody className="d-flex" >
                     <MDBCardImage
@@ -112,7 +112,7 @@ export default function HCPPatientList(){
                         {user.firstname} {user.lastname}
                       </div>
                       <div style={{ fontSize: "0.8rem" }}>
-                        {user.meeting_time} | {user.location}
+                        {user.meeting_time} Appointment is scheduled at 12pm {user.location}
                       </div>
                     </div>
                     <div className="ms-auto">
@@ -130,98 +130,96 @@ export default function HCPPatientList(){
                       </MDBBtn> */}
 
                       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
-  <MDBModalDialog>
-    {cardData && (
-      <MDBModalContent
-        style={{
-          width: '800px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '500px',
-          borderRadius: '20px',
-          top: '50%',
-          left: '50%',
-          marginTop: '500px',
-          transform: 'translate(-50%, -50%)',
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)'
-        }}
-      >
-        <MDBModalBody>
-          <MDBRow>
-            <MDBCol lg='6'>
-              <MDBCardImage
-                src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
-                alt='avatar'
-                className='rounded-circle'
-                class='imgClass'
-                fluid
+                          <MDBModalDialog>
+                            {cardData && (
+                              <MDBModalContent
+                                style={{
+                                  width: '800px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  height: '500px',
+                                  borderRadius: '20px',
+                                  top: '50%',
+                                  left: '50%',
+                                  marginTop: '500px',
+                                  transform: 'translate(-50%, -50%)',
+                                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)'
+                                }}
+                              >
+                                <MDBModalBody>
+                                  <MDBRow>
+                                    <MDBCol lg='6'>
+                                      <MDBCardImage
+                                        src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
+                                        alt='avatar'
+                                        className='rounded-circle'
+                                        class='imgClass'
+                                        fluid
 
-              />
-              <MDBCardBody className='pt-1'>
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText style={{color: 'black'}}>Name</MDBCardText>
-                  </MDBCol>
-                  <MDBCol>
-                    <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText  style={{color: 'black'}}>Email</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm='9'>
-                    <MDBCardText className='text-muted'>{cardData.email}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText  style={{color: 'black'}}>Profession</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm='9'>
-                    <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText  style={{color: 'black'}}>Specialty</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm='9' >
-                    <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText  style={{color: 'black'}}>City</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm='9'>
-                    <MDBCardText className='text-muted'>{cardData.city}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCol>
-            <MDBCol lg='6'>
-              <h2 className='fw-bold mb-3' style={{color: 'black'}}>A Little Bit About Myself</h2>
-              <MDBCardText className='text-muted text-center'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                  in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                  sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </MDBCardText>
-              </MDBCol>
-            </MDBRow>
-          </MDBModalBody>
-        </MDBModalContent>
-      )}
-    </MDBModalDialog>
-  </MDBModal>
-
-                    
+                                      />
+                                      <MDBCardBody className='pt-1'>
+                                        <MDBRow>
+                                          <MDBCol sm='3'>
+                                            <MDBCardText style={{color: 'black'}}>Name</MDBCardText>
+                                          </MDBCol>
+                                          <MDBCol>
+                                            <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
+                                          </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                          <MDBCol sm='3'>
+                                            <MDBCardText  style={{color: 'black'}}>Email</MDBCardText>
+                                          </MDBCol>
+                                          <MDBCol sm='9'>
+                                            <MDBCardText className='text-muted'>{cardData.email}</MDBCardText>
+                                          </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                          <MDBCol sm='3'>
+                                            <MDBCardText  style={{color: 'black'}}>Profession</MDBCardText>
+                                          </MDBCol>
+                                          <MDBCol sm='9'>
+                                            <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
+                                          </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                          <MDBCol sm='3'>
+                                            <MDBCardText  style={{color: 'black'}}>Specialty</MDBCardText>
+                                          </MDBCol>
+                                          <MDBCol sm='9' >
+                                            <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
+                                          </MDBCol>
+                                        </MDBRow>
+                                        <hr />
+                                        <MDBRow>
+                                          <MDBCol sm='3'>
+                                            <MDBCardText  style={{color: 'black'}}>City</MDBCardText>
+                                          </MDBCol>
+                                          <MDBCol sm='9'>
+                                            <MDBCardText className='text-muted'>{cardData.city}</MDBCardText>
+                                          </MDBCol>
+                                        </MDBRow>
+                                      </MDBCardBody>
+                                    </MDBCol>
+                                    <MDBCol lg='6'>
+                                      <h2 className='fw-bold mb-3' style={{color: 'black'}}>A Little Bit About Myself</h2>
+                                      <MDBCardText className='text-muted text-center'>
+                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                          sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </MDBCardText>
+                                      </MDBCol>
+                                    </MDBRow>
+                                  </MDBModalBody>
+                                </MDBModalContent>
+                              )}
+                            </MDBModalDialog>
+                          </MDBModal>
                             <a
                               class="button-21"
                               href="/HCP-connect"
