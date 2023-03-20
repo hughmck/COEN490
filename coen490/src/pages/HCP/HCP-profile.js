@@ -16,6 +16,8 @@ export default function HCPProfile() {
   const [data, setData] = useState({});
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState(null);
+  const [cardData, setCardData] = useState([]);
+
 
   useEffect(() => {
     axios.get("http://localhost:4444/HCP/profile")
@@ -76,10 +78,6 @@ export default function HCPProfile() {
     }
 
   };
-
-
-
-
 
   return (
     <>
@@ -183,7 +181,7 @@ export default function HCPProfile() {
           <MDBCol lg="8">
             <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
-                  <h5 className="mx-auto w-100 text-center">Describe Your Experience </h5>
+                  <h5 className="mx-auto w-100 text-center">Describe Yourself</h5>
                   <MDBCardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
@@ -206,6 +204,7 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom ">January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
+                       <hr className="divider" />
                       <MDBRow>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -219,6 +218,7 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom ">January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
+                       <hr className="divider" />
                       <MDBRow>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -232,6 +232,8 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom ">January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
+                        <hr className="divider" />
+
                       <MDBRow className ='test'>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -258,7 +260,7 @@ export default function HCPProfile() {
                         <h5 className="livedata w-100 text-center">Your Live Data</h5>
                       </MDBCol>
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow Data to be Handled by HCP</label>
+                        <label className="form-check-label" >Allow Data to be Handled by HCP</label>
                         <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <hr className="divider" />
