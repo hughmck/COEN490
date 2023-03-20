@@ -191,7 +191,7 @@ export default function UserBookApt(){
 
   return(
     <>
-    <main className="hero-section">
+    <main className="hero-section1">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
         <h1 className="nav-logo">EasySante</h1>
