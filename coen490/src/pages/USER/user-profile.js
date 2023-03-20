@@ -88,10 +88,10 @@ export default function HCPProfile() {
         </ul>
       </nav>
     <section className = "w-200 h-100">
-      <MDBContainer style={{background: "transparent", paddingTop: '25px'}}>
+      <MDBContainer className="bg1">
         <MDBRow>
           <MDBCol lg="4" >
-            <MDBCard className="bg" >
+            <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody style={{background: "transparent"}}>
 {isEditing ? (
   <>
@@ -119,13 +119,13 @@ export default function HCPProfile() {
     className="rounded-circle"
     style={{ width: '150px' }}
     fluid />
-    <MDBCardBody className="bg">
+    <MDBCardBody style={{background: "transparent", border: '0px'}}>
   <MDBRow >
     <MDBCol sm="3">
       <MDBCardText>Name</MDBCardText>
     </MDBCol>
     <MDBCol>
-      <MDBCardText className="text-muted">{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.firstname + " " + data.lastname : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -134,7 +134,7 @@ export default function HCPProfile() {
       <MDBCardText>Email</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.email : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.email : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -143,7 +143,7 @@ export default function HCPProfile() {
       <MDBCardText>Phone</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.phone : 'Loading...'}</MDBCardText>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.phone : 'Loading...'}</MDBCardText>
     </MDBCol>
   </MDBRow>
   <hr />
@@ -152,8 +152,8 @@ export default function HCPProfile() {
       <MDBCardText>City</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
-      <MDBCardText className="text-muted">{data ? data.city : 'Loading...'}</MDBCardText>
-      <button type="button" className="btn btn-dark" onClick={handleEdit}>Edit</button>
+      <MDBCardText style = {{color: 'white'}}>{data ? data.city : 'Loading...'}</MDBCardText>
+      <button type="button" className="button-81" onClick={handleEdit}>Edit</button>
     </MDBCol>
   </MDBRow>
 </MDBCardBody>
@@ -161,26 +161,21 @@ export default function HCPProfile() {
   </>
 )}
 </MDBCardBody>
-
-
-
             </MDBCard>
-
-
           </MDBCol>
           <MDBCol lg="8">
-            <MDBCard className="bg">
+            <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
-                  <h5 className="mx-auto w-100 text-center" style={{color: 'black'}}>About You</h5>
-                  <MDBCardText className="text-muted ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
+                  <h5 className="mx-auto w-100 text-center">About You</h5>
+                  <MDBCardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
 
             <MDBRow>
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0" style = {{background: "transparent", border: '0px'}}>
                   <MDBCardBody>
-                      <h5 className="mx-auto w-100 text-center" style={{color: 'black'}}>Your Past Meetings</h5>
+                      <h5 className="mx-auto w-100 text-center" >Your Past Meetings</h5>
                       <MDBRow>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -191,7 +186,7 @@ export default function HCPProfile() {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom " style={{color: 'black'}}>January 5th 2022</MDBCardText>
+                          <MDBCardText className="text-center align-bottom " >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow>
@@ -204,7 +199,7 @@ export default function HCPProfile() {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" style={{color: 'black'}}>January 5th 2022</MDBCardText>
+                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow>
@@ -217,7 +212,7 @@ export default function HCPProfile() {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" style={{color: 'black'}}>January 5th 2022</MDBCardText>
+                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow className ='test'>
@@ -230,7 +225,7 @@ export default function HCPProfile() {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-center" style={{color: 'black'}}>January 5th 2022</MDBCardText>
+                          <MDBCardText className="text-center align-center" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                   </MDBCardBody>
@@ -238,29 +233,29 @@ export default function HCPProfile() {
               </MDBCol>
 
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0" style = {{background: "transparent", border: '0px'}}>
                   <MDBCardBody className = "card-data">
                     <MDBRow>
                       <MDBCol>
 
-                        <h5 className="livedata w-100 text-center" style={{color: 'black'}}>Your Live Data</h5>
+                        <h5 className="livedata w-100 text-center" >Your Live Data</h5>
                       </MDBCol>
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={{color: 'black'}}>Allow Data to be Handled by HCP</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow Data to be Handled by HCP</label>
                         <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <hr className="divider" />
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={{color: 'black'}}>Allow Live Tracking and Analysis</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow Live Tracking and Analysis</label>
                         <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <hr className="divider" />
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={{color: 'black'}}>Allow EasySante to Use Your Data</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow EasySante to Use Your Data</label>
                         <input className="card-data-button form-check-input float-end align-middle" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <div className="col-md-12 text-center">
-                        <button type="button" className="btn btn-danger" style={{color: 'black'}}>Terminate</button>
+                        <button type="button" className="btn btn-danger" >Terminate</button>
                       </div>
                     </MDBRow>
                   </MDBCardBody>
