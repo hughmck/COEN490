@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import React from 'react';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import '../../style/user/user-dashboard.css';
+import './user-book-apts.css';
 import {
   MDBCard,
   MDBCardImage,
@@ -223,6 +223,7 @@ export default function UserBookApt(){
   An error
   </div>
     <form className="flex justify-center items-center">
+      <MDBRow style = {{padding: '15px'}}>
         <div className="flex flex-wrap justify-center items-center m-2">
             <select
                 className="block w-48 bg-blue-200 border border-blue-400 hover:border-blue-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
@@ -236,6 +237,7 @@ export default function UserBookApt(){
                 <option value="PTSD">PTSD</option>
                 <option value="Disorders">Disorders</option>
             </select>
+        
             <select
                 className="block w-48 bg-blue-200 border border-blue-400 hover:border-blue-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 value={type}
@@ -246,11 +248,10 @@ export default function UserBookApt(){
                 <option value="audiocall">Audio Call</option>
                 <option value="videocall">Video Call</option>
             </select>
-
-                <MDBBtn onClick={handleDate} color="primary">{date.toDateString()}</MDBBtn>
+                <MDBBtn class='button-21' onClick={handleDate} color="primary">{date.toDateString()}</MDBBtn>
                 {isDateOpen && (
                     <div>
-                        <Calendar onChange={handleDateClick} value={date} />
+                        <Calendar style={{width:'100px'}} onChange={handleDateClick} value={date} />
                     </div>
                 )}
                 <select
@@ -271,36 +272,39 @@ export default function UserBookApt(){
                     <option value="18">18:00</option>
                     <option value="19">19:00</option>
                 </select>
-            <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 mr-2 px-[10px]"
+            <MDBBtn
+                className="button-81"
                 type="submit"
                 onClick={handleSearch}
             >
                 Search
-            </button>
-            <button
-                className="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 px-[10px]"
+            </MDBBtn>
+            <MDBBtn
+                className="button-81"
                 type="reset"
                 onClick={handleReset}
             >
                 Reset
-            </button>
+            </MDBBtn>
         </div>
+        </MDBRow>
     </form>
 
   <MDBContainer>
       <MDBRow>
         {searchResults.map((user, index) => (
           <MDBCol size='3' key={index} style={{ margin: "40px" }}>
-            <MDBCard>
+            <MDBCard class = 'bg'>
               <MDBCardBody>
-                <MDBCardTitle>{user.name} {user.lastname}</MDBCardTitle>
+                <MDBCardTitle style = {{color: 'white'}}>{user.name} {user.lastname}</MDBCardTitle>
                 <MDBListGroup flush>
-                  <MDBListGroupItem>Type: {user.type}</MDBListGroupItem>
-                  <MDBListGroupItem>Certificate: {user.Certificate}</MDBListGroupItem>
+                  <MDBListGroupItem style = {{marginTop: '10px'}}>Type: {user.type}</MDBListGroupItem>
+                  <MDBListGroupItem style = {{marginBottom: '10px'}}>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn onClick={() => toggleShow(user)}>VIEW PROFILE</MDBBtn>
-                <MDBBtn onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>Book Meeting</MDBBtn>
+                <MDBRow>
+                <MDBBtn class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
+                <MDBBtn class='button-21' onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>Book Meeting</MDBBtn>
+                </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
@@ -326,22 +330,21 @@ export default function UserBookApt(){
           boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.25)'
         }}
       >
-        <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
         <MDBModalBody>
           <MDBRow>
             <MDBCol lg='6'>
-              <h2 className='fw-bold mb-3'>HCP Information</h2>
               <MDBCardImage
                 src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
                 alt='avatar'
                 className='rounded-circle'
-                style={{ width: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                class='imgClass'
                 fluid
+
               />
               <MDBCardBody className='pt-1'>
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Name</MDBCardText>
+                    <MDBCardText style={{color: 'black'}}>Name</MDBCardText>
                   </MDBCol>
                   <MDBCol>
                     <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
@@ -350,7 +353,7 @@ export default function UserBookApt(){
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Email</MDBCardText>
+                    <MDBCardText  style={{color: 'black'}}>Email</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='9'>
                     <MDBCardText className='text-muted'>{cardData.email}</MDBCardText>
@@ -359,7 +362,7 @@ export default function UserBookApt(){
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Profession</MDBCardText>
+                    <MDBCardText  style={{color: 'black'}}>Profession</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='9'>
                     <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
@@ -368,16 +371,16 @@ export default function UserBookApt(){
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Specialty</MDBCardText>
+                    <MDBCardText  style={{color: 'black'}}>Specialty</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm='9'>
+                  <MDBCol sm='9' >
                     <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>City</MDBCardText>
+                    <MDBCardText  style={{color: 'black'}}>City</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='9'>
                     <MDBCardText className='text-muted'>{cardData.city}</MDBCardText>
@@ -386,7 +389,7 @@ export default function UserBookApt(){
               </MDBCardBody>
             </MDBCol>
             <MDBCol lg='6'>
-              <h2 className='fw-bold mb-3'>A Little Bit About Myself</h2>
+              <h2 className='fw-bold mb-3' style={{color: 'black'}}>A Little Bit About Myself</h2>
               <MDBCardText className='text-muted text-center'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
