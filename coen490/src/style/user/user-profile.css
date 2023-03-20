@@ -1,46 +1,203 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin: 0;
 
-.form-check-label{
-  padding-bottom: 0.80em;
-  padding-top: 0.80em;
 }
 
-.livedata{
-  padding-bottom: 0.4em;
+.bg {
+
+  background-color: aqua;
+  background-color: rgba(0, 0, 0, .25);
+  color: white;
+  padding: 30px;
+
 }
 
-hr.divider {
-  margin: 0em;
-  border-width: 1px;
+.bg1 {
+  background-color: aqua;
+    background-color: rgba(0, 0, 0, .25);
+    color: white;
+    padding: 30px;
+
 }
 
-.card-data {
-  padding-bottom: 0 !important;
-}
-.form-switch .form-check-input:checked {
-  margin-top: 17px;
+.button-21 {
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4c7dfb, #004675 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s, background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+  padding-top: 5px;
+  margin-top: 5px;
 }
 
-.form-check.form-switch {
-    display: block;
-    min-height: 1.0rem;
-    padding-left: 1em;
-}
-.col-md-12.text-center{
-  padding-top:0.5em;
-  padding-bottom:0.75em;
+
+.button-81 {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-.btn.btn-danger{
-
-  padding: 6px 10px;
-  font-size: 12px;
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
 }
 
-.transparent-bg {
-  background-color: transparent;
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
 }
 
-@media (min-width: 1400px) {
-    max-width: 100%;
-    max-height: 100%;
+.imgClass {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+.button-21:active,
+.button-21:focus {
+  outline: none;
+}
+
+.button-21:hover {
+  background-position: -20px -20px;
+}
+
+.button-21:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+.hero-section {
+  height: 130vh;
+  background-image: linear-gradient(to bottom, rgba(117, 134, 233, 0.52), rgba(1, 48, 149, 0.73)), url('../../style/user/yooo.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar .nav-links {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar .nav-links li {
+  transition: color .2s ease;
+}
+
+.navbar .nav-links li:hover {
+  color: grey;
+  cursor: pointer;
+}
+
+.hero-text {
+  width: 450px;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  text-align: right;
+}
+
+.hero-welcome-text {
+  margin: 0;
+  padding: 0;
+  font-size: 34px;
+  margin-bottom: -10px;
+}
+
+.hero-country {
+  font-size: 100px;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-text-description {
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+.explore-btn {
+  text-decoration: none;
+  color: black;
+  box-shadow: 0 4px 30px #ffc500;
+  background: #eec500;
+  padding: 12px 30px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  font-weight: normal;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.explore-btn:hover {
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 4px 40px #ffd900;
+  background: #ffd900;
 }
