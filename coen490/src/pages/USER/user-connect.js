@@ -87,7 +87,7 @@ export default function UserConnect() {
         </ul>
       </nav>
     <div ref={chatboxEl} />
-      <button className="button" onClick={handleClick} style={{ position: 'absolute', bottom: '685px', right: '580px' }}>Join Meeting</button>
+      <button class='button-21' style={{ position: 'absolute', bottom: '160px', right: '840px' }} onClick={handleClick}>Join Meeting</button>
     </div>
     </main>
     </>
