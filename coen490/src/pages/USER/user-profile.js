@@ -190,7 +190,6 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom " >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
-                       <hr className="divider" />
                       <MDBRow>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -204,7 +203,6 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
-                       <hr className="divider" />
                       <MDBRow>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -218,7 +216,6 @@ export default function HCPProfile() {
                           <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
-                       <hr className="divider" />
                       <MDBRow className ='test'>
                         <MDBCol sm ="3">
                           <MDBCardImage
@@ -271,7 +268,7 @@ export default function HCPProfile() {
       </MDBContainer>
       <UserProvider>
         <Container className = "d-flex align-items-center justify-content-center" style = {{ minHeight: "1vh" }}>
-          <LogOut  style = {{paddingTop: '10px'}} />
+          <LogOut />
         </Container>
       </UserProvider>
     </section>
