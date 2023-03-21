@@ -70,8 +70,6 @@ body {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    max-width: 300px;
-    max-height: 40px;
 }
 
 .button-81:hover {

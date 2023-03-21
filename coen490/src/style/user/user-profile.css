@@ -31,18 +31,6 @@ body {
   border-radius: 50%;
 }
 
-.button-21:active,
-.button-21:focus {
-  outline: none;
-}
-
-.button-21:hover {
-  background-position: -20px -20px;
-}
-
-.button-21:focus:not(:active) {
-  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
-}
 
 .hero-section1 {
   height: 130vh;
