@@ -145,14 +145,7 @@ export default function HCPDashboard() {
                  <MDBCard>
                   <MDBContainer>
                 <MDBCardTitle style={{color: "black"}}>
-                    Dear Dr {name}, on {selectedDate.toDateString()}, you have {number} appointments. Here they are listed: {' '}
-                  </MDBCardTitle>
-                  </MDBContainer>
-                  </MDBCard>
-                </MDBModalDialog>
-              </MDBModal>
-          <div style={{ marginLeft: '20px', width: '600px' }}>
-            {selectedAppointments.length > 0 ? (
+                    {selectedAppointments.length > 0 ? (
               <div>
                 <h4>Appointments for {selectedDate.toDateString()}:</h4>
                 {selectedAppointments.map((appointment, index) => (
@@ -232,7 +225,11 @@ export default function HCPDashboard() {
                 ))}
                 </>
               )}
-            </div>
+                  </MDBCardTitle>
+                  </MDBContainer>
+                  </MDBCard>
+                </MDBModalDialog>
+              </MDBModal>
         </div>
       </MDBCardBody>
     </div>
