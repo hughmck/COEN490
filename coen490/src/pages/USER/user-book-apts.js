@@ -248,7 +248,7 @@ export default function UserBookApt(){
                 <option value="audiocall">Audio Call</option>
                 <option value="videocall">Video Call</option>
             </select>
-                <MDBBtn class='button-21' onClick={handleDate} color="primary">{date.toDateString()}</MDBBtn>
+                <MDBBtn class='button-21' onClick={handleDate} style={{maxWidth: '150px', maxHeight: '40px'}} color="primary">{date.toDateString()}</MDBBtn>
                 {isDateOpen && (
                     <div>
                         <Calendar style={{width:'100px'}} onChange={handleDateClick} value={date} />
@@ -276,6 +276,7 @@ export default function UserBookApt(){
                 className="button-81"
                 type="submit"
                 onClick={handleSearch}
+                style={{maxWidth: '75px', maxHeight: '40px'}}
             >
                 Search
             </MDBBtn>
@@ -283,6 +284,7 @@ export default function UserBookApt(){
                 className="button-81"
                 type="reset"
                 onClick={handleReset}
+                style={{maxWidth: '75px', maxHeight: '40px'}}
             >
                 Reset
             </MDBBtn>
@@ -302,8 +304,8 @@ export default function UserBookApt(){
                   <MDBListGroupItem style = {{marginBottom: '10px'}}>Certificate: {user.Certificate}</MDBListGroupItem>
                 </MDBListGroup>
                 <MDBRow>
-                <MDBBtn class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
-                <MDBBtn class='button-21' onClick={() => handleBook(user)} href='#' style={{marginTop: "10px"}}>Book Meeting</MDBBtn>
+                <MDBBtn style={{maxWidth: '300px', maxHeight: '40px'}} class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
+                <MDBBtn style={{maxWidth: '300px', maxHeight: '40px', marginTop: '10px'}} class='button-21' onClick={() => handleBook(user)} href='#'>Book Meeting</MDBBtn>
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>

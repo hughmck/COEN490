@@ -149,7 +149,7 @@
 .react-calendar__tile--now {
     border: 2px solid white;
     background: rgba(255, 255, 255, 0);
-    color: rgb(255, 238, 0);
+    color: rgb(255, 230, 0);
     width: 60px;
     height: 90px;
     text-align: center;
