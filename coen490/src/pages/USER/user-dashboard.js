@@ -168,9 +168,9 @@ export default function UserDashboard() {
         </ul>
       </nav>
       </div>
-      <MDBRow style={{marginLeft: '15px'}}>
+      <MDBRow style={{marginLeft: '15px', marginTop: '60px', background: 'rgba(63, 63, 63, 0.2)', backdropFilter: 'blur(8px)'}}>
         <MDBCol md='6'>
-        <canvas id="line-chart" ref={lineChartRef} style={{width: "800px", height: "500px"}}></canvas>
+        <canvas id="line-chart" ref={lineChartRef} style={{width: "800px", height: "500px", color: "white"}}></canvas>
         </MDBCol>
         <MDBCol md='5'>
         <canvas id="bar-chart" ref={barChartRef} style={{width: "800px", height: "500px"}}></canvas>
@@ -190,7 +190,7 @@ export default function UserDashboard() {
           </div>
         </div>
       )}
-       {tweetId && <Tweet tweetId={tweetId} />}
+       {/* {tweetId && <Tweet tweetId={tweetId} />} */}
 </main>
 
     </>
