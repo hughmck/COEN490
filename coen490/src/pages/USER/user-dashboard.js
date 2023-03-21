@@ -49,7 +49,8 @@ export default function UserDashboard() {
               data: [50, 50, 60, 50, 50, 60, 50, 50, 60, 50, 80, 160, 160, 80, 60, 50, 60, 60, 50, 60, 50, 50, 60],
               borderColor: "white",
               backgroundColor: "white",
-              fontColor: "white"
+              backdropFilter: "white",
+              color: "white"
             },
           ],
         },
@@ -59,6 +60,8 @@ export default function UserDashboard() {
           width: 700,
           height: 500,
           borderColor: "white",
+          fontColor: "white",
+          ticks: "white",
           scales: {
             yAxes: [{
               ticks: {
@@ -71,11 +74,13 @@ export default function UserDashboard() {
             }],
             xAxes: [{
               ticks: {
-                fontColor: "white"
+                fontColor: "white",
+                labels: "white"
               },
               gridLines: {
                 color: "white",
-                zeroLineColor: "white"
+                zeroLineColor: "white",
+                fontColor:"white"
               }
             }]
           }
@@ -94,7 +99,7 @@ export default function UserDashboard() {
               data: [1, 3, 2, 3],
               backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)"],
               borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)"],
-              borderWidth: 1,
+              borderWidth: 1
             },
           ],
         },
