@@ -69,3 +69,62 @@
 03/22/2023, 14:52:11: LOG-OUT DETECTED WITH EMAIL : undefined
 03/22/2023, 14:52:28: NEW USER REGISTERED : {"email":"test1@admin.com","firstname":"Test","lastname":"Test","phone":"123123123","city":"City","dataHCP":true,"dataDash":true,"dataEasy":true}
 03/22/2023, 15:32:41: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 15:42:36: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 15:55:56: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 16:15:50: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 16:16:16: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 16:16:24: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:20:28: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 16:20:43: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:21:15: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 16:21:22: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:22:42: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 16:22:48: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:24:03: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 16:24:08: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:25:58: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:41:36: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 16:42:18: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 16:43:26: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 16:43:55: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:44:02: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 16:46:29: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 16:48:13: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 16:48:46: SIGN-IN DETECTED WITH EMAIL : "admin1@admin.com"
+03/22/2023, 16:48:54: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "admin1@admin.com"
+03/22/2023, 16:50:15: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:03:02: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:03:14: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:04:08: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:04:14: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:07:48: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:07:56: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:09:14: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:09:23: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:10:12: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:10:18: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:13:35: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:13:45: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:14:06: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 17:15:33: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:15:38: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:16:11: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:16:17: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:16:20: USER INFO UPDATED : "test@admin.com", NEW INfO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"YEssir","avatar":"1679519645403.jpg"}
+03/22/2023, 17:16:26: USER INFO UPDATED : "test@admin.com", NEW INfO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Paris","avatar":"1679519645403.jpg"}
+03/22/2023, 17:18:26: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:41:22: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:42:30: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 17:56:43: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 17:58:43: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Paris","avatar":"1679519645403.jpg"}
+03/22/2023, 17:58:43: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF USER: "test@admin.com"
+03/22/2023, 17:58:53: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522323150.jpg"}
+03/22/2023, 17:59:04: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522333077.jpg"}
+03/22/2023, 17:59:13: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522344230.jpg"}
+03/22/2023, 18:00:46: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522353992.jpg"}
+03/22/2023, 18:01:44: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 18:05:28: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 18:09:03: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522353992.jpg"}
+03/22/2023, 18:19:18: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 18:20:09: SIGN-IN DETECTED WITH EMAIL : "test1@admin.com"
+03/22/2023, 18:20:16: LOG-OUT DETECTED WITH EMAIL : "test1@admin.com"

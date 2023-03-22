@@ -17,10 +17,14 @@ export default function HCPProfile() {
   const [hcpCheck, setHcpCheck] = useState(true);
   const [dashCheck, setDashCheck] = useState(true);
   const [easyCheck, setEasyCheck] = useState(true);
+  const [userProfile, setUserProfile] = useState([]);
+
 
   useEffect(() => {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
+        console.log(res.data)
+        setUserProfile('data:image/jpeg;base64,' + res.data.base64Data)
         setData(res.data)
         setHcpCheck(res.data.dataHCP)
         setDashCheck(res.data.dataDash)
@@ -61,22 +65,22 @@ export default function HCPProfile() {
     setIsEditing(!isEditing);
   };
 
-  const handleSave = () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     setIsEditing(false);
-    // Get the new values from the input fields
-    const fullNameInput = document.getElementById('full-name');
-    const newName = fullNameInput ? fullNameInput.value : '';
 
-    const emailInput = document.getElementById('email');
-    const newEmail = emailInput ? emailInput.value : '';
+    const userResponse = await fetch('http://localhost:4444/user/profile/edit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
-    const phoneInput = document.getElementById('phone');
-    const newPhone = phoneInput ? phoneInput.value : '';
-    // Call the file upload function only if a file has been selected
+
     if (file) {
         handleFileUpload();
         console.log("file detected")
     }
+    window.location.reload()
 
   };
 
@@ -89,14 +93,25 @@ export default function HCPProfile() {
   setHcpCheck(hcpCheckValue);
   setDashCheck(dashCheckValue);
   setEasyCheck(easyCheckValue);
+
   const userResponse = await fetch('http://localhost:4444/user/profile/data', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(hcpCheck),
   });
+
   const userInfo = await userResponse.json();
+
   console.log(userInfo)
 };
+
+const handleInputChange = (e) => {
+  setData({
+    ...data,
+    [e.target.name]: e.target.value,
+  });
+};
+
 
 
   return (
@@ -119,28 +134,28 @@ export default function HCPProfile() {
           <MDBCol lg="4" >
             <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody style={{background: "transparent"}}>
-{isEditing ? (
-  <>
-  <form onSubmit={handleSubmit}>
-    <input type="file" onChange={handleFileChange} />
-  </form>
+              {isEditing ? (
+                <>
+                <form onSubmit={handleSubmit}>
+                  <input type="file" onChange={handleFileChange} />
+                </form>
 
-  <MDBRow>
-  <MDBCardBody style={{background: "transparent"}}>
-      <MDBInput label="Full Name" labelPosition="top" value={data ? data.firstname + " " + data.lastname : ''} />
-      <MDBInput label="Email" labelPosition="top" value={data ? data.email : ''} />
-      <MDBInput label="Phone" labelPosition="top" value={data ? data.phone : ''}/>
-      <MDBInput label="City" labelPosition="top" value={data ? data.city : ''} />
-    <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
-  </MDBCardBody>
-</MDBRow>
+                <MDBRow>
+                <MDBCardBody style={{background: "transparent"}}>
+                    <MDBInput label="Full Name" labelPosition="top" value={`${data.firstname} ${data.lastname}`} onChange={handleInputChange} name="fullname" />
+                    <MDBInput label="Email" labelPosition="top" value={data.email} onChange={handleInputChange} name="email" />
+                    <MDBInput label="Phone" labelPosition="top" value={data.phone} onChange={handleInputChange} name="phone"/>
+                    <MDBInput label="City" labelPosition="top" value={data.city} onChange={handleInputChange} name="city" />
+                  <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
+                </MDBCardBody>
+              </MDBRow>
 
-</>
+              </>
 
-) : (
+              ) : (
   <>
   <MDBCardImage
-    src="https://i.pravatar.cc/100"
+    src={userProfile}
     alt="avatar"
     className="rounded-circle"
     style={{ width: '150px' }}

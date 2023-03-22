@@ -3,13 +3,14 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const multer = require('multer');
-const path = require('path');
 const User = require("./db_data/user")
 const HCP = require("./db_data/hcp")
 const zoomSdk = require('zoomus')
 var cors = require('cors')
 const { ObjectId } = require('mongodb')
 const fs = require('fs');
+const path = require('path');
+const base64 = require('base64-js');
 
 app.use(cors())
 let MongoClient = require('mongodb').MongoClient;
@@ -174,8 +175,6 @@ mongoose
 
 
 	app.post('/user/braceletdata', (req, res) => {
-		if(allowDashboard === 'true')
-		{
 		MongoClient.connect(process.env.ATLAS_URI3, function(err, db) {
 			var dbo = db.db("SENSOR_DATA");
 			dbo.collection('Data').find({email: currentU}).toArray(function(err, result) {
@@ -184,7 +183,6 @@ mongoose
 			db.close()
 		});
 		});
-	}
 	});
 
 
@@ -233,32 +231,48 @@ MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 
 
 
-	app.post('/HCP/booked/all', async (req, res) => {
-	  try {
-	    const zoomDb = await MongoClient.connect(process.env.ATLAS_URI2);
-	    const connectDb = await MongoClient.connect(process.env.ATLAS_URI);
-	    const dboZoom = zoomDb.db("CONNECT");
-	    const dboConnect = connectDb.db("DATA_FROM_EMAIL");
+app.post('/HCP/booked/all', async (req, res) => {
+  try {
+    const zoomDb = await MongoClient.connect(process.env.ATLAS_URI2);
+    const connectDb = await MongoClient.connect(process.env.ATLAS_URI);
+    const dboZoom = zoomDb.db("CONNECT");
+    const dboConnect = connectDb.db("DATA_FROM_EMAIL");
 
-	    const HCP_client = await dboZoom.collection('zoom').find({ HCP: currentH }).toArray();
-			var usersmap = HCP_client.map(function(client) {
-  			return client.user;
-			});
-			const users = await Promise.all(
-  			usersmap.map((email) =>
-    		dboConnect.collection('USER').find({ email }).toArray()
-  		)
-			);
-			console.log(users);
-	    res.json(users);
+    const HCP_client = await dboZoom.collection('zoom').find({ HCP: currentH }).toArray();
+    var usersmap = HCP_client.map(function(client) {
+      return client.user;
+    });
 
-	    zoomDb.close();
-	    connectDb.close();
-	  } catch (error) {
-	    console.error(error);
-	    res.status(500).send("Internal Server Error");
-	  }
-	});
+    const users = await Promise.all(
+      usersmap.map((email) =>
+        dboConnect.collection('USER').find({ email }).toArray()
+      )
+    );
+
+		console.log(users)
+    // Loop through each user object and add base64 data for the image
+    for (let user of users) {
+      const imagePath = path.join("./uploads", user.avatar);
+
+      fs.readFile(imagePath, function(err, data) {
+        if (err) throw err;
+        user.base64Data = base64.fromByteArray(data);
+      });
+    }
+
+    // Wait for all the file reading operations to finish before sending the response
+    await Promise.all(users);
+
+    res.json(users);
+
+    zoomDb.close();
+    connectDb.close();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 
 
 
@@ -319,7 +333,13 @@ MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 	        },
 	        function(err, result) {
 	            if (err) throw err;
-	            res.json(result);
+
+							const imagePath = path.join("./uploads", result.avatar);
+							fs.readFile(imagePath, function(err, data) {
+							  if (err) throw err;
+							  result.base64Data = base64.fromByteArray(data);
+								res.json(result);
+							});
 	            db.close();
 	        });
 	    });
@@ -468,6 +488,33 @@ app.post('/HCP/dashboard', (req, res) => {
 	});
 });
 
+
+app.post('/user/profile/edit', (req, res) => {
+  MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+    var dba = db.db("DATA_FROM_EMAIL");
+    const { email, firstname, lastname, phone, city, avatar } = req.body;
+    dba.collection('USER').updateOne({ email }, { $set: { firstname, lastname, phone, city, avatar } }, (err, result) => {
+      if (err) throw err;
+      db.close()
+      res.send("Successfully updated user");
+
+			const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+			const currentDate = new Date().toLocaleString('en-US', options);
+			const logData = `${currentDate}: USER INFO UPDATED : ${JSON.stringify(current(currentU, currentH))}, NEW INFO : ${JSON.stringify({ email, firstname, lastname, phone, city, avatar })}\n`;
+
+			fs.appendFile('logs/user.txt', logData, (err) => {
+				 if (err) throw err;
+				 console.log('Data logged to file!');
+			});
+
+    });
+  });
+
+
+});
+
+
+
 app.post('/user/cancel', (req, res) => {
 	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
 		var dbo = db.db("CONNECT");
@@ -517,6 +564,7 @@ const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
 
+	console.log(req.body)
 	const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 	const currentDate = new Date().toLocaleString('en-US', options);
 	const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF USER: ${JSON.stringify(currentU)}\n`;
