@@ -95,7 +95,8 @@ const Signup = () => {
     "city": newform.city,
     "dataHCP" : true,
     "dataDash" : true,
-    "dataEasy" : true
+    "dataEasy" : true,
+    "avatar" : "default.jpg"
      }
    console.log('test')
    fetch('http://localhost:4444/sign-up/user', {
