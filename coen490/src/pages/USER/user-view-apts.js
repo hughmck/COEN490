@@ -39,8 +39,18 @@ export default function UserViewApt(){
   const [selectedAppointments, setSelectedAppointments] = useState([]);
   const [number, setNumber] = useState('...');
   const [basicModal, setBasicModal] = useState(false);
-  const toggleShow = () => setBasicModal(!basicModal);
+  const [cardData, setCardData] = useState([]);
 
+
+  const toggleShow = (user) => {
+
+        setCardData(user);
+        console.log(cardData);
+        setBasicModal(!basicModal)
+
+      };
+
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -137,9 +147,13 @@ export default function UserViewApt(){
           Welcome back, Hugh! You have {number} upcoming appointments:{' '}
         </MDBCardTitle>
         <div style={{ display: 'flex', justifyContent: 'left'}}>
-          <Calendar value={selectedDate} onChange={handleCalendarChange} />
-          <div style={{ marginLeft: '20px', width: '600px' }}>
-            {selectedAppointments.length > 0 ? (
+          <Calendar value={selectedDate} onChange={handleCalendarChange} onClickDay={() => toggleShow()} />
+          <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+              <MDBModalDialog>
+                 <MDBCard>
+                  <MDBContainer>
+                <MDBCardTitle style={{color: "black"}}>
+                    {selectedAppointments.length > 0 ? (
               <div>
                 <h4>Appointments for {selectedDate.toDateString()}:</h4>
                 {selectedAppointments.map((appointment, index) => (
@@ -229,10 +243,14 @@ export default function UserViewApt(){
                   </MDBCardBody>
                   </div>
                 ))}
-                </>
+                 </>
               )}
+                  </MDBCardTitle>
+                  </MDBContainer>
+                  </MDBCard>
+                </MDBModalDialog>
+              </MDBModal>
             </div>
-          </div>
       </MDBCardBody>
     </MDBCard>
     </main>

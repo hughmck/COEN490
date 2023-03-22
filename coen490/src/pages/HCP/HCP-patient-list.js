@@ -117,8 +117,8 @@ export default function HCPPatientList(){
                     </div>
                     <div className="ms-auto">
 
-                    <MDBBtn class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
-{/*
+                    <MDBBtn class='button-21' style={{maxWidth: '300px', maxHeight: '40px'}} onClick={() => toggleShow(user)} >View Profile</MDBBtn>
+                      {/* 
                       <MDBBtn
                         onClick={() => handleView(user)}
                         href="#"
