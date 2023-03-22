@@ -68,3 +68,4 @@
 03/22/2023, 14:21:18: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
 03/22/2023, 14:52:11: LOG-OUT DETECTED WITH EMAIL : undefined
 03/22/2023, 14:52:28: NEW USER REGISTERED : {"email":"test1@admin.com","firstname":"Test","lastname":"Test","phone":"123123123","city":"City","dataHCP":true,"dataDash":true,"dataEasy":true}
+03/22/2023, 15:32:41: LOG-OUT DETECTED WITH EMAIL : undefined
