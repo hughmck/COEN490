@@ -1,0 +1,42 @@
+03/21/2023, 16:23:45: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:25:00: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:25:01: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:33:00: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:34:23: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:34:41: NEW APPOINTMENT BOOKED : {"Username":"null","user":"admin@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.30.2023","MeetingTime":"18","zoomid":"null","_id":"641a14e1ff66633ccc5e0951"}
+03/21/2023, 16:46:32: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:47:27: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:49:19: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:51:08: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:52:37: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:55:23: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:55:25: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:56:28: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:56:29: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:56:53: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 16:58:01: NEW APPOINTMENT BOOKED : {"Username":"null","user":"admin@admin.com","HCP":"prop9@easysante.com","HCPfirstname":"Marie","HCPlastname":"Curie","MeetingDate":"3.22.2023","MeetingTime":"17","zoomid":"null","_id":"641a1a59e5cda722781bfc8a"}
+03/21/2023, 17:15:40: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 17:24:50: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 20:41:22: NEW APPOINTMENT BOOKED : {"Username":"null","HCP":"prop9@easysante.com","HCPfirstname":"Marie","HCPlastname":"Curie","MeetingDate":"3.22.2023","MeetingTime":"18","zoomid":"null","_id":"641a4eb10316043388b5f4a4"}
+03/21/2023, 20:41:22: NEW APPOINTMENT BOOKED : {"Username":"null","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.22.2023","MeetingTime":"17","zoomid":"null","_id":"641a4eb10316043388b5f4a3"}
+03/21/2023, 20:59:17: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 21:13:34: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 21:38:17: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"prop5@easysante.com","HCPfirstname":"Marguerite","HCPlastname":"Duras","MeetingDate":"3.30.2023","MeetingTime":"17","zoomid":"null","_id":"641a5c083c9bb92c4831cd4c"}
+03/21/2023, 22:33:42: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 22:35:17: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 22:36:26: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 22:37:36: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/21/2023, 23:47:11: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:00:07: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:05:53: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:06:12: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:25:14: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:29:15: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:30:54: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 24:32:21: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 02:52:00: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 02:54:09: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 03:18:52: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.23.2023","MeetingTime":"18","zoomid":"null","_id":"641aabdcef8afc3fe8de7f8d"}
+03/22/2023, 11:51:34: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 12:19:27: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 12:31:12: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
 import React from 'react';
-import './HCP-patient-list.css'
+import '../../style/HCP/HCP-patient-list.css'
 import {
   MDBCard,
   MDBCardImage,
@@ -49,7 +49,7 @@ export default function HCPPatientList(){
         setBasicModal(!basicModal)
 
       };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -116,9 +116,9 @@ export default function HCPPatientList(){
                       </div>
                     </div>
                     <div className="ms-auto">
-                      
+
                     <MDBBtn class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
-{/* 
+{/*
                       <MDBBtn
                         onClick={() => handleView(user)}
                         href="#"
@@ -235,7 +235,7 @@ export default function HCPPatientList(){
                               >Call<i class="fas fa-phone ms-2"></i
                             ></a>
                     </div>
-                    
+
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

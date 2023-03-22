@@ -18,7 +18,6 @@ export default function HCPProfile() {
   const [filename, setFilename] = useState(null);
   const [cardData, setCardData] = useState([]);
 
-
   useEffect(() => {
     axios.get("http://localhost:4444/HCP/profile")
       .then(res => {
@@ -78,6 +77,8 @@ export default function HCPProfile() {
     }
 
   };
+
+
 
   return (
     <>
@@ -271,7 +272,7 @@ export default function HCPProfile() {
                       <hr className="divider" />
                       <div className="form-check form-switch">
                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow EasySante to Use Your Data</label>
-                        <input className="card-data-button form-check-input float-end align-middle" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
+                        <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
                       </div>
                       <div className="col-md-12 text-center">
                         <button type="button" className="btn btn-danger">Terminate</button>

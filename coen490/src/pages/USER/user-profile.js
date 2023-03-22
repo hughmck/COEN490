@@ -5,7 +5,7 @@ import React from 'react';
 import {MDBCol, MDBInput, MDBButton, MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn,MDBIcon,MDBListGroup,MDBListGroupItem} from 'mdb-react-ui-kit';
 import '../../style/user/user-profile.css'
 import axios from 'axios';
-import './calendar.css'
+import '../../style/user/calendar.css'
 import { useContext, useState, useEffect } from "react";
 
 export default function HCPProfile() {
@@ -14,11 +14,17 @@ export default function HCPProfile() {
   const [data, setData] = useState({});
   const [file, setFile] = useState(null);
   const [filename, setFilename] = useState(null);
+  const [hcpCheck, setHcpCheck] = useState(true);
+  const [dashCheck, setDashCheck] = useState(true);
+  const [easyCheck, setEasyCheck] = useState(true);
 
   useEffect(() => {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
         setData(res.data)
+        setHcpCheck(res.data.dataHCP)
+        setDashCheck(res.data.dataDash)
+        setEasyCheck(res.data.dataEasy)
       })
       .catch(err => {
         console.log(err)
@@ -74,6 +80,25 @@ export default function HCPProfile() {
 
   };
 
+  async function handleLiveTrackingChange() {
+    console.log("HERE")
+  const hcpCheckValue = document.getElementById("hcpCheck").checked;
+  const dashCheckValue = document.getElementById("dashCheck").checked;
+  const easyCheckValue = document.getElementById("easyCheck").checked;
+
+  setHcpCheck(hcpCheckValue);
+  setDashCheck(dashCheckValue);
+  setEasyCheck(easyCheckValue);
+  const userResponse = await fetch('http://localhost:4444/user/profile/data', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(hcpCheck),
+  });
+  const userInfo = await userResponse.json();
+  console.log(userInfo)
+};
+
+
   return (
     <>
     <main className="hero-section">
@@ -109,7 +134,7 @@ export default function HCPProfile() {
     <button type="button" className="btn btn-dark mt-3" onClick={handleSave}>Save</button>
   </MDBCardBody>
 </MDBRow>
- 
+
 </>
 
 ) : (
@@ -245,18 +270,40 @@ export default function HCPProfile() {
                         <h5 className="livedata w-100 text-center" >Your Live Data</h5>
                       </MDBCol>
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow Data to be Handled by HCP</label>
-                        <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
-                      </div>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow Live Tracking and Analysis by EasySante</label>
+                        <input
+                          className="card-data-button form-check-input float-end align-middle"
+                          type="checkbox"
+                          role="switch"
+                          id="easyCheck"
+                          checked={easyCheck}
+                          onChange={handleLiveTrackingChange}
+                        />
+                        </div>
                       <hr className="divider" />
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow Live Tracking and Analysis</label>
-                        <input className="card-data-button form-check-input float-end" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
-                      </div>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow Your HCP to View And Analysis Your Data</label>
+                        <input
+                          className="card-data-button form-check-input float-end align-middle"
+                          type="checkbox"
+                          role="switch"
+                          id="hcpCheck"
+                          checked={hcpCheck}
+                          onChange={handleLiveTrackingChange}
+                        />
+                        </div>
                       <hr className="divider" />
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault" >Allow EasySante to Use Your Data</label>
-                        <input className="card-data-button form-check-input float-end align-middle" type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked />
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow Display Of Information On Your Dashboard</label>
+                        <input
+                          className="card-data-button form-check-input float-end align-middle"
+                          type="checkbox"
+                          role="switch"
+                          id="dashCheck"
+                          checked={dashCheck}
+                          onChange={handleLiveTrackingChange}
+                        />
+
                       </div>
                       <div className="col-md-12 text-center">
                         <button type="button" className="btn btn-danger" >Terminate</button>

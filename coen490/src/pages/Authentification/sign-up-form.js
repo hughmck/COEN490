@@ -92,7 +92,10 @@ const Signup = () => {
     "firstname": newform.firstname,
     "lastname": newform.lastname,
     "phone": newform.phone,
-    "city": newform.city
+    "city": newform.city,
+    "dataHCP" : true,
+    "dataDash" : true,
+    "dataEasy" : true
      }
    console.log('test')
    fetch('http://localhost:4444/sign-up/user', {

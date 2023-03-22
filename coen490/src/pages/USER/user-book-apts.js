@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import React from 'react';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import './user-book-apts.css';
+import '../../style/user/user-book-apts.css';
 import {
   MDBCard,
   MDBCardImage,
@@ -169,6 +169,7 @@ export default function UserBookApt(){
       }
           });
             const data = await response.json();
+            console.log("HERE",data)
             if (data == '1') {
               document.getElementById('popup-container').innerText = 'Your Meeting Has Been Booked For ' + date + ' ' + time + ' with ' + user.name + ' ' + user.lastname;
               document.getElementById('popup-container').style.display = 'block';
@@ -237,7 +238,7 @@ export default function UserBookApt(){
                 <option value="PTSD">PTSD</option>
                 <option value="Disorders">Disorders</option>
             </select>
-        
+
             <select
                 className="block w-48 bg-blue-200 border border-blue-400 hover:border-blue-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 value={type}
@@ -365,7 +366,7 @@ export default function UserBookApt(){
                     <MDBCardText  style={{color: 'black'}}>Profession</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='9'>
-                    <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
+                    <MDBCardText className='text-muted'>{cardData.profession}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -374,7 +375,7 @@ export default function UserBookApt(){
                     <MDBCardText  style={{color: 'black'}}>Specialty</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='9' >
-                    <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
+                    <MDBCardText className='text-muted'>{cardData.specialty}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />

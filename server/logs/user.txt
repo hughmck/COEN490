@@ -1,0 +1,70 @@
+03/21/2023, 16:24:10: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:24:13: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:25:12: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:25:13: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:26:20: SIGN-IN DETECTED WITH EMAIL : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"5145145146","city":"San Francisco"}
+03/21/2023, 16:33:16: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:33:32: NEW APPOINTMENT BOOKED : {"Username":"null","user":"admin@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.29.2023","MeetingTime":"18","zoomid":"null","_id":"641a149cced64552fc8d1c6d"}
+03/21/2023, 16:34:28: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:34:41: NEW APPOINTMENT BOOKED : {"Username":"null","user":"admin@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.30.2023","MeetingTime":"18","zoomid":"null","_id":"641a14e1ff66633ccc5e0951"}
+03/21/2023, 16:46:44: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:49:11: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:50:32: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:50:55: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:50:57: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:56:39: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 16:56:40: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 16:56:57: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 16:57:48: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 16:58:01: NEW APPOINTMENT BOOKED : {"Username":"null","user":"admin@admin.com","HCP":"prop9@easysante.com","HCPfirstname":"Marie","HCPlastname":"Curie","MeetingDate":"3.22.2023","MeetingTime":"17","zoomid":"null","_id":"641a1a59e5cda722781bfc8a"}
+03/21/2023, 17:15:25: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 17:24:56: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 20:37:11: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/21/2023, 20:37:21: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 20:41:22: NEW APPOINTMENT BOOKED : {"Username":"null","HCP":"prop9@easysante.com","HCPfirstname":"Marie","HCPlastname":"Curie","MeetingDate":"3.22.2023","MeetingTime":"18","zoomid":"null","_id":"641a4eb10316043388b5f4a4"}
+03/21/2023, 20:41:22: NEW APPOINTMENT BOOKED : {"Username":"null","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.22.2023","MeetingTime":"17","zoomid":"null","_id":"641a4eb10316043388b5f4a3"}
+03/21/2023, 20:41:33: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 20:42:26: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 20:44:54: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 20:45:02: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 20:50:00: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 20:50:06: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 20:54:38: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 20:54:50: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 20:59:08: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 21:13:39: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 21:15:32: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 21:16:23: NEW USER REGISTERED : {"email":"demo@admin.com","firstname":"Adam","lastname":"Smith","phone":"5141234567","city":"Montreal"}
+03/21/2023, 21:37:57: LOG-OUT DETECTED WITH EMAIL : undefined
+03/21/2023, 21:38:04: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 21:38:17: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"prop5@easysante.com","HCPfirstname":"Marguerite","HCPlastname":"Duras","MeetingDate":"3.30.2023","MeetingTime":"17","zoomid":"null","_id":"641a5c083c9bb92c4831cd4c"}
+03/21/2023, 22:33:32: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 22:35:24: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 22:36:13: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/21/2023, 22:37:42: SIGN-IN DETECTED WITH EMAIL : "demo@admin.com"
+03/21/2023, 23:47:04: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 24:00:13: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:05:45: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:06:19: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:25:07: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:29:21: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:30:48: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 24:32:27: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 01:37:02: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 01:40:04: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 02:51:40: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 02:54:19: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 03:18:52: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.23.2023","MeetingTime":"18","zoomid":"null","_id":"641aabdcef8afc3fe8de7f8d"}
+03/22/2023, 11:48:18: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 11:48:24: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 11:51:27: LOG-OUT DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 12:19:05: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 12:19:11: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 12:19:15: LOG-OUT DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 12:31:19: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
+03/22/2023, 13:50:26: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 13:50:34: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 14:21:10: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 14:21:18: SIGN-IN DETECTED WITH EMAIL : "admin@admin.com"
+03/22/2023, 14:52:11: LOG-OUT DETECTED WITH EMAIL : undefined
+03/22/2023, 14:52:28: NEW USER REGISTERED : {"email":"test1@admin.com","firstname":"Test","lastname":"Test","phone":"123123123","city":"City","dataHCP":true,"dataDash":true,"dataEasy":true}

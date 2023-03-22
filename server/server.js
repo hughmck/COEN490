@@ -9,6 +9,7 @@ const HCP = require("./db_data/hcp")
 const zoomSdk = require('zoomus')
 var cors = require('cors')
 const { ObjectId } = require('mongodb')
+const fs = require('fs');
 
 app.use(cors())
 let MongoClient = require('mongodb').MongoClient;
@@ -38,6 +39,16 @@ mongoose
 
 	var currentU
 	app.post('/sign-up/user', (req, res) => {
+
+	 const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+ 	 const currentDate = new Date().toLocaleString('en-US', options);
+ 	 const logData = `${currentDate}: NEW USER REGISTERED : ${JSON.stringify(req.body)}\n`;
+
+ 	 fs.appendFile('logs/user.txt', logData, (err) => {
+ 		 if (err) throw err;
+ 		 console.log('Data logged to file!');
+ 	 });
+
 		MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 			currentU = req.body.email;
 			var dba = db.db("DATA_FROM_EMAIL");
@@ -50,6 +61,17 @@ mongoose
 
 	var currentH
 	app.post('/sign-up/HCP', (req, res) => {
+
+		 const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  	 const currentDate = new Date().toLocaleString('en-US', options);
+  	 const logData = `${currentDate}: NEW HCP REGISTERED : ${JSON.stringify(req.body)}\n`;
+
+  	 fs.appendFile('logs/hcp.txt', logData, (err) => {
+  		 if (err) throw err;
+  		 console.log('Data logged to file!');
+  	 });
+
+
 		MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 			currentH = req.body.email;
 			var dbo = db.db("DATA_FROM_EMAIL");
@@ -60,13 +82,38 @@ mongoose
 
 		});
 	});
+
+	app.post('/sign-in/user', (req, res) => {
+
+	 const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+	 const currentDate = new Date().toLocaleString('en-US', options);
+	 const logData = `${currentDate}: SIGN-IN DETECTED WITH EMAIL : ${JSON.stringify(req.body.email)}\n`;
+
+	 fs.appendFile('logs/user.txt', logData, (err) => {
+		 if (err) throw err;
+		 console.log('Data logged to file!');
+	 });
+
+		currentU = req.body.email;
+	});
+
 	app.post('/sign-in/HCP', (req, res) => {
+
+   const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+	 const currentDate = new Date().toLocaleString('en-US', options);
+	 const logData = `${currentDate}: SIGN-IN DETECTED WITH EMAIL : ${JSON.stringify(req.body.email)}\n`;
+
+	 fs.appendFile('logs/hcp.txt', logData, (err) => {
+		 if (err) throw err;
+		 console.log('Data logged to file!');
+	 });
+
 		currentH = req.body.email;
 	});
 
-	app.post('/sign-in/user', (req, res) => {
-		currentU = req.body.email;
-	});
+
+
+
 
 
 	app.post('/user/bookapt', async (req, res) => {
@@ -89,7 +136,6 @@ mongoose
   return !bookedHCPs.some((connectItem) => connectItem.HCP === item.email);
 	});
 
-	console.log('result : ', resultWithoutConnect);
   res.json(resultWithoutConnect);
 
   zoomDb.close();
@@ -108,6 +154,40 @@ mongoose
   	});
 		});
 	});
+
+	app.post('/HCP/booked/connect', (req, res) => {
+		MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+			var dbo = db.db("CONNECT");
+  		dbo.collection('zoom').find({HCP: currentH}).toArray(function(err, result) {
+    	if (err) throw err;
+			res.json(result)
+			db.close()
+  	});
+		});
+	});
+
+
+	app.post('/user/profile/data', (req, res) => {
+		console.log(req.body)
+		res.send('yur')
+	});
+
+
+	app.post('/user/braceletdata', (req, res) => {
+		if(allowDashboard === 'true')
+		{
+		MongoClient.connect(process.env.ATLAS_URI3, function(err, db) {
+			var dbo = db.db("SENSOR_DATA");
+			dbo.collection('Data').find({email: currentU}).toArray(function(err, result) {
+			if (err) throw err;
+			res.json(result)
+			db.close()
+		});
+		});
+	}
+	});
+
+
 
 
 	app.post('/user/profile/hcp', (req, res) => {
@@ -183,6 +263,30 @@ MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 
 
 	app.post('/logout', (req, res) => {
+		const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+		const currentDate = new Date().toLocaleString('en-US', options);
+		const logData = `${currentDate}: LOG-OUT DETECTED WITH EMAIL : ${JSON.stringify(current(currentU, currentH))}\n`;
+
+	 if(currentH === undefined || currentH == 'null'){
+
+			  fs.appendFile('logs/user.txt', logData, (err) => {
+				if (err) throw err;
+				console.log('Data logged to file!');
+			});
+
+		}else if (currentU === undefined || currentU == 'null') {
+			  fs.appendFile('logs/hcp.txt', logData, (err) => {
+				if (err) throw err;
+				console.log('Data logged to file!');
+			});
+
+		}else if(currentU === undefined && currentH === undefined){
+
+				console.log('undefined logged-out');
+
+		}
+
+
 			if(req.body.status == 'logout'){
 				currentH = 'null'
 				currentU ='null'
@@ -312,20 +416,30 @@ app.post('/user/booked', (req, res) => {
       zoomid : 'null'
     };
     var dbo = db.db("CONNECT");
-    dbo.collection('zoom').findOne({ user: current(currentU,currentH) }, function(err, result) {
       if (err) throw err;
 			if (!req.body.canBook) {
 				res.send('2');
-      } else if (result) {
+      } else{
         dbo.collection('zoom').insertOne(HCPbooked, (err, data) => {
           if(err) {
             res.send('0');
           } else {
+						const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+						const currentDate = new Date().toLocaleString('en-US', options);
+						const logData = `${currentDate}: NEW APPOINTMENT BOOKED : ${JSON.stringify(HCPbooked)}\n`;
+
+						fs.appendFile('logs/user.txt', logData, (err) => {
+						   if (err) throw err;
+						   console.log('Data logged to file!');
+						});
+						fs.appendFile('logs/hcp.txt', logData, (err) => {
+						   if (err) throw err;
+						   console.log('Data logged to file!');
+						});
             res.send('1');
           }
         });
       }
-    });
   });
 });
 
@@ -340,6 +454,8 @@ app.post('/user/viewapts', (req, res) => {
 	});
 	});
 });
+
+
 
 app.post('/HCP/dashboard', (req, res) => {
 	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
@@ -358,7 +474,23 @@ app.post('/user/cancel', (req, res) => {
 		dbo.collection('zoom').deleteOne({ _id: ObjectId(req.body.id) }, function(err, result) {
     if (err) throw err;
 		db.close();
+
+		const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+		const currentDate = new Date().toLocaleString('en-US', options);
+		const logData = `${currentDate}: APPOINTMENT DELETED FOR : ${JSON.stringify(current(currentU, currentH))}, WITH ID : ${JSON.stringify(ObjectId(req.body.id))}\n`;
+
+		fs.appendFile('logs/user.txt', logData, (err) => {
+			 if (err) throw err;
+			 console.log('Data logged to file!');
+		});
+
+		fs.appendFile('logs/hcp.txt', logData, (err) => {
+			 if (err) throw err;
+			 console.log('Data logged to file!');
+		});
+
   	});
+
 	});
 });
 
@@ -384,6 +516,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
+
+	const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+	const currentDate = new Date().toLocaleString('en-US', options);
+	const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF USER: ${JSON.stringify(currentU)}\n`;
+
+	fs.appendFile('logs/user.txt', logData, (err) => {
+		 if (err) throw err;
+		 console.log('Data logged to file!');
+	});
+
   res.send(req.body.file);
 });
 
