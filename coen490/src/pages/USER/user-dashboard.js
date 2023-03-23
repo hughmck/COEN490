@@ -1,6 +1,6 @@
 import { UserContext } from "../../contexts/user.context";
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { App, Credentials } from "realm-web";
+import { App, Credentials, User } from "realm-web";
 import axios from 'axios';
 import '../../style/user/user-dashboard.css';
 import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
@@ -14,8 +14,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-
+import { Bar, Line } from 'react-chartjs-2';
+ 
 
 export default function UserDashboard() {
 
@@ -25,6 +25,8 @@ export default function UserDashboard() {
   const [braceletTime, setBraceletTime] = useState(null);
   const [dataLength, setDataLength] = useState(null);
   const [dataBPM, setDataBPM] = useState(null);
+  const [userData, setUserData] = useState({});
+
 
 ChartJS.register(
   CategoryScale,
@@ -55,6 +57,7 @@ const labels = Array.from({ length: dataLength }, (_, i) => `T-${dataLength - i}
 labels[labels.length - 1] = braceletTime;
 
 console.log(braceletData, dataBPM)
+
  const data = {
   labels,
   datasets: [
@@ -74,6 +77,16 @@ console.log(braceletData, dataBPM)
 };
 
 
+useEffect(() => {
+    axios.get("http://localhost:4444/user/profile")
+      .then(res => {
+        setUserData(res.data)
+        console.log(userData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
 useEffect(() => {
  const fetchData = async () => {
@@ -159,12 +172,22 @@ fetchData();
             </div>
           </div>
         )}
-        <div className="chart-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "60vh", width: "60vw", margin: "auto", backgroundColor: "white" }}>
-          <Line options={options} data={data} style={{ height: "400px", width: "600px" }} />
-        </div>
+        <div class="dash-cards container">
+            <div class="dash-card dash-card--fb" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
+              <h2 class="followers-info__count">Welcome back! {userData.firstname}</h2>
+            </div>
+          </div>
+          <div class="dash-cards container">
+            <div class="dash-card dash-card--fb">
+              <div class="user-info dash-card__user-info">
+                <span class="user-info__icon"><i class='bx bxl-facebook-square'></i></span>
+            </div>
+            <div>
+              <Line options={options} data={data}/>
+            </div>
+            </div>
+          </div>
       </main>
     </>
   );
-
-
 }
