@@ -23,6 +23,8 @@ import {
   MDBModalDialog,
   MDBModalContent
 } from 'mdb-react-ui-kit';
+import logo from '../../style/490LogoWhite.png';
+
 
 
 export default function HCPPatientList(){
@@ -84,7 +86,7 @@ export default function HCPPatientList(){
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
           <a href="/HCP-connect">Connect</a>

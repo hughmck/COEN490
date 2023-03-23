@@ -3,6 +3,8 @@ import { Container } from "react-bootstrap"
 import { UserProvider } from "../../contexts/user.context"
 import '../../style/home.css';
 import { MDBCard } from "mdbreact";
+import logo from '../../style/490LogoWhite.png';
+
 
 export default function Register(){
 
@@ -10,7 +12,7 @@ export default function Register(){
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/sign-up">Sign Up</a>
           <a href="/sign-in">Sign In</a>

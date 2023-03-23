@@ -317,6 +317,7 @@ small {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 1.5rem 2rem;
+  color: black;
 }
 
 @media (min-width: 40em) {
@@ -420,6 +421,10 @@ small {
 .followers-info__count {
   font-size: 3.75rem;
   margin: 0;
+  color: black;
+  position: absolute;
+  left: 40px;
+  backdrop-filter: blur(5px);
 }
 
 .followers-info__text {

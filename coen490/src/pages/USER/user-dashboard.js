@@ -15,6 +15,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
+import logo from '../../style/490LogoWhite.png';
  
 
 export default function UserDashboard() {
@@ -148,7 +149,7 @@ fetchData();
       <main className="hero-section">
         <div className="hero-content">
           <nav className="navbar" style={{ marginLeft: "20px", width: "1740px" }}>
-            <h1 className="nav-logo">EasySante</h1>
+            <img className="nav-logo" src={logo}/>
             <ul className="nav-links">
               <a href="/user-dashboard">Dashboard</a>
               <a href="/user-connect">Connect</a>
@@ -174,7 +175,7 @@ fetchData();
         )}
         <div class="dash-cards container">
             <div class="dash-card dash-card--fb" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
-              <h2 class="followers-info__count">Welcome back! {userData.firstname}</h2>
+              <h2 class="followers-info__count">Welcome back, {userData.firstname} {userData.lastname}!</h2>
             </div>
           </div>
           <div class="dash-cards container">

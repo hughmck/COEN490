@@ -21,7 +21,7 @@ import {
   MDBModalBody,
   MDBModalFooter
 } from 'mdb-react-ui-kit';
-
+import logo from '../../style/490LogoWhite.png';
 import '../../style/user/user-dashboard.css';
 
 const formatDate = (date) => {
@@ -126,7 +126,7 @@ export default function HCPDashboard() {
      <main className="hero-section">
      <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
           <a href="/HCP-connect">Connect</a>
