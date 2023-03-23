@@ -176,3 +176,28 @@
 03/23/2023, 10:01:27: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 =======
 >>>>>>> main
+03/23/2023, 10:16:14: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:16:19: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:18:00: HCP INFO UPDATED : "admin@easysante.com", NEW INFO : {"firstname":"Adam","lastname":"Smith","profession":"Therapist","specialty":null,"city":"San Francisco"}
+03/23/2023, 10:18:27: HCP INFO UPDATED : "admin@easysante.com", NEW INFO : {"firstname":"Adam","lastname":"Smith","profession":"Therapist","specialty":null,"city":"San Francisco"}
+03/23/2023, 10:18:35: HCP INFO UPDATED : "admin@easysante.com", NEW INFO : {"firstname":"Adam","lastname":"Smith","profession":"Therapist","specialty":null,"city":"San Francisco"}
+03/23/2023, 10:18:45: HCP INFO UPDATED : "admin@easysante.com", NEW INFO : {"firstname":"Adam","lastname":"Smith","profession":"Therapist","specialty":null,"city":"San Francisco"}
+03/23/2023, 10:18:45: PROFILE IMAGE undefined UPLOADED TO DATA BASE OF HCP: "admin@easysante.com"
+03/23/2023, 10:19:01: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:19:51: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"admin@easysante.com","HCPfirstname":"Adam","HCPlastname":"Smith","MeetingDate":"3.24.2023","MeetingTime":"15","zoomid":"null","_id":"641c6007ee8e302e28337735"}
+03/23/2023, 10:20:05: APPOINTMENT DELETED FOR : "test@admin.com", WITH ID : "641c6015ee8e302e28337736"
+03/23/2023, 10:25:19: SIGN-IN DETECTED WITH EMAIL : "demo@easysante.com"
+03/23/2023, 10:26:32: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:48:09: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:48:17: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:48:24: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:51:30: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 10:58:42: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:03:57: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:05:16: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:08:29: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"admin@easysante.com","HCPfirstname":"Adam","HCPlastname":"Smith","MeetingDate":"3.24.2023","MeetingTime":"13","zoomid":"null","_id":"641c6b6dd51a4c3998e99aee"}
+03/23/2023, 11:09:38: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"admin@easysante.com","HCPfirstname":"Adam","HCPlastname":"Smith","MeetingDate":"3.24.2023","MeetingTime":"13","zoomid":"null","_id":"641c6bb2d51a4c3998e99aef"}
+03/23/2023, 11:10:15: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:11:19: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:13:17: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 11:13:51: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"

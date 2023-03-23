@@ -1,171 +1,124 @@
+import '../../style/HCP/HCPconnect.css'
 import React, { useState, useEffect, useRef } from 'react';
-import Talk from 'talkjs';
+import Talk from 'talkjs'
 import axios from 'axios';
-import '../../style/user/user-dashboard.css';
+
+import { useQuery } from 'react-query';
 import logo from '../../style/490LogoWhite.png';
 
 
 export default function UserConnect() {
-  const [url, setUrl] = useState('');
-  const [talkLoaded, markTalkLoaded] = useState(false);
-  const [activeChatboxIndex, setActiveChatboxIndex] = useState(0);
-  const chatboxEl = useRef();
-  const [isMounted, setIsMounted] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [otherUsers, setOtherUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
+
+const [url, setUrl] = useState('');
+const chatboxEl = useRef();
+const [userData, setUserData] = useState([])
+const [talkLoaded, markTalkLoaded] = useState(false);
 
 
-  useEffect(() => {
-  async function fetchData() {
-    const response = await fetch('http://localhost:4444/user/viewapts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: null,
-    });
-    const data = await response.json();
-    setUserData(data);
-  }
+const fetchUserData = async () => {
+  const data = await axios.post('http://localhost:4444/user/viewapts');
+  setUserData(data)
+  return data;
+};
 
-  async function loadTalkJS() {
-    await Talk.ready;
-    markTalkLoaded(true);
-  }
 
-  fetchData();
-  loadTalkJS();
-}, []);
+ const { status, isStale, isFetching, error, data } = useQuery(
+  'user data',
+  fetchUserData
+);
 
 useEffect(() => {
-  async function setupChat() {
-    await waitUntil(() => userData.length > 0);
-
-    const firstUser = userData[0];
-    setOtherUsers({
-      id: '10',
-      name: firstUser.HCP,
-      email: 'test',
-      photoUrl: 'anthony.jpeg',
-      welcomeMessage: 'Hello!',
-      role: 'default'
-    });
-  }
-
-  if (talkLoaded && userData.length > 0) {
-    setupChat();
-  }
-}, [talkLoaded, userData]);
-
-
-
-function waitUntil(condition) {
-  return new Promise((resolve) => {
-    const intervalId = setInterval(() => {
-      if (condition()) {
-        clearInterval(intervalId);
-        resolve();
-      }
-    }, 100);
-  });
-}
-
-    useEffect(() => {
-    async function setCurrent(){
-      await waitUntil(() => userData.length > 0);
-      setCurrentUser({
-        id: '10912',
-        name: 'Anthony Smith',
-        email: userData[0].user,
-        photoUrl: 'anthony.jpeg',
-        welcomeMessage: 'Hello!',
-        role: 'default'
-      });
+ Talk.ready.then(() => markTalkLoaded(true));
+ if (talkLoaded && data) {
+      console.log(data)
+      let fullName;
+      let id;
+      let welcome;
+    if (!data.data || data.data.length === 0) {
+      fullName = 'no match';
+      id = '21';
+      welcome = 'connect with an HCP to start your converstation!'
+    } else {
+      fullName = data.data[0].HCPfirstname + ' ' + data.data[0].HCPlastname;
+      id = '20';
+      welcome ='Talk to Your HCP'
     }
 
-    setCurrent();
-    }, [userData]);
+   const currentUser = new Talk.User({
+     id: id,
+     name: fullName,
+     email: 'test',
+     photoUrl: 'henry.jpeg',
+     welcomeMessage: welcome,
+     role: 'default',
+   });
 
-    useEffect(() => {
-    if (talkLoaded && otherUsers.length > 0) {
-      const session = new Talk.Session({
-        appId: 'tW54Iuga',
-        me: new Talk.User(currentUser),
-      });
+   const otherUser = new Talk.User({
+     id: '12',
+     name: fullName,
+     email: 'any',
+     photoUrl: 'jessica.jpeg',
+     welcomeMessage: 'Hello!',
+     role: 'default',
+   });
 
-      const otherUserObj = new Talk.User(otherUsers);
-      const currentUserObj = new Talk.User(currentUser);
+   const session = new Talk.Session({
+     appId: 'tW54Iuga',
+     me: currentUser,
+   });
 
-      console.log("HERE", otherUserObj, currentUserObj)
-      const conversationId = Talk.oneOnOneId(currentUser, otherUsers);
-      const conversation = session.getOrCreateConversation(conversationId);
-      conversation.setParticipant(currentUser);
-      conversation.setParticipant(otherUsers);
-      const chatbox = session.createChatbox();
-      chatbox.select(conversation);
-      chatbox.mount(chatboxEl.current);
+   const conversationId = Talk.oneOnOneId(currentUser, otherUser);
+   const conversation = session.getOrCreateConversation(conversationId);
+   conversation.setParticipant(currentUser);
+   conversation.setParticipant(otherUser);
+   const chatbox = session.createChatbox();
+   chatbox.select(conversation);
+   chatbox.mount(chatboxEl.current);
 
 
-      const iframe = chatboxEl.current.querySelector('iframe');
-       if (iframe) {
-         iframe.style.width = '100%';
-         iframe.style.height = '730px';
-       }
-
-      return () => session.destroy();
-
-      console.log(chatbox.current)
-      return () => session.destroy();
+   const iframe = chatboxEl.current.querySelector('iframe');
+    if (iframe) {
+      iframe.style.width = '100%';
+      iframe.style.height = '730px';
     }
-    }, [talkLoaded, otherUsers, currentUser]);
+
+   return () => session.destroy();
+ }
+}, [talkLoaded, isFetching]);
 
 
-  const handleClick = async () => {
-    axios.post("http://localhost:4444/zoomidUser")
-      .then(res => {
-        setUrl(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      });
-    window.open(url, '_blank');
-  };
+const handleClick = async () => {
+  axios.post("http://localhost:4444/zoomidHCP")
+    .then(res => {
+      setUrl(res.data)
+    })
+    .catch(err => {
+      console.log(err)
 
-
-
-
-
+    })
+    console.log(url)
+  window.open(url, '_blank');
+};
 
 
 return (
-  <div className="hero-section">
-    <div className="hero-content">
-      <nav className="navbar" style={{ marginLeft: '20px', width: '1740px' }}>
-        <img className="nav-logo" src={logo}/>
-        <ul className="nav-links">
-          <a href="/user-dashboard">Dashboard</a>
-          <a href="/user-connect">Connect</a>
-          <a href="/user-view-apt">View Appointments</a>
-          <a href="/user-book-apt">Book Appointments</a>
-          <a href="/user-profile">Profile</a>
-        </ul>
-      </nav>
-      <div className="chatbox-container">
-        <div className="users-container">
-          <h2>Choose a user to chat with:</h2>
-          <ul>
-          </ul>
-        </div>
-        <div className="chatbox-wrapper">
-          <div ref={chatboxEl} />
-        </div>
+    <>
+    <main className="hero-section">
+        <div className="hero-content">
+          <nav className="navbar" style={{ marginLeft: "20px", width: "1740px" }}>
+            <img className="nav-logo" src={logo}/>
+            <ul className="nav-links">
+              <a href="/user-dashboard">Dashboard</a>
+              <a href="/user-connect">Connect</a>
+              <a href="/user-view-apt">View Appointments</a>
+              <a href="/user-book-apt">Book Appointments</a>
+              <a href="/user-profile">Profile</a>
+            </ul>
+          </nav>
+    <div ref={chatboxEl} />
+      <button onClick={handleClick} class='button-21' style={{ position: 'absolute', bottom: '100px', right: '840px' }}>Join Meeting</button>
       </div>
-      <button onClick={handleClick} className="button-21" style={{ position: 'absolute', bottom: '160px', right: '840px' }}>
-        Join Meeting
-      </button>
-    </div>
-  </div>
-);
-
-
-
-  };
+      </main>
+    </>
+  );
+};
