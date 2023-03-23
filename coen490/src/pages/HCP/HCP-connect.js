@@ -2,6 +2,8 @@ import '../../style/HCP/HCPconnect.css'
 import React, { useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs'
 import axios from 'axios';
+import logo from '../../style/490LogoWhite.png';
+
 
 export default function HCPConnect() {
 const [url, setUrl] = useState('');
@@ -119,7 +121,7 @@ return (
     <main className="hero-section">
       <div className="hero-content">
         <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-          <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
           <ul className="nav-links">
             <a href="/HCP-dashboard">Dashboard</a>
             <a href="/HCP-connect">Connect</a>

@@ -7,6 +7,7 @@ import '../../style/user/user-profile.css'
 import axios from 'axios';
 import '../../style/user/calendar.css'
 import { useContext, useState, useEffect } from "react";
+import logo from '../../style/490LogoWhite.png';
 
 export default function HCPProfile() {
 
@@ -24,7 +25,7 @@ export default function HCPProfile() {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
         console.log(res.data)
-        setUserProfile('data:image/jpeg;base64,' + res.data.base64Data)
+        setUserProfile(res.data.avatar)
         setData(res.data)
         setHcpCheck(res.data.dataHCP)
         setDashCheck(res.data.dataDash)
@@ -119,7 +120,7 @@ const handleInputChange = (e) => {
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
           <a href="/user-connect">Connect</a>
@@ -208,7 +209,7 @@ const handleInputChange = (e) => {
             <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
                   <h5 className="mx-auto w-100 text-center">About You</h5>
-                  <MDBCardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
+                  <MDBCardText style={{color: "white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
 
@@ -227,7 +228,7 @@ const handleInputChange = (e) => {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom " >January 5th 2022</MDBCardText>
+                          <MDBCardText  style={{color: "white"}} className="text-center align-bottom " >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow>
@@ -240,7 +241,7 @@ const handleInputChange = (e) => {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
+                          <MDBCardText  style={{color: "white"}} className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow>
@@ -253,7 +254,7 @@ const handleInputChange = (e) => {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
+                          <MDBCardText style={{color: "white"}} className="text-center align-bottom" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                       <MDBRow className ='test'>
@@ -266,7 +267,7 @@ const handleInputChange = (e) => {
                             fluid />
                         </MDBCol>
                         <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-center" >January 5th 2022</MDBCardText>
+                          <MDBCardText style={{color: "white"}} className="text-center align-center" >January 5th 2022</MDBCardText>
                         </MDBCol>
                       </MDBRow>
                   </MDBCardBody>

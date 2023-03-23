@@ -25,6 +25,8 @@ import {
   MDBModalFooter
 
 } from 'mdb-react-ui-kit';
+import logo from '../../style/490LogoWhite.png';
+
 
 export default function UserBookApt(){
 
@@ -195,7 +197,7 @@ export default function UserBookApt(){
     <main className="hero-section1">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
           <a href="/user-connect">Connect</a>

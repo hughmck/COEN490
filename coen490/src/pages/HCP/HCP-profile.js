@@ -8,6 +8,7 @@ import '../../style/HCP/hcp-profile.css'
 import axios from 'axios';
 import { useContext, useState, useEffect } from "react";
 import '../../style/user/user-dashboard.css';
+import logo from '../../style/490LogoWhite.png';
 
 
 export default function HCPProfile() {
@@ -85,7 +86,7 @@ export default function HCPProfile() {
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
           <a href="/HCP-connect">Connect</a>

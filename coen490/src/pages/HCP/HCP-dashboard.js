@@ -21,7 +21,7 @@ import {
   MDBModalBody,
   MDBModalFooter
 } from 'mdb-react-ui-kit';
-
+import logo from '../../style/490LogoWhite.png';
 import '../../style/user/user-dashboard.css';
 
 const formatDate = (date) => {
@@ -81,7 +81,7 @@ export default function HCPDashboard() {
             return {
               title: `Appointment with ${userInfo[index].firstname}`,
               date: new Date(year, month - 1, day, hour, 0),
-              description: `Please View The Connect Page to Join Your Meeting Or To Converse With ${userInfo[index].firstname}.`,
+              description: `Please click the connect page to meet with your patient: ${userInfo[index].firstname}.`,
             };
           })
 
@@ -126,7 +126,7 @@ export default function HCPDashboard() {
      <main className="hero-section">
      <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
           <a href="/HCP-connect">Connect</a>
@@ -153,7 +153,7 @@ export default function HCPDashboard() {
                     <h5>
                       {appointment.title} at {formatDate(appointment.date)}
                     </h5>
-                    <p>{appointment.description}</p>
+                    <p style={{color: "black"}}>{appointment.description}</p>
                   </div>
                 ))}
               </div>
@@ -169,20 +169,13 @@ export default function HCPDashboard() {
                 <>
                 {selectedAppointments.map((appointment, index) => (
                     <div key={index}>
-                  <MDBCardImage
-                    src={`../../Digital-Identity/logo-1.png`}
-                    alt="avatar"
-                    className="rounded-circle"
-                    style={{ width: '150px' }}
-                    fluid
-                  />
                   <MDBCardBody className="pt-1">
                     <MDBRow>
                       <MDBCol sm="3">
-                        <MDBCardText>Name</MDBCardText>
+                        <MDBCardText style={{color: "black"}}>Name</MDBCardText>
                       </MDBCol>
                       <MDBCol>
-                        <MDBCardText className="text-muted">
+                        <MDBCardText className="text-muted" style={{color: "black"}}>
                           {selectedAppointments ? selectedAppointments[index].data.firstname + ' ' + selectedAppointments[index].data.lastname : 'Loading...'}
                         </MDBCardText>
                       </MDBCol>
@@ -190,10 +183,10 @@ export default function HCPDashboard() {
                     <hr />
                     <MDBRow>
                       <MDBCol sm="3">
-                        <MDBCardText>Email</MDBCardText>
+                        <MDBCardText style={{color: "black"}}>Email</MDBCardText>
                       </MDBCol>
                       <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
+                        <MDBCardText className="text-muted" style={{color: "black"}}>
                           {selectedAppointments ? selectedAppointments[index].data.email : 'Loading...'}
                         </MDBCardText>
                       </MDBCol>
@@ -201,10 +194,10 @@ export default function HCPDashboard() {
                     <hr />
                     <MDBRow>
                       <MDBCol sm="3">
-                        <MDBCardText>Phone</MDBCardText>
+                        <MDBCardText style={{color: "black"}}>Phone</MDBCardText>
                       </MDBCol>
                       <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
+                        <MDBCardText className="text-muted" style={{color: "black"}}>
                           {selectedAppointments ? selectedAppointments[index].data.phone : 'Loading...'}
                         </MDBCardText>
                       </MDBCol>
@@ -212,7 +205,7 @@ export default function HCPDashboard() {
                     <hr />
                     <MDBRow>
                       <MDBCol sm="3">
-                        <MDBCardText>City</MDBCardText>
+                        <MDBCardText style={{color: "black"}}>City</MDBCardText>
                       </MDBCol>
                       <MDBCol sm="9">
                         <MDBCardText className="text-muted">

@@ -23,10 +23,12 @@ import {
   MDBModalDialog,
   MDBModalContent
 } from 'mdb-react-ui-kit';
+import logo from '../../style/490LogoWhite.png';
 
-const randomAvatar = "https://i.pravatar.cc/150?img=";
+
 
 export default function HCPPatientList(){
+
   const [reason, setReason] = useState('');
   const [type, setType] = useState('');
   const [data, setData] = useState([]);
@@ -39,6 +41,7 @@ export default function HCPPatientList(){
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [basicModal, setBasicModal] = useState(false);
   const [cardData, setCardData] = useState([]);
+
 
 
 
@@ -83,7 +86,7 @@ export default function HCPPatientList(){
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/HCP-dashboard">Dashboard</a>
           <a href="/HCP-connect">Connect</a>
@@ -102,7 +105,7 @@ export default function HCPPatientList(){
                 <MDBCard class="mb-3">
                   <MDBCardBody className="d-flex" >
                     <MDBCardImage
-                      src="https://i.pravatar.cc/100"
+                      src={user.avatar}
                       alt="avatar"
                       className="me-3"
                       style={{ maxWidth: "50px" }}
@@ -118,8 +121,8 @@ export default function HCPPatientList(){
                     <div className="ms-auto">
 
                     <MDBBtn class='button-21' style={{maxWidth: '300px', maxHeight: '40px'}} onClick={() => toggleShow(user)} >View Profile</MDBBtn>
-                      {/* 
-                      <MDBBtn
+                    {/*
+                    <MDBBtn
                         onClick={() => handleView(user)}
                         href="#"
                         style={{ marginTop: "auto", marginBottom: "auto" }}
@@ -151,7 +154,7 @@ export default function HCPPatientList(){
                                   <MDBRow>
                                     <MDBCol lg='6'>
                                       <MDBCardImage
-                                        src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
+                                        src={user.avatar}
                                         alt='avatar'
                                         className='rounded-circle'
                                         class='imgClass'
