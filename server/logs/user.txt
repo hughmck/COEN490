@@ -122,7 +122,3 @@
 03/22/2023, 17:59:04: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522333077.jpg"}
 03/22/2023, 17:59:13: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522344230.jpg"}
 03/22/2023, 18:00:46: USER INFO UPDATED : "test@admin.com", NEW INFO : {"email":"test@admin.com","firstname":"Antoine","lastname":"Gaubil","phone":"+15148790912","city":"Montreal","avatar":"1679522353992.jpg"}
-
-03/22/2023, 18:20:16: LOG-OUT DETECTED WITH EMAIL : "test1@admin.com"
-03/22/2023, 20:01:02: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
-03/22/2023, 20:02:21: SIGN-IN DETECTED WITH EMAIL : "test@admin.com"
