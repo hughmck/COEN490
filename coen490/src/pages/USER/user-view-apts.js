@@ -21,7 +21,8 @@ import {
   MDBModalHeader,
   MDBModalTitle,
   MDBModalBody,
-  MDBModalFooter
+  MDBModalFooter,
+  MDBIcon
 } from 'mdb-react-ui-kit';
 
 import '../../style/user/user-dashboard.css';
@@ -45,12 +46,11 @@ export default function UserViewApt(){
   const toggleShow = (user) => {
 
         setCardData(user);
-        console.log(cardData);
-        setBasicModal(!basicModal)
+        setBasicModal(!basicModal);
 
       };
 
-    
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,7 +60,7 @@ export default function UserViewApt(){
           body: null,
         });
         const data = await response.json();
-        setDbDate(data);
+        setDbDate(data)
         console.log(data)
         setNumber(data.length)
 
@@ -87,6 +87,7 @@ export default function UserViewApt(){
               title: `Appointment with ${userInfo[index].firstname}`,
               date: new Date(year, month - 1, day, hour, 0),
               description: `Please View The Connect Page to Join Your Meeting Or To Converse With ${userInfo[index].firstname}.`,
+              id: `${userInfo[index]}`,
             };
           })
 
@@ -126,6 +127,45 @@ export default function UserViewApt(){
   };
 
 
+
+  const handleCancelMeeting = async (canceldata) => {
+    try {
+      const response = await fetch('http://localhost:4444/user/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(canceldata),
+      });
+
+      if (response.status === 200) {
+        document.getElementById('popup-container').innerText = 'Your Meeting With' + canceldata.firstname + canceldata.lastname + 'Has Been Deleted';
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#38f57d';
+        setTimeout(() => {
+          document.getElementById('popup-container').style.display = 'none';
+          window.location.reload();
+        }, 3000);
+      } else {
+        document.getElementById('popup-container').innerText = 'An Error Has Occured. Please Try Again Ulteriorly';
+        document.getElementById('popup-container').style.display = 'block';
+        document.getElementById('popup-container').style.backgroundColor = '#38f57d';
+        setTimeout(() => {
+          document.getElementById('popup-container').style.display = 'none';
+          window.location.reload();
+        }, 3000);
+      }
+
+
+    } catch (error) {
+      console.error(error);
+    }
+
+    window.location.reload()
+
+  }
+
+
+
+
   return (
     <>
     <main className="hero-section">
@@ -141,6 +181,25 @@ export default function UserViewApt(){
         </ul>
       </nav>
       </div>
+      <div id="popup-container" style={{
+      display: "none",
+      width: "900px",
+      height: "65px",
+      position: "fixed",
+      top: "15%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#d5eef7",
+      zIndex: 9999,
+      textAlign: "center",
+      borderRadius: "10px",
+      opacity: 0.9,
+      fontSize: "15px",
+      fontFamily: "Montserrat",
+      lineHeight: "70px"
+    }}>
+    !
+    </div>
     <MDBCard style={{ backgroundColor: "transparent", border: "0" }}>
       <MDBCardBody>
         <MDBCardTitle>
@@ -153,94 +212,95 @@ export default function UserViewApt(){
                  <MDBCard>
                   <MDBContainer>
                 <MDBCardTitle style={{color: "black"}}>
-                    {selectedAppointments.length > 0 ? (
-              <div>
-                <h4>Appointments for {selectedDate.toDateString()}:</h4>
-                {selectedAppointments.map((appointment, index) => (
-                  <div key={index}>
-                    <h5>
-                      {appointment.title} at {formatDate(appointment.date)}
-                    </h5>
-                    <p>{appointment.description}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              selectedDate.toDateString() === new Date().toDateString() ? (
-                <p>No appointments today, please book an appointment with an HCP if you are feeling down.</p>
-
-              ) : (
-                <p>No appointments on {selectedDate.toDateString()}</p>
-              )
-              )}
 
               {selectedAppointments.length > 0 && (
                 <>
                 {selectedAppointments.map((appointment, index) => (
                     <div key={index}>
-                  <MDBCardImage
-                    src={`../../Digital-Identity/logo-1.png`}
-                    alt="avatar"
-                    className="rounded-circle"
-                    style={{ width: '150px' }}
-                    fluid
-                  />
-                  <MDBCardBody className="pt-1">
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Name</MDBCardText>
-                      </MDBCol>
-                      <MDBCol>
-                        <MDBCardText className="text-muted">
-                          {selectedAppointments ? selectedAppointments[index].data.firstname + ' ' + selectedAppointments[index].data.lastname : 'Loading...'}
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Email</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
-                          {selectedAppointments ? selectedAppointments[index].data.email : 'Loading...'}
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Profession</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
-                          {selectedAppointments ? selectedAppointments[index].data.profession : 'Loading...'}
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>Specialty</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
-                          {selectedAppointments ? selectedAppointments[index].data.specialty : 'Loading...'}
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                      <MDBCol sm="3">
-                        <MDBCardText>City</MDBCardText>
-                      </MDBCol>
-                      <MDBCol sm="9">
-                        <MDBCardText className="text-muted">
-                          {selectedAppointments ? selectedAppointments[index].data.city : 'Loading...'}
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
-                  </MDBCardBody>
+                    <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+                     <MDBModalDialog>
+                       <MDBModalContent>
+                         <MDBModalHeader>
+                           <MDBModalTitle>{appointment.title} at {formatDate(appointment.date)}</MDBModalTitle>
+                           <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+                         </MDBModalHeader>
+                         <MDBModalBody>
+                         <MDBCardImage
+                           src={selectedAppointments[index].data.avatar}
+                           alt="avatar"
+                           className="rounded-circle"
+                           style={{ width: '150px' }}
+                           fluid
+                         />
+                         <MDBCardBody className="pt-1">
+                           <MDBRow>
+                             <MDBCol sm="3">
+                               <MDBCardText>Name</MDBCardText>
+                             </MDBCol>
+                             <MDBCol>
+                               <MDBCardText className="text-muted">
+                                 {selectedAppointments ? selectedAppointments[index].data.firstname + ' ' + selectedAppointments[index].data.lastname : 'Loading...'}
+                               </MDBCardText>
+                             </MDBCol>
+                           </MDBRow>
+                           <hr />
+                           <MDBRow>
+                             <MDBCol sm="3">
+                               <MDBCardText>Email</MDBCardText>
+                             </MDBCol>
+                             <MDBCol sm="9">
+                               <MDBCardText className="text-muted">
+                                 {selectedAppointments ? selectedAppointments[index].data.email : 'Loading...'}
+                               </MDBCardText>
+                             </MDBCol>
+                           </MDBRow>
+                           <hr />
+                           <MDBRow>
+                             <MDBCol sm="3">
+                               <MDBCardText>Profession</MDBCardText>
+                             </MDBCol>
+                             <MDBCol sm="9">
+                               <MDBCardText className="text-muted">
+                                 {selectedAppointments ? selectedAppointments[index].data.profession : 'Loading...'}
+                               </MDBCardText>
+                             </MDBCol>
+                           </MDBRow>
+                           <hr />
+                           <MDBRow>
+                             <MDBCol sm="3">
+                               <MDBCardText>Specialty</MDBCardText>
+                             </MDBCol>
+                             <MDBCol sm="9">
+                               <MDBCardText className="text-muted">
+                                 {selectedAppointments ? selectedAppointments[index].data.specialty : 'Loading...'}
+                               </MDBCardText>
+                             </MDBCol>
+                           </MDBRow>
+                           <hr />
+                           <MDBRow>
+                             <MDBCol sm="3">
+                               <MDBCardText>City</MDBCardText>
+                             </MDBCol>
+                             <MDBCol sm="9">
+                               <MDBCardText className="text-muted">
+                                 {selectedAppointments ? selectedAppointments[index].data.city : 'Loading...'}
+                               </MDBCardText>
+                             </MDBCol>
+                           </MDBRow>
+                           <hr />
+                           <MDBRow>
+                             <MDBCol sm="9">
+                               <div className="col-md-12 text-center">
+                               <MDBBtn color="danger" onClick={() => handleCancelMeeting(selectedAppointments[index].data)}>Cancel Meeting</MDBBtn>
+                               </div>
+                             </MDBCol>
+                           </MDBRow>
+                         </MDBCardBody>
+                         </MDBModalBody>
+                       </MDBModalContent>
+                     </MDBModalDialog>
+                   </MDBModal>
+
                   </div>
                 ))}
                  </>

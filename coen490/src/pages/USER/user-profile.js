@@ -18,12 +18,12 @@ export default function HCPProfile() {
   const [dashCheck, setDashCheck] = useState(true);
   const [easyCheck, setEasyCheck] = useState(true);
   const [userProfile, setUserProfile] = useState([]);
+  const [past, setPast] = useState([]);
 
 
   useEffect(() => {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
-        console.log(res.data)
         setUserProfile(res.data.avatar)
         setData(res.data)
         setHcpCheck(res.data.dataHCP)
@@ -34,6 +34,18 @@ export default function HCPProfile() {
         console.log(err)
       })
   }, [])
+
+  useEffect(() => {
+    axios.get("http://localhost:4444/user/past")
+      .then(res => {
+        setPast(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -85,7 +97,7 @@ export default function HCPProfile() {
   };
 
   async function handleLiveTrackingChange() {
-    console.log("HERE")
+
   const hcpCheckValue = document.getElementById("hcpCheck").checked;
   const dashCheckValue = document.getElementById("dashCheck").checked;
   const easyCheckValue = document.getElementById("easyCheck").checked;
@@ -214,63 +226,31 @@ const handleInputChange = (e) => {
 
             <MDBRow>
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0" style = {{background: "transparent", border: '0px'}}>
-                  <MDBCardBody>
-                      <h5 className="mx-auto w-100 text-center" >Your Past Meetings</h5>
-                      <MDBRow>
-                        <MDBCol sm ="3">
-                          <MDBCardImage
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-                            alt="avatar"
-                            className="rounded-circle"
-                            style={{ width: '50px' }}
-                            fluid />
-                        </MDBCol>
-                        <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom " >January 5th 2022</MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                      <MDBRow>
-                        <MDBCol sm ="3">
-                          <MDBCardImage
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                            alt="avatar"
-                            className="rounded-circle"
-                            style={{ width: '50px' }}
-                            fluid />
-                        </MDBCol>
-                        <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                      <MDBRow>
-                        <MDBCol sm ="3">
-                          <MDBCardImage
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
-                            alt="avatar"
-                            className="rounded-circle"
-                            style={{ width: '50px' }}
-                            fluid />
-                        </MDBCol>
-                        <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-bottom" >January 5th 2022</MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                      <MDBRow className ='test'>
-                        <MDBCol sm ="3">
-                          <MDBCardImage
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp"
-                            alt="avatar"
-                            className="rounded-circle"
-                            style={{ width: '50px' }}
-                            fluid />
-                        </MDBCol>
-                        <MDBCol sm ="6">
-                          <MDBCardText className="text-center align-center" >January 5th 2022</MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                  </MDBCardBody>
-                </MDBCard>
+              <MDBRow style={{ width: '100%' }}>
+                <MDBCol md="6">
+                  <MDBCard className="mb-4 mb-md-0" style={{ background: "transparent", border: '0px' }}>
+                  <MDBCardBody style={{ width: '100%' }}>
+                      <h5 className="mx-auto w-100 text-center">Your Past Meetings</h5>
+                      {past.map((item, index) => (
+                        <MDBRow key={past[index][0].firstname}>
+                          <MDBCol sm="3">
+                            <MDBCardImage
+                              src={past[index][0].avatar}
+                              alt="avatar"
+                              className="rounded-circle"
+                              style={{ width: '50px' }}
+                              fluid />
+                          </MDBCol>
+                          <MDBCol sm="6">
+                            <MDBCardText className="text-center align-bottom ">{past[index][0].firstname} {past[index][0].lastname}</MDBCardText>
+                          </MDBCol>
+                        </MDBRow>
+                      ))}
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
+                </MDBRow>
+
               </MDBCol>
 
               <MDBCol md="6">

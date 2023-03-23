@@ -170,7 +170,7 @@ export default function HCPDashboard() {
                 {selectedAppointments.map((appointment, index) => (
                     <div key={index}>
                   <MDBCardImage
-                    src={`../../Digital-Identity/logo-1.png`}
+                    src={selectedAppointments[index].data.avatar}
                     alt="avatar"
                     className="rounded-circle"
                     style={{ width: '150px' }}

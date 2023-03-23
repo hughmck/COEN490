@@ -23,6 +23,10 @@ import HCPPatientList from './pages/HCP/HCP-patient-list'
 import HCPProfile from './pages/HCP/HCP-profile'
 
 import {Route, Routes, Navigate, useNavigate} from "react-router-dom"
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+
+const queryClient = new QueryClient()
+
 function App() {
 
   var status = 'status', storage = window.localStorage;
@@ -83,6 +87,7 @@ function App() {
 
     return(
     <>
+    <QueryClientProvider client={queryClient}>
       <WhichNav />
       <div className="container" style={{ width: '100%', maxWidth: '100%', paddingLeft: '0px', paddingRight: '0px' }}>
 
@@ -109,6 +114,7 @@ function App() {
 
         </Routes>
       </div>
+      </QueryClientProvider>
     </>
   )
 

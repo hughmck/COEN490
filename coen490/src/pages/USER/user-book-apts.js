@@ -29,7 +29,6 @@ import {
 export default function UserBookApt(){
 
   const [reason, setReason] = useState('');
-  const [type, setType] = useState('');
   const [time, setTime] = useState('');
   const [data, setData] = useState({});
 
@@ -78,8 +77,8 @@ export default function UserBookApt(){
       const formattedDate = `${month}.${day}.${year}`;
       setRealDate(formattedDate);
 
-      console.log(type + reason + date + time);
-      if(!type || !reason || !date || !time){
+
+      if(!reason || !date || !time){
         document.getElementById('popup-container').innerText = 'Please Input Your Preferences In The Search Bar.';
         document.getElementById('popup-container').style.display = 'block';
         document.getElementById('popup-container').style.backgroundColor = '#e34f4f';
@@ -89,9 +88,31 @@ export default function UserBookApt(){
       }
       else{
       setCanBook(true);
+
+      let profession;
+
+      switch (reason) {
+        case "Prescription":
+          profession = "Doctor";
+          break;
+        case "Seeking Help":
+          profession = "Doctor";
+          break;
+        case "Counselling":
+          profession = "Therapist";
+          break;
+        case "Need To Chat":
+          profession = "Therapist";
+          break;
+        case "Disorders":
+          profession = "Psychiatrist";
+          break;
+        default:
+          profession = "unknown";
+        }
+
       let databody = {
-       "reason": reason,
-       "type": type,
+       "reason": profession,
        "time" : time,
        "date" : realDate
       }
@@ -114,7 +135,6 @@ export default function UserBookApt(){
               event.preventDefault();
               setCanBook(false);
               setReason('');
-              setType('');
               setTime('');
               setDate(new Date());
               setSearchResults(localReset);
@@ -152,7 +172,7 @@ export default function UserBookApt(){
         const handleBook = async (user) => {
         let HCPbooked = {
           "HCPemail": user.email,
-          "HCPfirstname": user.name,
+          "HCPfirstname": user.firstname,
           "HCPlastname": user.lastname,
           "MeetingDate" : realDate,
           "MeetingTime" : time,
@@ -231,23 +251,12 @@ export default function UserBookApt(){
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
             >
-                <option value="">Reason</option>
-                <option value="Addictions">Addictions</option>
-                <option value="ADHD">ADHD</option>
-                <option value="Mental Issues">Mental Issues</option>
-                <option value="PTSD">PTSD</option>
+                <option value="">What Are You Looking For?</option>
+                <option value="Prescription">Prescription</option>
+                <option value="Counselling">Counselling</option>
+                <option value="Need To Chat">Need To Chat</option>
+                <option value="Seeking Help">Seeking Help</option>
                 <option value="Disorders">Disorders</option>
-            </select>
-
-            <select
-                className="block w-48 bg-blue-200 border border-blue-400 hover:border-blue-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-            >
-                <option value="">Meeting</option>
-                <option value="chat">Chat</option>
-                <option value="audiocall">Audio Call</option>
-                <option value="videocall">Video Call</option>
             </select>
                 <MDBBtn class='button-21' onClick={handleDate} style={{maxWidth: '150px', maxHeight: '40px'}} color="primary">{date.toDateString()}</MDBBtn>
                 {isDateOpen && (
@@ -299,10 +308,10 @@ export default function UserBookApt(){
           <MDBCol size='3' key={index} style={{ margin: "40px" }}>
             <MDBCard class = 'bg'>
               <MDBCardBody>
-                <MDBCardTitle style = {{color: 'white'}}>{user.name} {user.lastname}</MDBCardTitle>
+                <MDBCardTitle style = {{color: 'white'}}>{user.firstname} {user.lastname}</MDBCardTitle>
                 <MDBListGroup flush>
-                  <MDBListGroupItem style = {{marginTop: '10px'}}>Type: {user.type}</MDBListGroupItem>
-                  <MDBListGroupItem style = {{marginBottom: '10px'}}>Certificate: {user.Certificate}</MDBListGroupItem>
+                  <MDBListGroupItem style = {{marginTop: '10px'}}>Profession: {user.profession}</MDBListGroupItem>
+                  <MDBListGroupItem style = {{marginBottom: '10px'}}>Specialty: {user.specialty}</MDBListGroupItem>
                 </MDBListGroup>
                 <MDBRow>
                 <MDBBtn style={{maxWidth: '300px', maxHeight: '40px'}} class='button-21' onClick={() => toggleShow(user)} >View Profile</MDBBtn>
@@ -337,7 +346,7 @@ export default function UserBookApt(){
           <MDBRow>
             <MDBCol lg='6'>
               <MDBCardImage
-                src={`https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp`}
+                src={cardData.avatar}
                 alt='avatar'
                 className='rounded-circle'
                 class='imgClass'
@@ -350,7 +359,7 @@ export default function UserBookApt(){
                     <MDBCardText style={{color: 'black'}}>Name</MDBCardText>
                   </MDBCol>
                   <MDBCol>
-                    <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
+                    <MDBCardText className='text-muted'>{cardData.firstname} {cardData.lastname}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
