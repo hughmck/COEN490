@@ -17,7 +17,7 @@ const [talkLoaded, markTalkLoaded] = useState(false);
 
 const fetchUserData = async () => {
   const data = await axios.post('http://localhost:4444/hcp/viewapts');
-  console.log(data)
+  setUserData(data)
   return data;
 };
 
@@ -27,25 +27,33 @@ const fetchUserData = async () => {
   fetchUserData
 );
 
-
- console.log(status, isStale, isFetching, error, data);
-
 useEffect(() => {
-
  Talk.ready.then(() => markTalkLoaded(true));
+ if (talkLoaded && data) {
+      let fullName;
+      let id;
+      let welcome;
+    if (!data.data || data.data.length === 0) {
+      fullName = 'no match';
+      id = '11';
+      welcome = 'You have no appointments booked'
+    } else {
+      fullName = 'Demo Capstone';
+      id = '12';
+      welcome ='Talk to Your Client Here!'
+    }
 
- if (talkLoaded && userData) {
    const otherUser = new Talk.User({
-     id: '10',
-     name: 'Henry Mill',
-     email: 'henrymill@example.com',
+     id: '20',
+     name: fullName,
+     email: 'test',
      photoUrl: 'henry.jpeg',
-     welcomeMessage: 'Hello!',
+     welcomeMessage: welcome,
      role: 'default',
    });
 
    const currentUser = new Talk.User({
-     id: '20',
+     id: id,
      name: 'Jessica Well',
      email: 'jessicawells@example.com',
      photoUrl: 'jessica.jpeg',
@@ -75,7 +83,7 @@ useEffect(() => {
 
    return () => session.destroy();
  }
-}, [talkLoaded, userData]);
+}, [talkLoaded, isFetching]);
 
 
 const handleClick = async () => {
