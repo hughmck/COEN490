@@ -28,6 +28,7 @@ const fetchUserData = async () => {
 );
 
 useEffect(() => {
+  console.log("HERE",url)
  Talk.ready.then(() => markTalkLoaded(true));
  if (talkLoaded && data) {
       console.log(data)
@@ -90,7 +91,10 @@ useEffect(() => {
 const handleClick = async () => {
   axios.post("http://localhost:4444/zoomidHCP")
     .then(res => {
+      if(!url){
       setUrl(res.data)
+      console.log(res.data)
+    }
     })
     .catch(err => {
       console.log(err)

@@ -201,3 +201,8 @@
 03/23/2023, 11:11:19: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
 03/23/2023, 11:13:17: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/23/2023, 11:13:51: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+03/23/2023, 13:46:35: LOG-OUT DETECTED WITH EMAIL : "hugh.mck6@easysante.com"
+03/23/2023, 14:41:01: APPOINTMENT DELETED FOR : "demo@admin.com", WITH ID : "641c9d3d425a231829ede5d0"
+03/23/2023, 14:41:24: NEW APPOINTMENT BOOKED : {"Username":"null","user":"demo@admin.com","HCP":"admin@easysante.com","HCPfirstname":"Paul","HCPlastname":"Liestain","MeetingDate":"3.24.2023","MeetingTime":"15","zoomid":"null","_id":"641c9d54425a231829ede5d1"}
+03/23/2023, 15:29:40: NEW APPOINTMENT BOOKED : {"Username":"null","user":"demo@admin.com","HCP":"admin@easysante.com","HCPfirstname":"Paul","HCPlastname":"Liestain","MeetingDate":"3.24.2023","MeetingTime":"18","zoomid":"null","_id":"641ca8a4425a231829ede5d2"}
+03/23/2023, 15:33:37: APPOINTMENT DELETED FOR : "demo@admin.com", WITH ID : "641ca991b0d50e99ca4065c3"
