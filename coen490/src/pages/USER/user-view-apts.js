@@ -40,6 +40,7 @@ export default function UserViewApt(){
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedAppointments, setSelectedAppointments] = useState([]);
   const [number, setNumber] = useState('...');
+  const [name, setName] = useState('...');
   const [basicModal, setBasicModal] = useState(false);
   const [cardData, setCardData] = useState([]);
 
@@ -199,11 +200,11 @@ export default function UserViewApt(){
       lineHeight: "70px"
     }}>
     !
-    </div>
+    </div> 
     <MDBCard style={{ backgroundColor: "transparent", border: "0" }}>
       <MDBCardBody>
         <MDBCardTitle>
-          Welcome back, Hugh! You have {number} upcoming appointments:{' '}
+          You have {number} upcoming appointments:{' '}
         </MDBCardTitle>
         <div style={{ display: 'flex', justifyContent: 'left'}}>
           <Calendar value={selectedDate} onChange={handleCalendarChange} onClickDay={() => toggleShow()} />
@@ -212,7 +213,25 @@ export default function UserViewApt(){
                  <MDBCard>
                   <MDBContainer>
                 <MDBCardTitle style={{color: "black"}}>
-
+              {selectedAppointments.length > 0 ? (
+              <div>
+                <h4>Appointments for {selectedDate.toDateString()}:</h4>
+                {selectedAppointments.map((appointment, index) => (
+                  <div key={index}>
+                    <h5>
+                      {appointment.title} at {formatDate(appointment.date)}
+                    </h5>
+                    <p style={{color: "black"}}>{appointment.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              selectedDate.toDateString() === new Date().toDateString() ? (
+                <p>No appointments today, book an appointment with an HCP!</p>
+              ) : (
+                <p>No appointments on {selectedDate.toDateString()}</p>
+              )
+              )}
               {selectedAppointments.length > 0 && (
                 <>
                 {selectedAppointments.map((appointment, index) => (
@@ -257,7 +276,7 @@ export default function UserViewApt(){
                            <hr />
                            <MDBRow>
                              <MDBCol sm="3">
-                               <MDBCardText>Profession</MDBCardText>
+                               <MDBCardText>Vocation</MDBCardText>
                              </MDBCol>
                              <MDBCol sm="9">
                                <MDBCardText className="text-muted">

@@ -263,7 +263,7 @@ export default function UserBookApt(){
                 <MDBBtn class='button-21' onClick={handleDate} style={{maxWidth: '150px', maxHeight: '40px'}} color="primary">{date.toDateString()}</MDBBtn>
                 {isDateOpen && (
                     <div>
-                        <Calendar style={{width:'100px'}} onChange={handleDateClick} value={date} />
+                        <Calendar style={{width:'100px', height: '200px'}} onChange={handleDateClick} value={date} />
                     </div>
                 )}
                 <select
@@ -405,10 +405,9 @@ export default function UserBookApt(){
             <MDBCol lg='6'>
               <h2 className='fw-bold mb-3' style={{color: 'black'}}>A Little Bit About Myself</h2>
               <MDBCardText className='text-muted text-center'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                  in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  As a licensed therapist, I have devoted my career to helping individuals overcome personal challenges and achieve greater emotional well-being. My education and certifications are a testament to my dedication to 
+                    providing compassionate and effective therapy services. I hold a Master of Science in Clinical Psychology from Concordia University, where I received extensive training in various therapeutic modalities and gained a deep understanding of human behavior and psychological principles. 
+                    Additionally, I am licensed by Quebec and have met rigorous standards of education, training, and experience to become a licensed therapist.
                 </MDBCardText>
               </MDBCol>
             </MDBRow>

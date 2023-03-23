@@ -147,7 +147,7 @@ const handleInputChange = (e) => {
     src={userProfile}
     alt="avatar"
     className="rounded-circle"
-    style={{ width: '150px' }}
+    style={{ width: '150px', marginLeft: '90px' }}
     fluid />
     <MDBCardBody style={{background: "transparent", border: '0px'}}>
   <MDBRow >
@@ -170,7 +170,7 @@ const handleInputChange = (e) => {
   <hr />
   <MDBRow>
     <MDBCol sm="3">
-      <MDBCardText>Profession</MDBCardText>
+      <MDBCardText>Vocation</MDBCardText>
     </MDBCol>
     <MDBCol sm="9">
       <MDBCardText style = {{color: 'white'}}>{data ? data.profession : 'Loading...'}</MDBCardText>

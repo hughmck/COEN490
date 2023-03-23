@@ -171,7 +171,7 @@ const handleInputChange = (e) => {
     src={userProfile}
     alt="avatar"
     className="rounded-circle"
-    style={{ width: '150px' }}
+    style={{ width: '150px', marginLeft: '90px' }}
     fluid />
     <MDBCardBody style={{background: "transparent", border: '0px'}}>
   <MDBRow >
@@ -207,7 +207,7 @@ const handleInputChange = (e) => {
     </MDBCol>
     <MDBCol sm="9">
       <MDBCardText style = {{color: 'white'}}>{data ? data.city : 'Loading...'}</MDBCardText>
-      <button type="button" className="button-81" onClick={handleEdit}>Edit</button>
+      <button type="button" className="button-21" onClick={handleEdit}>Edit</button>
     </MDBCol>
   </MDBRow>
 </MDBCardBody>
@@ -233,10 +233,10 @@ const handleInputChange = (e) => {
               <MDBRow style={{ width: '100%' }}>
                 <MDBCol md="6">
                   <MDBCard className="mb-4 mb-md-0" style={{ background: "transparent", border: '0px' }}>
-                  <MDBCardBody style={{ width: '100%' }}>
+                  <MDBCardBody style={{ width: '400px' }}>
                       <h5 className="mx-auto w-100 text-center">Your Past Meetings</h5>
                       {past.map((item, index) => (
-                        <MDBRow key={past[index][0].firstname}>
+                        <MDBRow style={{ marginTop: '15px' }} key={past[index][0].firstname}>
                           <MDBCol sm="3">
                             <MDBCardImage
                               src={past[index][0].avatar}
@@ -290,7 +290,7 @@ const handleInputChange = (e) => {
                         </div>
                       <hr className="divider" />
                       <div className="form-check form-switch">
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow Display Of Information On Your Dashboard</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Allow Display Of Info On Your Dashboard</label>
                         <input
                           className="card-data-button form-check-input float-end align-middle"
                           type="checkbox"

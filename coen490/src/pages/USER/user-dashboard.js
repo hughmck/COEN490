@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { App, Credentials, User } from "realm-web";
 import axios from 'axios';
 import '../../style/user/user-dashboard.css';
-import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { MDBRow, MDBCol, MDBCardTitle } from 'mdb-react-ui-kit';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -185,12 +185,12 @@ fetchData();
           </div>
         )}
         <div class="dash-cards container">
-            <div class="react-calendar2" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
-              <h2 class="followers-info__count">Welcome back, {userData.firstname} {userData.lastname}!</h2>
+            <div class="pt-1" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
+              <MDBCardTitle><h2 class="followers-info__count" style={{color: "white", marginTop: '20px'}}>Welcome back, {userData.firstname} {userData.lastname}!</h2></MDBCardTitle>
             </div>
           </div>
           <div class="dash-cards container">
-            <div class='react-calendar1'>
+            <div class='pt-1' style={{backdropFilter: 'blur(9px)', background: 'rgba(255, 255, 255, 0.2)'}}>
               <Line options={options} data={data}/>
             </div>
           </div>
