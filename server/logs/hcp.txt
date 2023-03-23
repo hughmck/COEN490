@@ -44,6 +44,7 @@
 03/22/2023, 17:41:33: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 17:42:37: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 17:56:29: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
+<<<<<<< HEAD
 03/22/2023, 19:16:23: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 19:16:46: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 19:17:07: NEW APPOINTMENT BOOKED : {"Username":"null","user":"test@admin.com","HCP":"prop8@easysante.com","HCPfirstname":"Roald","HCPlastname":"Stendal","MeetingDate":"3.23.2023","MeetingTime":"17","zoomid":"null","_id":"641b8c732cf59b0da039109a"}
@@ -173,3 +174,5 @@
 03/23/2023, 09:43:49: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
 03/23/2023, 09:43:57: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/23/2023, 10:01:27: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+=======
+>>>>>>> main

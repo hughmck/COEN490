@@ -24,6 +24,7 @@ import {
   MDBModalFooter,
   MDBIcon
 } from 'mdb-react-ui-kit';
+import logo from '../../style/490LogoWhite.png';
 
 import '../../style/user/user-dashboard.css';
 
@@ -86,8 +87,7 @@ export default function UserViewApt(){
             return {
               title: `Appointment with ${userInfo[index].firstname}`,
               date: new Date(year, month - 1, day, hour, 0),
-              description: `Please View The Connect Page to Join Your Meeting Or To Converse With ${userInfo[index].firstname}.`,
-              id: `${userInfo[index]}`,
+              description: `Please click the connect page to meet with your patient: ${userInfo[index].firstname}.`,
             };
           })
 
@@ -171,7 +171,7 @@ export default function UserViewApt(){
     <main className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
           <a href="/user-connect">Connect</a>

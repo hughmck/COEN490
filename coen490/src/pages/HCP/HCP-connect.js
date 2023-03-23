@@ -2,7 +2,9 @@ import '../../style/HCP/HCPconnect.css'
 import React, { useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs'
 import axios from 'axios';
+
 import { useQuery } from 'react-query';
+import logo from '../../style/490LogoWhite.png';
 
 
 export default function HCPConnect() {
@@ -91,22 +93,22 @@ const handleClick = async () => {
 
 
 return (
-  <>
-  <main className="hero-section">
-    <div className="hero-content">
-      <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
-        <h1 className="nav-logo">EasySante</h1>
-        <ul className="nav-links">
-          <a href="/HCP-dashboard">Dashboard</a>
-          <a href="/HCP-connect">Connect</a>
-          <a href="/HCP-patient-list">View Appointments</a>
-          <a href="/HCP-profile">Profile</a>
-        </ul>
-      </nav>
-      <button onClick={handleClick} class='button-21' style={{ position: 'absolute', bottom: '160px', right: '840px' }}>Join Meeting</button>
-  <div ref={chatboxEl} />
-    </div>
-    </main>
-  </>
-);
+    <>
+    <main className="hero-section">
+      <div className="hero-content">
+        <nav className="navbar" style={{marginLeft: "20px", width: "1740px" }}>
+        <img className="nav-logo" src={logo}/>
+          <ul className="nav-links">
+            <a href="/HCP-dashboard">Dashboard</a>
+            <a href="/HCP-connect">Connect</a>
+            <a href="/HCP-patient-list">View Appointments</a>
+            <a href="/HCP-profile">Profile</a>
+          </ul>
+        </nav>
+    <div ref={chatboxEl} />
+      <button onClick={handleClick} class='button-21' style={{ position: 'absolute', bottom: '100px', right: '840px' }}>Join Meeting</button>
+      </div>
+      </main>
+    </>
+  );
 };

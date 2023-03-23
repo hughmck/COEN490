@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs';
 import axios from 'axios';
 import '../../style/user/user-dashboard.css';
+import logo from '../../style/490LogoWhite.png';
+
 
 export default function UserConnect() {
   const [url, setUrl] = useState('');
@@ -138,11 +140,12 @@ return (
   <div className="hero-section">
     <div className="hero-content">
       <nav className="navbar" style={{ marginLeft: '20px', width: '1740px' }}>
-        <h1 className="nav-logo">EasySante</h1>
+        <img className="nav-logo" src={logo}/>
         <ul className="nav-links">
           <a href="/user-dashboard">Dashboard</a>
           <a href="/user-connect">Connect</a>
-          <a href="/user-appointment">Appointments</a>
+          <a href="/user-view-apt">View Appointments</a>
+          <a href="/user-book-apt">Book Appointments</a>
           <a href="/user-profile">Profile</a>
         </ul>
       </nav>
