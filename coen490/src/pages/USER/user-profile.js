@@ -24,7 +24,7 @@ export default function HCPProfile() {
     axios.get("http://localhost:4444/user/profile")
       .then(res => {
         console.log(res.data)
-        setUserProfile('data:image/jpeg;base64,' + res.data.base64Data)
+        setUserProfile(res.data.avatar)
         setData(res.data)
         setHcpCheck(res.data.dataHCP)
         setDashCheck(res.data.dataDash)
