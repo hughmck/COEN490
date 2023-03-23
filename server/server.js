@@ -249,17 +249,6 @@ app.post('/HCP/booked/all', async (req, res) => {
       )
     );
 
-		console.log(users)
-    // Loop through each user object and add base64 data for the image
-    for (let user of users) {
-      const imagePath = path.join("./uploads", user.avatar);
-
-      fs.readFile(imagePath, function(err, data) {
-        if (err) throw err;
-        user.base64Data = base64.fromByteArray(data);
-      });
-    }
-
     // Wait for all the file reading operations to finish before sending the response
     await Promise.all(users);
 
@@ -333,13 +322,7 @@ app.post('/HCP/booked/all', async (req, res) => {
 	        },
 	        function(err, result) {
 	            if (err) throw err;
-
-							const imagePath = path.join("./uploads", result.avatar);
-							fs.readFile(imagePath, function(err, data) {
-							  if (err) throw err;
-							  result.base64Data = base64.fromByteArray(data);
-								res.json(result);
-							});
+							res.json(result);
 	            db.close();
 	        });
 	    });
@@ -509,8 +492,6 @@ app.post('/user/profile/edit', (req, res) => {
 
     });
   });
-
-
 });
 
 
@@ -541,7 +522,6 @@ app.post('/user/cancel', (req, res) => {
 	});
 });
 
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
@@ -549,14 +529,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
     const avatar = Date.now() + ext;
-    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
-			var dba = db.db("DATA_FROM_EMAIL");
-			dba.collection('USER').updateOne({ email:currentU }, { $set: { avatar: avatar } }, (err, result) => {
-        if (err) throw err;
-        db.close()
-        cb(null, avatar);
-      });
-    });
+    cb(null, avatar);
   }
 });
 
@@ -564,17 +537,33 @@ const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
 
-	console.log(req.body)
-	const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-	const currentDate = new Date().toLocaleString('en-US', options);
-	const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF USER: ${JSON.stringify(currentU)}\n`;
+  console.log(req.body);
+  const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  const currentDate = new Date().toLocaleString('en-US', options);
+  const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF USER: ${JSON.stringify(currentU)}\n`;
 
-	fs.appendFile('logs/user.txt', logData, (err) => {
-		 if (err) throw err;
-		 console.log('Data logged to file!');
-	});
+  fs.appendFile('logs/user.txt', logData, (err) => {
+    if (err) throw err;
+    console.log('Data logged to file!');
+  });
 
-  res.send(req.body.file);
+	console.log("HERE",req.file)
+  const imagePath = path.join("./uploads", req.file.filename);
+  let actualAvatar;
+
+  fs.readFile(imagePath, function(err, data) {
+    if (err) throw err;
+    actualAvatar = 'data:image/jpeg;base64,' + base64.fromByteArray(data);
+
+    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+      var dba = db.db("DATA_FROM_EMAIL");
+      dba.collection('USER').updateOne({ email:currentU }, { $set: { avatar: actualAvatar } }, (err, result) => {
+        if (err) throw err;
+        db.close()
+        res.send(req.body.file);
+      });
+    });
+  });
 });
 
 
