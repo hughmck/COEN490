@@ -25,6 +25,7 @@ export default function UserDashboard() {
   const [braceletTime, setBraceletTime] = useState(null);
   const [dataLength, setDataLength] = useState(null);
   const [dataBPM, setDataBPM] = useState(null);
+  const [userData, setUserData] = useState({});
 
 ChartJS.register(
   CategoryScale,
@@ -110,7 +111,16 @@ fetchData();
   }, []);
 
 
-
+  useEffect(() => {
+    axios.get("http://localhost:4444/user/profile")
+      .then(res => {
+        console.log(res.data)
+        setUserData(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
