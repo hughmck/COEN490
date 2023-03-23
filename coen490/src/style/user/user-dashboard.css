@@ -122,27 +122,7 @@ body {
   transition: all 500ms ease-in-out;
 }
 
-:root {
-  /* Global */
-  --clr-lime-green: hsl(163, 72%, 41%);
-  --clr-Bright-red: hsl(356, 69%, 56%);
 
-  /* Media */
-  --clr-facebook: hsl(208, 92%, 53%);
-  --clr-twitter: hsl(203, 89%, 53%);
-  --clr-instagram: linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%));
-  --clr-youtube: hsl(348, 97%, 39%);
-
-  /* Dark Switch Color */
-  --clr-switch-theme: linear-gradient(to right, hsl(210, 78%, 56%), hsl(146, 68%, 55%));
-
-  /* Dark Theme Colors */
-  --clr-theme-bg: hsl(230, 17%, 14%);
-  --clr-theme-pattern: hsl(232, 19%, 15%);
-  --clr-theme-card-bg: hsl(228, 28%, 20%);
-  --clr-theme-text: hsl(228, 34%, 66%);
-  --clr-theme-text-secondary: hsl(0, 0%, 100%);
-}
 
 body {
   margin: 0;

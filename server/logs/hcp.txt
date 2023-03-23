@@ -52,3 +52,4 @@
 03/22/2023, 19:44:25: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 19:46:27: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
 03/22/2023, 21:32:54: SIGN-IN DETECTED WITH EMAIL : "admin@easysante.com"
+03/22/2023, 21:50:41: LOG-OUT DETECTED WITH EMAIL : "admin@easysante.com"

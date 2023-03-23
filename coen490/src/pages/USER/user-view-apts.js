@@ -87,7 +87,7 @@ export default function UserViewApt(){
             return {
               title: `Appointment with ${userInfo[index].firstname}`,
               date: new Date(year, month - 1, day, hour, 0),
-              description: `Please View The Connect Page to Join Your Meeting Or To Converse With ${userInfo[index].firstname}.`,
+              description: `Please click the connect page to meet with your patient: ${userInfo[index].firstname}.`,
             };
           })
 
@@ -179,13 +179,7 @@ export default function UserViewApt(){
                 <>
                 {selectedAppointments.map((appointment, index) => (
                     <div key={index}>
-                  <MDBCardImage
-                    src={`../../Digital-Identity/logo-1.png`}
-                    alt="avatar"
-                    className="rounded-circle"
-                    style={{ width: '150px' }}
-                    fluid
-                  />
+          
                   <MDBCardBody className="pt-1">
                     <MDBRow>
                       <MDBCol sm="3">
