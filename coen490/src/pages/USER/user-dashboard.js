@@ -49,6 +49,7 @@ ChartJS.register(
       text: 'Your Live Sensored Data',
     },
   },
+  
 };
 
 
@@ -66,14 +67,16 @@ console.log(braceletData, dataBPM)
       data: braceletData,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      color: 'rgb(128,0,128)',
     },
     {
       label: 'Hourly BPM',
       data: dataBPM,
       borderColor: 'rgb(128,0,128)',
       backgroundColor: 'rgb(128,0,128)',
+      color: 'rgb(128,0,128)',
     },
-  ],
+  ],  
 };
 
 
@@ -182,18 +185,13 @@ fetchData();
           </div>
         )}
         <div class="dash-cards container">
-            <div class="dash-card dash-card--fb" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
+            <div class="react-calendar2" style={{width:'1500px', marginLeft: '-125px', height: '100px', marginBottom:'100px'}}>
               <h2 class="followers-info__count">Welcome back, {userData.firstname} {userData.lastname}!</h2>
             </div>
           </div>
           <div class="dash-cards container">
-            <div class="dash-card dash-card--fb">
-              <div class="user-info dash-card__user-info">
-                <span class="user-info__icon"><i class='bx bxl-facebook-square'></i></span>
-            </div>
-            <div>
+            <div class='react-calendar1'>
               <Line options={options} data={data}/>
-            </div>
             </div>
           </div>
       </main>
