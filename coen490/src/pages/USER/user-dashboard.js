@@ -27,10 +27,6 @@ export default function UserDashboard() {
   const [dataLength, setDataLength] = useState(null);
   const [dataBPM, setDataBPM] = useState(null);
   const [userData, setUserData] = useState({});
-<<<<<<< HEAD
-=======
-
->>>>>>> 0152823639d6b59188946110fde87d746923fb1d
 
 ChartJS.register(
   CategoryScale,

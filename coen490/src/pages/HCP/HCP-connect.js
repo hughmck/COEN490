@@ -2,104 +2,80 @@ import '../../style/HCP/HCPconnect.css'
 import React, { useState, useEffect, useRef } from 'react';
 import Talk from 'talkjs'
 import axios from 'axios';
+
+import { useQuery } from 'react-query';
 import logo from '../../style/490LogoWhite.png';
 
 
 export default function HCPConnect() {
+
 const [url, setUrl] = useState('');
 const chatboxEl = useRef();
-const [data, setData] = useState([]);
+const [userData, setUserData] = useState([])
 const [talkLoaded, markTalkLoaded] = useState(false);
 
-function waitUntil(condition) {
-  return new Promise((resolve) => {
-    const intervalId = setInterval(() => {
-      if (condition()) {
-        clearInterval(intervalId);
-        resolve();
-      }
-    }, 200);
-  });
-}
-useEffect(() => {
-  async function setupChat() {
-    await waitUntil(() => data.length > 0);
-    Talk.ready.then(() => markTalkLoaded(true));
-  }
-  setupChat();
-}, [data]);
+
+const fetchUserData = async () => {
+  const data = await axios.post('http://localhost:4444/hcp/viewapts');
+  console.log(data)
+  return data;
+};
+
+
+ const { status, isStale, isFetching, error, data } = useQuery(
+  'user data',
+  fetchUserData
+);
+
+
+ console.log(status, isStale, isFetching, error, data);
 
 useEffect(() => {
-  const fetchData = async () => {
 
-    const response = await fetch('http://localhost:4444/HCP/booked/connect', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: null,
-    });
-    try {
-      const tempdata = await response.json();
-      setData(tempdata);
-    } catch (error) {
-      console.log(error);
+ Talk.ready.then(() => markTalkLoaded(true));
+
+ if (talkLoaded && userData) {
+   const otherUser = new Talk.User({
+     id: '10',
+     name: 'Henry Mill',
+     email: 'henrymill@example.com',
+     photoUrl: 'henry.jpeg',
+     welcomeMessage: 'Hello!',
+     role: 'default',
+   });
+
+   const currentUser = new Talk.User({
+     id: '20',
+     name: 'Jessica Well',
+     email: 'jessicawells@example.com',
+     photoUrl: 'jessica.jpeg',
+     welcomeMessage: 'Hello!',
+     role: 'default',
+   });
+
+   const session = new Talk.Session({
+     appId: 'tW54Iuga',
+     me: currentUser,
+   });
+
+   const conversationId = Talk.oneOnOneId(currentUser, otherUser);
+   const conversation = session.getOrCreateConversation(conversationId);
+   conversation.setParticipant(currentUser);
+   conversation.setParticipant(otherUser);
+   const chatbox = session.createChatbox();
+   chatbox.select(conversation);
+   chatbox.mount(chatboxEl.current);
+
+
+   const iframe = chatboxEl.current.querySelector('iframe');
+    if (iframe) {
+      iframe.style.width = '100%';
+      iframe.style.height = '730px';
     }
-  };
 
-
-
- if (talkLoaded) {
-   if(data.length > 1){
-     const currentUser = new Talk.User({
-       id: '20',
-       name: 'Jessica Well',
-       email: 'test',
-       photoUrl: 'jessica.jpeg',
-       welcomeMessage: 'Hello!',
-       role: 'default',
-     });
-     console.log("HERE",data[0].HCP)
-     const otherUser = new Talk.User({
-       id: '10',
-       name: 'blase',
-       email: 'test',
-       photoUrl: 'henry.jpeg',
-       welcomeMessage: 'Hello!',
-       role: 'default',
-     });
-
-     const session = new Talk.Session({
-       appId: 'tW54Iuga',
-       me: currentUser,
-     });
-
-     const conversationId = Talk.oneOnOneId(currentUser, otherUser);
-     const conversation = session.getOrCreateConversation(conversationId);
-     conversation.setParticipant(currentUser);
-     conversation.setParticipant(otherUser);
-     console.log(conversation)
-     const chatbox = session.createChatbox();
-     chatbox.select(conversation);
-     chatbox.mount(chatboxEl.current);
-     console.log(chatbox)
-
-
-     const iframe = chatboxEl.current.querySelector('iframe');
-      if (iframe) {
-        iframe.style.width = '100%';
-        iframe.style.height = '730px';
-      }
-
-     return () => session.destroy();
-
-   }
-
-
-
-
-
-
+   return () => session.destroy();
  }
-}, [talkLoaded]);
+}, [talkLoaded, userData]);
 
 
 const handleClick = async () => {

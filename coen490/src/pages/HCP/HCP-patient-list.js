@@ -8,8 +8,6 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBBtn,
-  MDBListGroup,
-  MDBListGroupItem,
   MDBRow,
   MDBContainer,
   MDBCol,
@@ -115,22 +113,12 @@ export default function HCPPatientList(){
                         {user.firstname} {user.lastname}
                       </div>
                       <div style={{ fontSize: "0.8rem" }}>
-                        {user.meeting_time} Appointment is scheduled at 12pm {user.location}
+                        Visit Your Schedule For More Information.
                       </div>
                     </div>
                     <div className="ms-auto">
 
                     <MDBBtn class='button-21' style={{maxWidth: '300px', maxHeight: '40px'}} onClick={() => toggleShow(user)} >View Profile</MDBBtn>
-                    {/*
-                    <MDBBtn
-                        onClick={() => handleView(user)}
-                        href="#"
-                        style={{ marginTop: "auto", marginBottom: "auto" }}
-                        noCollapse
-                        class='button-82'
-                      >
-                        View Profile
-                      </MDBBtn> */}
 
                       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
                           <MDBModalDialog>
@@ -154,7 +142,7 @@ export default function HCPPatientList(){
                                   <MDBRow>
                                     <MDBCol lg='6'>
                                       <MDBCardImage
-                                        src={user.avatar}
+                                        src={cardData.avatar}
                                         alt='avatar'
                                         className='rounded-circle'
                                         class='imgClass'
@@ -167,7 +155,7 @@ export default function HCPPatientList(){
                                             <MDBCardText style={{color: 'black'}}>Name</MDBCardText>
                                           </MDBCol>
                                           <MDBCol>
-                                            <MDBCardText className='text-muted'>{cardData.name}</MDBCardText>
+                                            <MDBCardText className='text-muted'>{cardData.firstname} {cardData.lastname}</MDBCardText>
                                           </MDBCol>
                                         </MDBRow>
                                         <hr />
@@ -182,19 +170,19 @@ export default function HCPPatientList(){
                                         <hr />
                                         <MDBRow>
                                           <MDBCol sm='3'>
-                                            <MDBCardText  style={{color: 'black'}}>Profession</MDBCardText>
+                                            <MDBCardText  style={{color: 'black'}}>Phone Number</MDBCardText>
                                           </MDBCol>
                                           <MDBCol sm='9'>
-                                            <MDBCardText className='text-muted'>{cardData.type}</MDBCardText>
+                                            <MDBCardText className='text-muted'>{cardData.phone}</MDBCardText>
                                           </MDBCol>
                                         </MDBRow>
                                         <hr />
                                         <MDBRow>
                                           <MDBCol sm='3'>
-                                            <MDBCardText  style={{color: 'black'}}>Specialty</MDBCardText>
+                                            <MDBCardText  style={{color: 'black'}}>City</MDBCardText>
                                           </MDBCol>
                                           <MDBCol sm='9' >
-                                            <MDBCardText className='text-muted'>{cardData.reason}</MDBCardText>
+                                            <MDBCardText className='text-muted'>{cardData.city}</MDBCardText>
                                           </MDBCol>
                                         </MDBRow>
                                         <hr />

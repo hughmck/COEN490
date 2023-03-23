@@ -169,6 +169,13 @@ export default function HCPDashboard() {
                 <>
                 {selectedAppointments.map((appointment, index) => (
                     <div key={index}>
+                  <MDBCardImage
+                    src={selectedAppointments[index].data.avatar}
+                    alt="avatar"
+                    className="rounded-circle"
+                    style={{ width: '150px' }}
+                    fluid
+                  />
                   <MDBCardBody className="pt-1">
                     <MDBRow>
                       <MDBCol sm="3">

@@ -47,7 +47,6 @@ mongoose
 
  	 fs.appendFile('logs/user.txt', logData, (err) => {
  		 if (err) throw err;
- 		 console.log('Data logged to file!');
  	 });
 
 		MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
@@ -69,7 +68,6 @@ mongoose
 
   	 fs.appendFile('logs/hcp.txt', logData, (err) => {
   		 if (err) throw err;
-  		 console.log('Data logged to file!');
   	 });
 
 
@@ -92,7 +90,6 @@ mongoose
 
 	 fs.appendFile('logs/user.txt', logData, (err) => {
 		 if (err) throw err;
-		 console.log('Data logged to file!');
 	 });
 
 		currentU = req.body.email;
@@ -106,7 +103,6 @@ mongoose
 
 	 fs.appendFile('logs/hcp.txt', logData, (err) => {
 		 if (err) throw err;
-		 console.log('Data logged to file!');
 	 });
 
 		currentH = req.body.email;
@@ -124,8 +120,8 @@ mongoose
   const dboZoom = zoomDb.db("CONNECT");
   const dboConnect = connectDb.db("DATA_FROM_EMAIL");
 
-  // Find HCPs in DATA_FROM_EMAIL.HCP database with matching type and reason
-  const hcpQuery = { type: req.body.type, reason: req.body.reason };
+
+  const hcpQuery = { profession: req.body.reason };
   const hcpResult = await dboConnect.collection('HCP').find(hcpQuery).toArray();
 
   const hcpEmails = hcpResult.map(hcp => hcp.email);
@@ -136,6 +132,7 @@ mongoose
 	const resultWithoutConnect = hcpResult.filter((item) => {
   return !bookedHCPs.some((connectItem) => connectItem.HCP === item.email);
 	});
+
 
   res.json(resultWithoutConnect);
 
@@ -166,6 +163,8 @@ mongoose
   	});
 		});
 	});
+
+
 
 
 	app.post('/user/profile/data', (req, res) => {
@@ -212,7 +211,6 @@ app.post('/user/viewapts/HCPinfo', (req, res) => {
 MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 	var dbo = db.db("DATA_FROM_EMAIL");
 	const emails = req.body;
-	console.log("emails", emails)
 	const results = [];
 
 	for (let i = 0; i < emails.length; i++) {
@@ -220,7 +218,6 @@ MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
 			if (err) throw err;
 			results.push(result[0]);
 			if (results.length === emails.length) {
-				console.log("results", results)
 				res.json(results);
 				db.close();
 			}
@@ -274,18 +271,15 @@ app.post('/HCP/booked/all', async (req, res) => {
 
 			  fs.appendFile('logs/user.txt', logData, (err) => {
 				if (err) throw err;
-				console.log('Data logged to file!');
 			});
 
 		}else if (currentU === undefined || currentU == 'null') {
 			  fs.appendFile('logs/hcp.txt', logData, (err) => {
 				if (err) throw err;
-				console.log('Data logged to file!');
 			});
 
 		}else if(currentU === undefined && currentH === undefined){
 
-				console.log('undefined logged-out');
 
 		}
 
@@ -327,6 +321,79 @@ app.post('/HCP/booked/all', async (req, res) => {
 	        });
 	    });
 	});
+
+	app.get('/user/past', async (req, res) => {
+  try {
+    const pasthcp = await MongoClient.connect(process.env.ATLAS_URI2);
+    const pasthcpinfo = await MongoClient.connect(process.env.ATLAS_URI);
+    const dbhcp = pasthcp.db("CONNECT");
+    const dbhcpinfo = pasthcpinfo.db("DATA_FROM_EMAIL");
+
+    const HCP_client = await dbhcp.collection('past').find({ user: currentU }).toArray();
+    var usersmap = HCP_client.map(function(client) {
+      return client.HCP;
+    });
+
+
+    const users = await Promise.all(
+      usersmap.map((email) =>
+        dbhcpinfo.collection('HCP').find({ email: email }).toArray()
+      )
+    );
+
+    // Wait for all the file reading operations to finish before sending the response
+    await Promise.all(users);
+
+
+
+    res.json(users);
+
+    pasthcp.close();
+    pasthcpinfo.close();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get('/hcp/past', async (req, res) => {
+try {
+	const pasthcp = await MongoClient.connect(process.env.ATLAS_URI2);
+	const pasthcpinfo = await MongoClient.connect(process.env.ATLAS_URI);
+	const dbhcp = pasthcp.db("CONNECT");
+	const dbhcpinfo = pasthcpinfo.db("DATA_FROM_EMAIL");
+
+	const HCP_client = await dbhcp.collection('past').find({ HCP: currentH }).toArray();
+	var usersmap = HCP_client.map(function(client) {
+		return client.user;
+	});
+	console.log("HERE", HCP_client)
+
+
+	const users = await Promise.all(
+		usersmap.map((email) =>
+			dbhcpinfo.collection('USER').find({ email: email }).toArray()
+		)
+	);
+
+	// Wait for all the file reading operations to finish before sending the response
+	await Promise.all(users);
+
+	console.log(users)
+
+	res.json(users);
+
+	pasthcp.close();
+	pasthcpinfo.close();
+} catch (error) {
+	console.error(error);
+	res.status(500).send("Internal Server Error");
+}
+});
+
+
+
+
 
 	app.get('/hcp/profile', (req, res) => {
 	    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
@@ -433,11 +500,9 @@ app.post('/user/booked', (req, res) => {
 
 						fs.appendFile('logs/user.txt', logData, (err) => {
 						   if (err) throw err;
-						   console.log('Data logged to file!');
 						});
 						fs.appendFile('logs/hcp.txt', logData, (err) => {
 						   if (err) throw err;
-						   console.log('Data logged to file!');
 						});
             res.send('1');
           }
@@ -458,6 +523,17 @@ app.post('/user/viewapts', (req, res) => {
 	});
 });
 
+app.post('/hcp/viewapts', (req, res) => {
+	console.log("Dasdas")
+	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
+		var dbo = db.db("CONNECT");
+		dbo.collection('zoom').find({HCP: currentH}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result)
+		db.close()
+	});
+	});
+});
 
 
 app.post('/HCP/dashboard', (req, res) => {
@@ -483,11 +559,33 @@ app.post('/user/profile/edit', (req, res) => {
 
 			const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 			const currentDate = new Date().toLocaleString('en-US', options);
-			const logData = `${currentDate}: USER INFO UPDATED : ${JSON.stringify(current(currentU, currentH))}, NEW INFO : ${JSON.stringify({ email, firstname, lastname, phone, city, avatar })}\n`;
+			const logData = `${currentDate}: USER INFO UPDATED : ${JSON.stringify(current(currentU, currentH))}, NEW INFO : ${JSON.stringify({ email, firstname, lastname, phone, city })}\n`;
 
 			fs.appendFile('logs/user.txt', logData, (err) => {
 				 if (err) throw err;
-				 console.log('Data logged to file!');
+
+			});
+
+    });
+  });
+});
+
+app.post('/hcp/profile/edit', (req, res) => {
+  MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+    var dba = db.db("DATA_FROM_EMAIL");
+    const { email, firstname, lastname, profession, specialty, city, avatar } = req.body;
+    dba.collection('HCP').updateOne({ email }, { $set: { firstname, lastname, profession, specialty, city, avatar } }, (err, result) => {
+      if (err) throw err;
+      db.close()
+      res.send("Successfully updated HCP");
+
+			const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+			const currentDate = new Date().toLocaleString('en-US', options);
+			const logData = `${currentDate}: HCP INFO UPDATED : ${JSON.stringify(current(currentU, currentH))}, NEW INFO : ${JSON.stringify({ firstname, lastname, profession, specialty, city })}\n`;
+
+			fs.appendFile('logs/hcp.txt', logData, (err) => {
+				 if (err) throw err;
+
 			});
 
     });
@@ -496,11 +594,13 @@ app.post('/user/profile/edit', (req, res) => {
 
 
 
+
 app.post('/user/cancel', (req, res) => {
 	MongoClient.connect(process.env.ATLAS_URI2, function(err, db) {
 		var dbo = db.db("CONNECT");
-		dbo.collection('zoom').deleteOne({ _id: ObjectId(req.body.id) }, function(err, result) {
+		dbo.collection('zoom').deleteMany({ HCP: req.body.email, user: currentU }, function(err, result) {
     if (err) throw err;
+		res.sendStatus(200);
 		db.close();
 
 		const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -509,12 +609,10 @@ app.post('/user/cancel', (req, res) => {
 
 		fs.appendFile('logs/user.txt', logData, (err) => {
 			 if (err) throw err;
-			 console.log('Data logged to file!');
 		});
 
 		fs.appendFile('logs/hcp.txt', logData, (err) => {
 			 if (err) throw err;
-			 console.log('Data logged to file!');
 		});
 
   	});
@@ -537,17 +635,14 @@ const upload = multer({ storage: storage });
 
 app.post('/user/profile/image', upload.single('file'), (req, res) => {
 
-  console.log(req.body);
   const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
   const currentDate = new Date().toLocaleString('en-US', options);
   const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF USER: ${JSON.stringify(currentU)}\n`;
 
   fs.appendFile('logs/user.txt', logData, (err) => {
     if (err) throw err;
-    console.log('Data logged to file!');
   });
 
-	console.log("HERE",req.file)
   const imagePath = path.join("./uploads", req.file.filename);
   let actualAvatar;
 
@@ -565,6 +660,35 @@ app.post('/user/profile/image', upload.single('file'), (req, res) => {
     });
   });
 });
+
+app.post('/hcp/profile/image', upload.single('file'), (req, res) => {
+
+  const options = { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  const currentDate = new Date().toLocaleString('en-US', options);
+  const logData = `${currentDate}: PROFILE IMAGE ${JSON.stringify(req.body.file)} UPLOADED TO DATA BASE OF HCP: ${JSON.stringify(currentH)}\n`;
+
+  fs.appendFile('logs/hcp.txt', logData, (err) => {
+    if (err) throw err;
+  });
+
+  const imagePath = path.join("./uploads", req.file.filename);
+  let actualAvatar;
+
+  fs.readFile(imagePath, function(err, data) {
+    if (err) throw err;
+    actualAvatar = 'data:image/jpeg;base64,' + base64.fromByteArray(data);
+
+    MongoClient.connect(process.env.ATLAS_URI, function(err, db) {
+      var dba = db.db("DATA_FROM_EMAIL");
+      dba.collection('HCP').updateOne({ email:currentH }, { $set: { avatar: actualAvatar } }, (err, result) => {
+        if (err) throw err;
+        db.close()
+        res.send(req.body.file);
+      });
+    });
+  });
+});
+
 
 
 app.post('/HCP/calendar', (req, res) => {
