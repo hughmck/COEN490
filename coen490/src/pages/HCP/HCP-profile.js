@@ -192,7 +192,7 @@ const handleInputChange = (e) => {
     </MDBCol>
     <MDBCol sm="9">
       <MDBCardText style = {{color: 'white'}}>{data ? data.city : 'Loading...'}</MDBCardText>
-      <button type="button" className="button-81" onClick={handleEdit}>Edit</button>
+      <button type="button" className="button-21" onClick={handleEdit}>Edit</button>
     </MDBCol>
   </MDBRow>
 </MDBCardBody>
@@ -206,7 +206,9 @@ const handleInputChange = (e) => {
             <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
                   <h5 className="mx-auto w-100 text-center">About You</h5>
-                  <MDBCardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
+                  <MDBCardText>As a licensed therapist, I have devoted my career to helping individuals overcome personal challenges and achieve greater emotional well-being. My education and certifications are a testament to my dedication to 
+                    providing compassionate and effective therapy services. I hold a Master of Science in Clinical Psychology from Concordia University, where I received extensive training in various therapeutic modalities and gained a deep understanding of human behavior and psychological principles. 
+                    Additionally, I am licensed by Quebec and have met rigorous standards of education, training, and experience to become a licensed therapist. </MDBCardText>
               </MDBCardBody>
             </MDBCard>
 

@@ -116,11 +116,6 @@ body {
 
 /* General Styles */
 
-* {
-  box-sizing: border-box;
-  /* Just For Test */
-  transition: all 30ms ease-in-out;
-}
 
 body {
   margin: 0;

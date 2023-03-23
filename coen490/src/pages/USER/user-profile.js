@@ -221,7 +221,10 @@ const handleInputChange = (e) => {
             <MDBCard style={{background: "transparent", border: '0px'}}>
               <MDBCardBody>
                   <h5 className="mx-auto w-100 text-center">About You</h5>
-                  <MDBCardText style={{color: "white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet massa egestas, mattis justo in, tincidunt ligula. Praesent blandit pellentesque erat quis aliquam. Proin feugiat at metus a efficitur. Vivamus vitae ligula dapibus, pulvinar sem sit amet, auctor erat. Praesent vehicula auctor dolor, ac commodo ipsum euismod et. Suspendisse in convallis nisl. Vestibulum ante ipsum primis in faucibu orci luctus et ultrices posuere cubilia curae.</MDBCardText>
+                  <MDBCardText style={{color: "white"}}>As a user currently experiencing depression and anxiety, I understand firsthand the challenges that come with struggling with mental health. Despite these difficulties, I am committed to seeking support and making positive changes in my life. 
+                  Through therapy, self-care practices, and medication management, I am working towards managing my symptoms and improving my overall well-being. 
+                  Although the journey can be challenging at times, I am dedicated to continuing my healing process and developing new coping skills to navigate life's ups and downs. 
+                  I am seeking additional support and resources from HCPs, and I remain hopeful that with time and effort, I can find greater peace and happiness in my life.</MDBCardText>
               </MDBCardBody>
             </MDBCard>
 
